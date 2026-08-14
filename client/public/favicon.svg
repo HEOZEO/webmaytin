@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0b1329" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="favGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Squircle -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#favBg)" stroke="#06b6d4" stroke-opacity="0.4" stroke-width="1.5" />
+
+  <!-- Laptop Screen Outer Box -->
+  <rect x="12" y="14" width="40" height="26" rx="4" fill="url(#favGrad)" />
+  <!-- Screen Inner Display -->
+  <rect x="15" y="17" width="34" height="20" rx="2" fill="url(#screenGrad)" />
+
+  <!-- Lightning / Tech Core inside Screen -->
+  <path d="M33 20 L27 28 H33 L31 34 L37 26 H31 Z" fill="#38bdf8" />
+
+  <!-- Laptop Base -->
+  <rect x="8" y="42" width="48" height="5" rx="2.5" fill="url(#favGrad)" />
+  <rect x="25" y="42.5" width="14" height="2" rx="1" fill="#94a3b8" opacity="0.6" />
+
+  <!-- Glow Dot -->
+  <circle cx="48" cy="18" r="2.5" fill="#38bdf8" />
+</svg>

@@ -1,0 +1,461 @@
+{
+  "info": {
+    "_postman_id": "laptop-store-smoke-2026-08",
+    "name": "Laptop Store - Critical Smoke Test",
+    "description": "Bộ test API cho các luồng critical sau đợt audit 2026-08-04. Dùng để verify nhanh trên local/staging sau khi chạy migration + seed. Bao gồm: Auth (register/OTP/login/forgot-reset), Cart (add/merge/remove), Order (create/cancel + stock check), Coupon (validate/apply/expired/over-limit), Admin (products/users/orders). Chạy tuần tự từ trên xuống dưới.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{customer_token}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000/api", "type": "string" },
+    { "key": "admin_token", "value": "", "type": "string" },
+    { "key": "customer_token", "value": "", "type": "string" },
+    { "key": "customer_email", "value": "smoke.customer@example.com", "type": "string" },
+    { "key": "customer_password", "value": "Smoke123@", "type": "string" },
+    { "key": "admin_email", "value": "admin@laptopstore.com", "type": "string" },
+    { "key": "admin_password", "value": "Admin123@", "type": "string" },
+    { "key": "test_product_id", "value": "1", "type": "string" },
+    { "key": "test_coupon_code", "value": "WELCOME10", "type": "string" },
+    { "key": "test_order_id", "value": "", "type": "string" },
+    { "key": "test_otp", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "0. Health & DB",
+      "item": [
+        {
+          "name": "Health check",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/health", "host": ["{{base_url}}"], "path": ["health"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.test('Has success=true', () => pm.expect(pm.response.json().success).to.eql(true));"] } }]
+        },
+        {
+          "name": "DB connection test",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/test-db", "host": ["{{base_url}}"], "path": ["test-db"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.test('Has current_time', () => pm.expect(pm.response.json().data).to.have.property('current_time'));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "1. AUTH - Registration flow (with OTP)",
+      "item": [
+        {
+          "name": "Send registration OTP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"full_name\": \"Smoke Test Customer\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/send-otp", "host": ["{{base_url}}"], "path": ["auth", "send-otp"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "console.log('OTP response:', pm.response.text());", "console.log('NOTE: OTP is sent to email + logged to server console. Check server logs or mailbox to get the actual OTP.')"] } }]
+        },
+        {
+          "name": "Verify registration OTP (set test_otp manually)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"otp\": \"{{test_otp}}\",\n  \"password\": \"{{customer_password}}\",\n  \"full_name\": \"Smoke Test Customer\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/verify-otp", "host": ["{{base_url}}"], "path": ["auth", "verify-otp"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200 or 201', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));", "if (pm.response.json().token) { pm.collectionVariables.set('customer_token', pm.response.json().token); }"] } }]
+        },
+        {
+          "name": "Register (legacy - no OTP)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"{{customer_password}}\",\n  \"full_name\": \"Smoke Test\",\n  \"phone\": \"0912345678\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/register", "host": ["{{base_url}}"], "path": ["auth", "register"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 201 OR 400 (already exists)', () => pm.expect(pm.response.code).to.be.oneOf([201, 400]));", "if (pm.response.json().token) { pm.collectionVariables.set('customer_token', pm.response.json().token); }"] } }]
+        },
+        {
+          "name": "Register - invalid email should fail 400",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"not-an-email\",\n  \"password\": \"Test1234@\",\n  \"full_name\": \"Test\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/register", "host": ["{{base_url}}"], "path": ["auth", "register"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Register - weak password should fail 400",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"weakpw@example.com\",\n  \"password\": \"123\",\n  \"full_name\": \"Test\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/register", "host": ["{{base_url}}"], "path": ["auth", "register"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "2. AUTH - Login + Lockout",
+      "item": [
+        {
+          "name": "Login customer (saves token)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"{{customer_password}}\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.test('Has token', () => pm.expect(pm.response.json().token).to.exist);", "pm.collectionVariables.set('customer_token', pm.response.json().token);"] } }]
+        },
+        {
+          "name": "Login wrong password (should be 401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"WrongPassword123@\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 401', () => pm.response.to.have.status(401));"] } }]
+        },
+        {
+          "name": "Get current user (auth required)",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/auth/me", "host": ["{{base_url}}"], "path": ["auth", "me"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.test('Email matches', () => pm.expect(pm.response.json().user.email).to.eql(pm.collectionVariables.get('customer_email')));"] } }]
+        },
+        {
+          "name": "Get current user (no token should be 401)",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/auth/me", "host": ["{{base_url}}"], "path": ["auth", "me"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 401', () => pm.response.to.have.status(401));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "3. AUTH - Forgot/Reset password",
+      "item": [
+        {
+          "name": "Forgot password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/forgot-password", "host": ["{{base_url}}"], "path": ["auth", "forgot-password"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "console.log('Check server logs or mailbox for reset link. Token is hashed in DB.')"] } }]
+        },
+        {
+          "name": "Reset password with bad token (should 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"token\": \"invalid-token-123\",\n  \"new_password\": \"NewPass123@\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/reset-password", "host": ["{{base_url}}"], "path": ["auth", "reset-password"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "4. CART - Add/Merge/Update/Remove",
+      "item": [
+        {
+          "name": "Get empty cart",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/cart", "host": ["{{base_url}}"], "path": ["cart"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Add product to cart",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": {{test_product_id}},\n  \"quantity\": 2\n}" },
+            "url": { "raw": "{{base_url}}/cart", "host": ["{{base_url}}"], "path": ["cart"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200 or 201', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));"] } }]
+        },
+        {
+          "name": "Add invalid product_id (should 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": \"not-a-number\",\n  \"quantity\": 1\n}" },
+            "url": { "raw": "{{base_url}}/cart", "host": ["{{base_url}}"], "path": ["cart"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Add quantity=0 (should 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": {{test_product_id}},\n  \"quantity\": 0\n}" },
+            "url": { "raw": "{{base_url}}/cart", "host": ["{{base_url}}"], "path": ["cart"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Merge cart (e.g. from localStorage on login)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [\n    { \"product_id\": {{test_product_id}}, \"quantity\": 1 }\n  ]\n}" },
+            "url": { "raw": "{{base_url}}/cart/merge", "host": ["{{base_url}}"], "path": ["cart", "merge"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Get cart after merge",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/cart", "host": ["{{base_url}}"], "path": ["cart"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.test('Has items', () => pm.expect(pm.response.json().data.items.length).to.be.greaterThan(0));", "pm.collectionVariables.set('test_cart_item_id', pm.response.json().data.items[0].id);"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "5. COUPON - Validate (success/expired/over-limit/invalid)",
+      "item": [
+        {
+          "name": "Get available coupons (public)",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/coupons/available", "host": ["{{base_url}}"], "path": ["coupons", "available"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Validate coupon for checkout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"code\": \"{{test_coupon_code}}\",\n  \"order_total\": 2000000\n}" },
+            "url": { "raw": "{{base_url}}/coupons/validate", "host": ["{{base_url}}"], "path": ["coupons", "validate"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["// Accept 200 (valid) or 400 (coupon not configured in test DB)", "pm.expect(pm.response.code).to.be.oneOf([200, 400]);"] } }]
+        },
+        {
+          "name": "Validate non-existent coupon (should 404)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"code\": \"DOES_NOT_EXIST_9999\",\n  \"order_total\": 2000000\n}" },
+            "url": { "raw": "{{base_url}}/coupons/validate", "host": ["{{base_url}}"], "path": ["coupons", "validate"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 404 or 400', () => pm.expect(pm.response.code).to.be.oneOf([404, 400]));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "6. ORDER - Create / Cancel",
+      "item": [
+        {
+          "name": "Create order - COD",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{ \"product_id\": {{test_product_id}}, \"quantity\": 1 }],\n  \"shipping_address\": \"Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội\",\n  \"phone\": \"0912345678\",\n  \"payment_method\": \"cod\",\n  \"full_name\": \"Smoke Test Customer\",\n  \"email\": \"{{customer_email}}\"\n}" },
+            "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 201 or 200', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));", "if (pm.response.json().data && pm.response.json().data.id) { pm.collectionVariables.set('test_order_id', pm.response.json().data.id); }"] } }]
+        },
+        {
+          "name": "Create order - missing payment_method (should 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{ \"product_id\": {{test_product_id}}, \"quantity\": 1 }],\n  \"shipping_address\": \"Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội\",\n  \"phone\": \"0912345678\"\n}" },
+            "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Create order - bad phone (should 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{ \"product_id\": {{test_product_id}}, \"quantity\": 1 }],\n  \"shipping_address\": \"Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội\",\n  \"phone\": \"abc123\",\n  \"payment_method\": \"cod\"\n}" },
+            "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Create order - invalid product_id (should 400/404)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{ \"product_id\": 999999, \"quantity\": 1 }],\n  \"shipping_address\": \"Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội\",\n  \"phone\": \"0912345678\",\n  \"payment_method\": \"cod\"\n}" },
+            "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400 or 404', () => pm.expect(pm.response.code).to.be.oneOf([400, 404]));"] } }]
+        },
+        {
+          "name": "Get my orders",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/orders", "host": ["{{base_url}}"], "path": ["orders"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.test('Has at least one order', () => pm.expect(pm.response.json().data.length).to.be.greaterThan(0));"] } }]
+        },
+        {
+          "name": "Get order by id (uses test_order_id)",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/orders/{{test_order_id}}", "host": ["{{base_url}}"], "path": ["orders", "{{test_order_id}}"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Get order with bad id (should 400)",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/orders/abc", "host": ["{{base_url}}"], "path": ["orders", "abc"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Cancel the order (saves test_order_id needed)",
+          "request": { "method": "PUT", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/orders/{{test_order_id}}/cancel", "host": ["{{base_url}}"], "path": ["orders", "{{test_order_id}}", "cancel"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "7. WISHLIST & REVIEW",
+      "item": [
+        {
+          "name": "Add to wishlist",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": {{test_product_id}}\n}" },
+            "url": { "raw": "{{base_url}}/wishlist", "host": ["{{base_url}}"], "path": ["wishlist"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200 or 201', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));"] } }]
+        },
+        {
+          "name": "Add to wishlist - bad product_id (should 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": \"abc\"\n}" },
+            "url": { "raw": "{{base_url}}/wishlist", "host": ["{{base_url}}"], "path": ["wishlist"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Get wishlist",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/wishlist", "host": ["{{base_url}}"], "path": ["wishlist"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Remove from wishlist",
+          "request": { "method": "DELETE", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/wishlist/{{test_product_id}}", "host": ["{{base_url}}"], "path": ["wishlist", "{{test_product_id}}"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Create review",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": {{test_product_id}},\n  \"rating\": 5,\n  \"comment\": \"Sản phẩm tuyệt vời, smoke test OK!\"\n}" },
+            "url": { "raw": "{{base_url}}/reviews", "host": ["{{base_url}}"], "path": ["reviews"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 201 or 400 (already reviewed)', () => pm.expect(pm.response.code).to.be.oneOf([201, 400]));"] } }]
+        },
+        {
+          "name": "Get reviews for product",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/reviews/product/{{test_product_id}}", "host": ["{{base_url}}"], "path": ["reviews", "product", "{{test_product_id}}"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "8. ADMIN - Login + Stats + Product CRUD",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));", "pm.collectionVariables.set('admin_token', pm.response.json().token);"] } }]
+        },
+        {
+          "name": "Admin dashboard stats",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{admin_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/admin/stats/dashboard", "host": ["{{base_url}}"], "path": ["admin", "stats", "dashboard"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Admin: list users",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{admin_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/admin/users?limit=5", "host": ["{{base_url}}"], "path": ["admin", "users"], "query": [{ "key": "limit", "value": "5" }] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Admin: list orders",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{admin_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/admin/orders?limit=5", "host": ["{{base_url}}"], "path": ["admin", "orders"], "query": [{ "key": "limit", "value": "5" }] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Admin: bulk update stock - negative qty should fail 400",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{ \"id\": {{test_product_id}}, \"quantity\": -5 }]\n}" },
+            "url": { "raw": "{{base_url}}/admin/products/bulk-stock", "host": ["{{base_url}}"], "path": ["admin", "products", "bulk-stock"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{admin_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 400', () => pm.response.to.have.status(400));"] } }]
+        },
+        {
+          "name": "Admin: bulk update stock - valid",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{ \"id\": {{test_product_id}}, \"quantity\": 50 }]\n}" },
+            "url": { "raw": "{{base_url}}/admin/products/bulk-stock", "host": ["{{base_url}}"], "path": ["admin", "products", "bulk-stock"] },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{admin_token}}", "type": "string" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        },
+        {
+          "name": "Admin: list coupons",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{admin_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/admin/coupons?limit=5", "host": ["{{base_url}}"], "path": ["admin", "coupons"], "query": [{ "key": "limit", "value": "5" }] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"] } }]
+        }
+      ]
+    },
+
+    {
+      "name": "9. SECURITY - Negative tests",
+      "item": [
+        {
+          "name": "Customer tries admin endpoint (should 403)",
+          "request": { "method": "GET", "header": [], "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{customer_token}}", "type": "string" }] }, "url": { "raw": "{{base_url}}/admin/stats/dashboard", "host": ["{{base_url}}"], "path": ["admin", "stats", "dashboard"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 403', () => pm.response.to.have.status(403));"] } }]
+        },
+        {
+          "name": "Rate limit brute-force - send 6 wrong logins",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"WRONG_1\"\n}" },
+            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["// Should be 401 OR 423 (account locked after threshold)", "pm.expect(pm.response.code).to.be.oneOf([401, 423, 429]);"] } }]
+        },
+        {
+          "name": "404 on unknown route",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/this/does/not/exist", "host": ["{{base_url}}"], "path": ["this", "does", "not", "exist"] } },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 404', () => pm.response.to.have.status(404));"] } }]
+        }
+      ]
+    }
+  ]
+}

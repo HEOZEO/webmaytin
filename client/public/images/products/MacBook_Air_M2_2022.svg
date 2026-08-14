@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg22" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="screen22" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="hsl(50, 70%, 20%)"/>
+    </linearGradient>
+    <radialGradient id="glow22" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fde047" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="waves" x="0" y="0" width="80" height="20" patternUnits="userSpaceOnUse">
+       <path d="M0 10 Q20 0 40 10 T80 10" fill="none" stroke="white" stroke-opacity="0.08" stroke-width="1.5"/>
+     </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg22)"/>
+  <rect width="800" height="600" fill="url(#waves)"/>
+  <ellipse cx="400" cy="280" rx="350" ry="240" fill="url(#glow22)"/>
+
+  <!-- Brand tag top-left -->
+  <rect x="32" y="32" width="94" height="40" rx="10" fill="#fde047"/>
+  <text x="79" y="58" text-anchor="middle"
+        font-family="-apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#0f172a">
+    APPLE
+  </text>
+
+  <!-- Model ID top-right -->
+  <text x="760" y="58" text-anchor="end"
+        font-family="-apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="rgba(255,255,255,0.5)">
+    ID #022
+  </text>
+
+  <!-- Title -->
+  <text x="40" y="115" font-family="-apple-system, Segoe UI, sans-serif"
+        font-size="34" font-weight="800" fill="white">
+    MacBook Air M2 2022
+  </text>
+
+  <!-- Subtitle -->
+  <text x="40" y="143" font-family="-apple-system, Segoe UI, sans-serif"
+        font-size="14" font-weight="500" fill="rgba(255,255,255,0.55)">
+    Laptop Apple chính hãng
+  </text>
+
+  <!-- Laptop body (open) — translated by layout -->
+  <g transform="translate(415, 310)">
+    <!-- Screen lid -->
+    <rect x="-220" y="-150" width="440" height="280" rx="12" fill="#0a0a0a" stroke="#fde047" stroke-width="2"/>
+    <!-- Screen content -->
+    <rect x="-205" y="-135" width="410" height="250" rx="6" fill="url(#screen22)"/>
+    <!-- Screen reflection -->
+    <polygon points="-205,-135 205,-135 80,115 -205,115" fill="white" opacity="0.08"/>
+
+    <!-- Logo inside screen -->
+    <polygon points="400,220 470,330 330,330" fill="#fde047" opacity="0.9"/>
+
+    <!-- Logo text -->
+    <text x="0" y="80" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif"
+          font-size="22" font-weight="800" fill="white" opacity="0.95">
+      Apple
+    </text>
+    <text x="0" y="100" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif"
+          font-size="11" font-weight="500" fill="rgba(255,255,255,0.7)">
+      Series 22
+    </text>
+
+    <!-- Keyboard base -->
+    <path d="M -240 130 L 240 130 L 260 165 L -260 165 Z" fill="#0a0a0a" stroke="#fde047" stroke-width="2"/>
+    <!-- Trackpad -->
+    <rect x="-50" y="140" width="100" height="6" rx="3" fill="#fde047" opacity="0.4"/>
+  </g>
+
+  <!-- Bottom footer -->
+  <line x1="40" y1="555" x2="760" y2="555" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="40" y="580" font-family="-apple-system, Segoe UI, sans-serif"
+        font-size="12" fill="rgba(255,255,255,0.4)">
+    shopmaytinh.vn
+  </text>
+  <text x="760" y="580" text-anchor="end" font-family="-apple-system, Segoe UI, sans-serif"
+        font-size="12" font-weight="600" fill="#fde047">
+    #FDE047
+  </text>
+</svg>
