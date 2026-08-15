@@ -137,20 +137,20 @@ export default function AdminPayments() {
 
   const STATUS_CONFIG = {
     pending:   { label: 'Chờ duyệt',   color: 'bg-amber-500/20 text-amber-300 border-amber-500/30',   icon: Loader2 },
-    approved:  { label: 'Đã duyệt',    color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30', icon: CheckCircle },
+    approved:  { label: 'Đã duyệt',    color: 'bg-red-600/20 text-emerald-300 border-red-600/30', icon: CheckCircle },
     rejected:  { label: 'Từ chối',     color: 'bg-rose-500/20 text-rose-300 border-rose-500/30',    icon: XCircle }
   };
 
   return (
     <div className="space-y-6">
       {/* Tabs */}
-      <div className="flex items-center gap-1 p-1 bg-slate-900/80 rounded-xl border border-slate-800 w-fit">
+      <div className="flex items-center gap-1 p-1 bg-black/80 rounded-none clip-path-rog border border-neutral-800 w-fit">
         <button
           onClick={() => setActiveTab('requests')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
             activeTab === 'requests'
-              ? 'bg-cyan-500 text-slate-950'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-red-600 text-white font-bold tracking-widest uppercase'
+              : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
           }`}
         >
           <CreditCard className="w-4 h-4" />
@@ -165,8 +165,8 @@ export default function AdminPayments() {
           onClick={() => setActiveTab('settings')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
             activeTab === 'settings'
-              ? 'bg-cyan-500 text-slate-950'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-red-600 text-white font-bold tracking-widest uppercase'
+              : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
           }`}
         >
           <QrCode className="w-4 h-4" />
@@ -179,15 +179,15 @@ export default function AdminPayments() {
         <div className="space-y-5">
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-sm text-slate-400 font-semibold">Lọc:</span>
+            <span className="text-sm text-neutral-400 font-semibold">Lọc:</span>
             {['all', 'pending', 'approved', 'rejected'].map(s => (
               <button
                 key={s}
                 onClick={() => { setFilterStatus(s); setPage(1); }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                   filterStatus === s
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                    : 'bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700'
+                    ? 'bg-red-600/20 text-red-400 border border-red-600/40'
+                    : 'bg-black text-neutral-400 border border-neutral-800 hover:border-slate-700'
                 }`}
               >
                 {s === 'all' ? 'Tất cả' : STATUS_CONFIG[s]?.label}
@@ -197,11 +197,11 @@ export default function AdminPayments() {
 
           {/* Cards grid */}
           {loading ? (
-            <div className="p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-cyan-400" /></div>
+            <div className="p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-red-500" /></div>
           ) : requests.length === 0 ? (
-            <div className="p-12 text-center space-y-3 bg-slate-900/50 rounded-2xl border border-slate-800">
+            <div className="p-12 text-center space-y-3 bg-black/50 rounded-none clip-path-rog border border-neutral-800">
               <CreditCard className="w-12 h-12 mx-auto text-slate-600" />
-              <p className="text-slate-400 font-semibold">Chưa có yêu cầu thanh toán nào.</p>
+              <p className="text-neutral-400 font-semibold">Chưa có yêu cầu thanh toán nào.</p>
             </div>
           ) : (
             <>
@@ -213,11 +213,11 @@ export default function AdminPayments() {
                   return (
                     <div
                       key={req.id}
-                      className="glass-card rounded-2xl overflow-hidden hover:border-cyan-500/40 transition-all"
+                      className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog overflow-hidden hover:border-red-600/40 transition-all"
                     >
                       <div className="flex flex-col sm:flex-row">
                         {/* Bill thumbnail - click to open full preview */}
-                        <div className="relative sm:w-44 flex-shrink-0 bg-slate-900/80 border-r border-slate-800">
+                        <div className="relative sm:w-44 flex-shrink-0 bg-black/80 border-r border-neutral-800">
                           {billUrl ? (
                             <button
                               onClick={() => setPreviewImage(billUrl)}
@@ -234,7 +234,7 @@ export default function AdminPayments() {
                                   e.currentTarget.parentElement.querySelector('[data-fallback]')?.classList.add('flex');
                                 }}
                               />
-                              <div data-fallback className="hidden absolute inset-0 flex-col items-center justify-center text-center p-3 text-slate-500 bg-slate-900">
+                              <div data-fallback className="hidden absolute inset-0 flex-col items-center justify-center text-center p-3 text-slate-500 bg-black">
                                 <FileWarning className="w-10 h-10 mb-1 text-amber-400" />
                                 <span className="text-[10px] font-bold text-amber-300">File không đúng định dạng</span>
                                 <span className="text-[9px] text-slate-500 mt-0.5 leading-tight">Click để tải file gốc<br />& liên hệ khách gửi lại</span>
@@ -243,13 +243,13 @@ export default function AdminPayments() {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   onClick={(e) => e.stopPropagation()}
-                                  className="mt-1.5 flex items-center gap-1 px-2 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded text-[10px] font-bold"
+                                  className="mt-1.5 flex items-center gap-1 px-2 py-1 bg-neutral-900 hover:bg-slate-700 text-red-500 rounded text-[10px] font-bold"
                                 >
                                   <Download className="w-3 h-3" /> Tải file
                                 </a>
                               </div>
                               <div className="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/60 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500 text-slate-950 rounded-lg text-xs font-bold">
+                                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 text-white font-bold tracking-widest uppercase rounded-lg text-xs font-bold">
                                   <ZoomIn className="w-3.5 h-3.5" /> Xem ảnh lớn
                                 </span>
                               </div>
@@ -267,7 +267,7 @@ export default function AdminPayments() {
                           <div className="flex items-start justify-between gap-2">
                             <div className="min-w-0">
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="font-mono text-cyan-400 font-bold text-sm">#{req.order_id}</span>
+                                <span className="font-mono text-red-500 font-bold text-sm">#{req.order_id}</span>
                                 <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${cfg.color}`}>
                                   <StatusIcon className="w-3 h-3" />
                                   {cfg.label}
@@ -278,7 +278,7 @@ export default function AdminPayments() {
                             </div>
                             <button
                               onClick={() => setDetailRequest(req)}
-                              className="p-1.5 bg-slate-800 border border-slate-700 rounded-lg text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-colors flex-shrink-0"
+                              className="p-1.5 bg-neutral-900 border border-slate-700 rounded-lg text-neutral-400 hover:text-red-500 hover:border-red-600/40 transition-colors flex-shrink-0"
                               title="Xem chi tiết"
                             >
                               <Info className="w-4 h-4" />
@@ -286,11 +286,11 @@ export default function AdminPayments() {
                           </div>
 
                           <div className="grid grid-cols-2 gap-2 text-[11px]">
-                            <div className="flex items-center gap-1.5 text-slate-400">
-                              <Wallet className="w-3 h-3 text-cyan-400" />
-                              <span className="font-bold text-cyan-300">{formatPrice(req.amount)}</span>
+                            <div className="flex items-center gap-1.5 text-neutral-400">
+                              <Wallet className="w-3 h-3 text-red-500" />
+                              <span className="font-bold text-red-400">{formatPrice(req.amount)}</span>
                             </div>
-                            <div className="flex items-center gap-1.5 text-slate-400">
+                            <div className="flex items-center gap-1.5 text-neutral-400">
                               <Calendar className="w-3 h-3 text-slate-500" />
                               <span>{new Date(req.created_at).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}</span>
                             </div>
@@ -308,7 +308,7 @@ export default function AdminPayments() {
                             <div className="flex gap-2 pt-1">
                               <button
                                 onClick={() => handleApprove(req.id)}
-                                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-500/15 border border-emerald-500/40 rounded-lg text-emerald-300 hover:bg-emerald-500/25 text-xs font-bold transition-colors"
+                                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-red-600/15 border border-red-600/40 rounded-lg text-emerald-300 hover:bg-red-600/25 text-xs font-bold transition-colors"
                               >
                                 <CheckCircle className="w-3.5 h-3.5" /> Duyệt
                               </button>
@@ -333,7 +333,7 @@ export default function AdminPayments() {
                   <select
                     value={limit}
                     onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }}
-                    className="px-2 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer"
+                    className="px-2 py-1 bg-black border border-neutral-800 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-red-600 cursor-pointer"
                   >
                     {[10, 20, 50, 100].map(n => (
                       <option key={n} value={n}>{n} / trang</option>
@@ -342,15 +342,15 @@ export default function AdminPayments() {
                   <button
                     onClick={() => setPage(p => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-400 disabled:opacity-40"
+                    className="px-3 py-1.5 bg-black border border-neutral-800 rounded-lg text-sm text-neutral-400 disabled:opacity-40"
                   >
                     ←
                   </button>
-                  <span className="text-sm text-slate-400">Trang {page} / {totalPages}</span>
+                  <span className="text-sm text-neutral-400">Trang {page} / {totalPages}</span>
                   <button
                     onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
-                    className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-sm text-slate-400 disabled:opacity-40"
+                    className="px-3 py-1.5 bg-black border border-neutral-800 rounded-lg text-sm text-neutral-400 disabled:opacity-40"
                   >
                     →
                   </button>
@@ -364,77 +364,77 @@ export default function AdminPayments() {
       {/* ===== SETTINGS TAB ===== */}
       {activeTab === 'settings' && (
         <div className="max-w-3xl">
-          <div className="glass-card rounded-2xl p-8 space-y-6">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-8 space-y-6">
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <QrCode className="w-5 h-5 text-cyan-400" />
+                <QrCode className="w-5 h-5 text-red-500" />
                 Cài Đặt Thanh Toán QR
               </h2>
-              <p className="text-sm text-slate-400 mt-1">Cấu hình thông tin tài khoản ngân hàng và mã QR để khách hàng thanh toán.</p>
+              <p className="text-sm text-neutral-400 mt-1">Cấu hình thông tin tài khoản ngân hàng và mã QR để khách hàng thanh toán.</p>
             </div>
 
             <form onSubmit={handleSaveSettings} className="space-y-5">
               {/* Bank info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">Tên ngân hàng</label>
+                  <label className="block text-xs font-semibold text-neutral-400 mb-1">Tên ngân hàng</label>
                   <input
                     type="text"
                     value={settings.bank_name}
                     onChange={e => setSettings({ ...settings, bank_name: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-red-600"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">Số tài khoản</label>
+                  <label className="block text-xs font-semibold text-neutral-400 mb-1">Số tài khoản</label>
                   <input
                     type="text"
                     required
                     value={settings.account_number}
                     onChange={e => setSettings({ ...settings, account_number: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500 font-mono"
+                    className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-red-600 font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">Tên chủ tài khoản</label>
+                  <label className="block text-xs font-semibold text-neutral-400 mb-1">Tên chủ tài khoản</label>
                   <input
                     type="text"
                     required
                     value={settings.account_holder}
                     onChange={e => setSettings({ ...settings, account_holder: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-red-600"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">Nội dung chuyển khoản (tùy chọn)</label>
+                  <label className="block text-xs font-semibold text-neutral-400 mb-1">Nội dung chuyển khoản (tùy chọn)</label>
                   <input
                     type="text"
                     value={settings.account_content}
                     onChange={e => setSettings({ ...settings, account_content: e.target.value })}
                     placeholder="VD: [SĐT] hoặc mã đơn hàng"
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-red-600"
                   />
                 </div>
               </div>
 
               {/* QR Image */}
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-2">Ảnh Mã QR</label>
+                <label className="block text-xs font-semibold text-neutral-400 mb-2">Ảnh Mã QR</label>
                 <div className="flex items-start gap-4">
                   {qrPreview && (
                     <div className="relative">
                       <img
                         src={qrPreview.startsWith('data:') ? qrPreview : getBackendUrl(qrPreview)}
                         alt="QR Code"
-                        className="w-32 h-32 rounded-xl object-cover bg-white border border-slate-700"
+                        className="w-32 h-32 rounded-none clip-path-rog object-cover bg-white border border-slate-700"
                         onError={e => { e.target.src = ''; setQrPreview(null); }}
                       />
                     </div>
                   )}
                   <div className="flex-1">
-                    <label className="flex items-center gap-2 px-4 py-3 bg-slate-900 border border-dashed border-slate-700 rounded-xl cursor-pointer hover:border-cyan-500/60 transition-colors">
-                      <Upload className="w-4 h-4 text-cyan-400" />
-                      <span className="text-sm text-slate-400">
+                    <label className="flex items-center gap-2 px-4 py-3 bg-black border border-dashed border-slate-700 rounded-none clip-path-rog cursor-pointer hover:border-red-600/60 transition-colors">
+                      <Upload className="w-4 h-4 text-red-500" />
+                      <span className="text-sm text-neutral-400">
                         {settings.qrFile ? settings.qrFile.name : 'Tải lên ảnh QR mới (JPG, PNG, WEBP, tối đa 5MB)'}
                       </span>
                       <input
@@ -459,20 +459,20 @@ export default function AdminPayments() {
 
               {/* Instructions */}
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">Hướng dẫn thanh toán (tùy chọn)</label>
+                <label className="block text-xs font-semibold text-neutral-400 mb-1">Hướng dẫn thanh toán (tùy chọn)</label>
                 <textarea
                   rows="3"
                   value={settings.instructions}
                   onChange={e => setSettings({ ...settings, instructions: e.target.value })}
                   placeholder="VD: Quý khách vui lòng chuyển khoản đúng số tiền và ghi nội dung chuyển khoản..."
-                  className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500 resize-none"
+                  className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-red-600 resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={settingsLoading}
-                className="flex items-center gap-2 px-6 py-3 bg-cyan-500 text-slate-950 font-bold rounded-xl hover:bg-cyan-400 transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog hover:bg-red-500 transition-colors disabled:opacity-50"
               >
                 {settingsLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 Lưu Cài Đặt
@@ -482,21 +482,21 @@ export default function AdminPayments() {
 
           {/* Preview */}
           {settings.account_number && (
-            <div className="glass-card rounded-2xl p-6 space-y-4 mt-6">
-              <h3 className="text-sm font-bold text-slate-400 flex items-center gap-2">
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 space-y-4 mt-6">
+              <h3 className="text-sm font-bold text-neutral-400 flex items-center gap-2">
                 <Info className="w-4 h-4" />
                 Xem trước thông tin hiển thị cho khách
               </h3>
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-slate-800">
+              <div className="flex items-center gap-4 p-4 rounded-none clip-path-rog bg-white/5 border border-neutral-800">
                 {qrPreview && (
-                  <img src={qrPreview.startsWith('data:') ? qrPreview : getBackendUrl(qrPreview)} alt="QR" className="w-24 h-24 rounded-xl object-cover bg-white" />
+                  <img src={qrPreview.startsWith('data:') ? qrPreview : getBackendUrl(qrPreview)} alt="QR" className="w-24 h-24 rounded-none clip-path-rog object-cover bg-white" />
                 )}
                 <div className="space-y-1 text-sm">
                   <div className="font-bold text-white">{settings.bank_name}</div>
-                  <div className="text-slate-300 font-mono">{settings.account_number}</div>
-                  <div className="text-slate-300">{settings.account_holder}</div>
+                  <div className="text-neutral-300 font-mono">{settings.account_number}</div>
+                  <div className="text-neutral-300">{settings.account_holder}</div>
                   {settings.account_content && (
-                    <div className="text-slate-400 text-xs">Nội dung: {settings.account_content}</div>
+                    <div className="text-neutral-400 text-xs">Nội dung: {settings.account_content}</div>
                   )}
                 </div>
               </div>
@@ -511,17 +511,17 @@ export default function AdminPayments() {
           <div className="relative max-w-3xl w-full" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setPreviewImage(null)}
-              className="absolute -top-3 -right-3 w-9 h-9 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 z-10 shadow-xl"
+              className="absolute -top-3 -right-3 w-9 h-9 bg-neutral-900 border border-slate-700 rounded-full flex items-center justify-center text-neutral-400 hover:text-white hover:bg-slate-700 z-10 shadow-xl"
             >
               <X className="w-4 h-4" />
             </button>
             <img
               src={previewImage.startsWith('data:') ? previewImage : getBackendUrl(previewImage)}
               alt="Bill Preview"
-              className="w-full max-h-[85vh] object-contain rounded-2xl border border-slate-700 shadow-2xl bg-slate-900"
+              className="w-full max-h-[85vh] object-contain rounded-none clip-path-rog border border-slate-700 shadow-2xl bg-black"
               onError={e => { e.target.src = ''; setPreviewImage(null); }}
             />
-            <p className="text-center text-xs text-slate-400 mt-3 flex items-center justify-center gap-1.5">
+            <p className="text-center text-xs text-neutral-400 mt-3 flex items-center justify-center gap-1.5">
               <ImageIcon className="w-3 h-3" /> Ảnh bill thanh toán của khách hàng — Click bên ngoài để đóng
             </p>
           </div>
@@ -537,22 +537,22 @@ export default function AdminPayments() {
           : null;
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setDetailRequest(null)}>
-            <div className="glass-card rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-              <div className="sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 p-5 flex items-center justify-between">
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+              <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-neutral-800 p-5 flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-bold text-white flex items-center gap-2">
-                    <Info className="w-5 h-5 text-cyan-400" />
+                    <Info className="w-5 h-5 text-red-500" />
                     Chi Tiết Yêu Cầu Thanh Toán
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="font-mono text-cyan-400 font-bold text-sm">#{detailRequest.order_id}</span>
+                    <span className="font-mono text-red-500 font-bold text-sm">#{detailRequest.order_id}</span>
                     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${cfg.color}`}>
                       <StatusIcon className="w-3 h-3" />
                       {cfg.label}
                     </span>
                   </div>
                 </div>
-                <button onClick={() => setDetailRequest(null)} className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+                <button onClick={() => setDetailRequest(null)} className="p-2 text-neutral-400 hover:text-white rounded-lg hover:bg-neutral-900">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -562,38 +562,38 @@ export default function AdminPayments() {
                 {detailBillUrl ? (
                   <button
                     onClick={() => setPreviewImage(detailBillUrl)}
-                    className="block w-full rounded-xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-colors group"
+                    className="block w-full rounded-none clip-path-rog overflow-hidden border border-neutral-800 hover:border-red-600/50 transition-colors group"
                   >
                     <img
                       src={detailBillUrl}
                       alt="Bill"
-                      className="w-full max-h-96 object-contain bg-slate-900"
+                      className="w-full max-h-96 object-contain bg-black"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         e.currentTarget.parentElement.querySelector('[data-detail-fallback]')?.classList.remove('hidden');
                         e.currentTarget.parentElement.querySelector('[data-detail-fallback]')?.classList.add('flex');
                       }}
                     />
-                    <div data-detail-fallback className="hidden flex-col items-center justify-center text-center p-6 bg-slate-900 min-h-[12rem]">
+                    <div data-detail-fallback className="hidden flex-col items-center justify-center text-center p-6 bg-black min-h-[12rem]">
                       <FileWarning className="w-12 h-12 text-amber-400 mb-2" />
                       <span className="text-sm font-bold text-amber-300">File bill không đúng định dạng ảnh</span>
-                      <span className="text-xs text-slate-400 mt-1 mb-3">Có thể khách upload bị lỗi. Hãy yêu cầu khách gửi lại bill mới.</span>
+                      <span className="text-xs text-neutral-400 mt-1 mb-3">Có thể khách upload bị lỗi. Hãy yêu cầu khách gửi lại bill mới.</span>
                       <a
                         href={detailBillUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500 text-slate-950 rounded-lg text-xs font-bold hover:bg-cyan-400"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600 text-white font-bold tracking-widest uppercase rounded-lg text-xs font-bold hover:bg-red-500"
                       >
                         <Download className="w-3.5 h-3.5" /> Tải file gốc về máy
                       </a>
                     </div>
-                    <div className="bg-slate-900/80 px-3 py-2 text-xs text-slate-400 flex items-center justify-center gap-1.5 group-hover:text-cyan-400">
+                    <div className="bg-black/80 px-3 py-2 text-xs text-neutral-400 flex items-center justify-center gap-1.5 group-hover:text-red-500">
                       <ZoomIn className="w-3.5 h-3.5" /> Click để xem ảnh lớn
                     </div>
                   </button>
                 ) : (
-                  <div className="p-8 text-center text-slate-500 bg-slate-900/50 rounded-xl border border-dashed border-slate-700">
+                  <div className="p-8 text-center text-slate-500 bg-black/50 rounded-none clip-path-rog border border-dashed border-slate-700">
                     <ImageIcon className="w-10 h-10 mx-auto mb-2" />
                     <span className="text-xs">Khách hàng chưa gửi ảnh bill.</span>
                   </div>
@@ -601,37 +601,37 @@ export default function AdminPayments() {
 
                 {/* Info grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1">
+                  <div className="p-3 bg-black/60 rounded-none clip-path-rog border border-neutral-800 space-y-1">
                     <div className="flex items-center gap-1.5 text-slate-500 font-semibold uppercase tracking-wide text-[10px]">
                       <User className="w-3 h-3" /> Khách hàng
                     </div>
                     <div className="font-bold text-white text-sm">{detailRequest.customer_name || '—'}</div>
                   </div>
-                  <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1">
+                  <div className="p-3 bg-black/60 rounded-none clip-path-rog border border-neutral-800 space-y-1">
                     <div className="flex items-center gap-1.5 text-slate-500 font-semibold uppercase tracking-wide text-[10px]">
                       <Phone className="w-3 h-3" /> Số điện thoại
                     </div>
                     <div className="font-mono text-white text-sm">{detailRequest.customer_phone || '—'}</div>
                   </div>
-                  <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1 sm:col-span-2">
+                  <div className="p-3 bg-black/60 rounded-none clip-path-rog border border-neutral-800 space-y-1 sm:col-span-2">
                     <div className="flex items-center gap-1.5 text-slate-500 font-semibold uppercase tracking-wide text-[10px]">
                       <Mail className="w-3 h-3" /> Email
                     </div>
                     <div className="text-white text-sm truncate">{detailRequest.customer_email || '—'}</div>
                   </div>
-                  <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1">
+                  <div className="p-3 bg-black/60 rounded-none clip-path-rog border border-neutral-800 space-y-1">
                     <div className="flex items-center gap-1.5 text-slate-500 font-semibold uppercase tracking-wide text-[10px]">
                       <Hash className="w-3 h-3" /> Mã yêu cầu
                     </div>
                     <div className="font-mono text-white text-sm">#{detailRequest.id}</div>
                   </div>
-                  <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1">
+                  <div className="p-3 bg-black/60 rounded-none clip-path-rog border border-neutral-800 space-y-1">
                     <div className="flex items-center gap-1.5 text-slate-500 font-semibold uppercase tracking-wide text-[10px]">
                       <Wallet className="w-3 h-3" /> Số tiền
                     </div>
-                    <div className="font-extrabold text-cyan-300 text-base">{formatPrice(detailRequest.amount)}</div>
+                    <div className="font-extrabold text-red-400 text-base">{formatPrice(detailRequest.amount)}</div>
                   </div>
-                  <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1 sm:col-span-2">
+                  <div className="p-3 bg-black/60 rounded-none clip-path-rog border border-neutral-800 space-y-1 sm:col-span-2">
                     <div className="flex items-center gap-1.5 text-slate-500 font-semibold uppercase tracking-wide text-[10px]">
                       <Calendar className="w-3 h-3" /> Thời gian gửi
                     </div>
@@ -646,7 +646,7 @@ export default function AdminPayments() {
 
                 {/* Rejection reason if any */}
                 {detailRequest.admin_note && (
-                  <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30">
+                  <div className="p-3 rounded-none clip-path-rog bg-rose-500/10 border border-rose-500/30">
                     <div className="flex items-start gap-2">
                       <MessageSquare className="w-4 h-4 text-rose-400 mt-0.5 flex-shrink-0" />
                       <div className="min-w-0">
@@ -659,19 +659,19 @@ export default function AdminPayments() {
 
                 {/* Actions */}
                 {detailRequest.status === 'pending' && (
-                  <div className="flex gap-3 pt-2 border-t border-slate-800">
+                  <div className="flex gap-3 pt-2 border-t border-neutral-800">
                     <button
                       onClick={() => {
                         setRejectModal({ id: detailRequest.id, order_id: detailRequest.order_id, reason: '' });
                         setDetailRequest(null);
                       }}
-                      className="flex-1 py-2.5 bg-rose-500/15 border border-rose-500/40 rounded-xl text-rose-300 hover:bg-rose-500/25 text-sm font-bold flex items-center justify-center gap-2 transition-colors"
+                      className="flex-1 py-2.5 bg-rose-500/15 border border-rose-500/40 rounded-none clip-path-rog text-rose-300 hover:bg-rose-500/25 text-sm font-bold flex items-center justify-center gap-2 transition-colors"
                     >
                       <XCircle className="w-4 h-4" /> Từ chối
                     </button>
                     <button
                       onClick={() => handleApprove(detailRequest.id)}
-                      className="flex-1 py-2.5 bg-emerald-500/20 border border-emerald-500/40 rounded-xl text-emerald-300 hover:bg-emerald-500/30 text-sm font-bold flex items-center justify-center gap-2 transition-colors"
+                      className="flex-1 py-2.5 bg-red-600/20 border border-red-600/40 rounded-none clip-path-rog text-emerald-300 hover:bg-red-600/30 text-sm font-bold flex items-center justify-center gap-2 transition-colors"
                     >
                       <CheckCircle className="w-4 h-4" /> Duyệt thanh toán
                     </button>
@@ -686,31 +686,31 @@ export default function AdminPayments() {
       {/* Reject Modal */}
       {rejectModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setRejectModal(null)}>
-          <div className="glass-card rounded-2xl p-6 w-full max-w-md space-y-4" onClick={e => e.stopPropagation()}>
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 w-full max-w-md space-y-4" onClick={e => e.stopPropagation()}>
             <h3 className="text-base font-bold text-white flex items-center gap-2">
               <XCircle className="w-5 h-5 text-rose-400" />
               Từ Chối Thanh Toán
             </h3>
-            <p className="text-sm text-slate-400">
-              Đơn hàng <span className="text-cyan-400 font-bold">#{rejectModal.order_id}</span> — Vui lòng nhập lý do từ chối để gửi email thông báo cho khách hàng.
+            <p className="text-sm text-neutral-400">
+              Đơn hàng <span className="text-red-500 font-bold">#{rejectModal.order_id}</span> — Vui lòng nhập lý do từ chối để gửi email thông báo cho khách hàng.
             </p>
             <textarea
               rows="3"
               value={rejectModal.reason}
               onChange={e => setRejectModal({ ...rejectModal, reason: e.target.value })}
               placeholder="VD: Số tiền không khớp với đơn hàng, ảnh mờ không rõ..."
-              className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-rose-500 resize-none"
+              className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-rose-500 resize-none"
             />
             <div className="flex gap-3">
               <button
                 onClick={() => setRejectModal(null)}
-                className="flex-1 py-2.5 bg-slate-800 text-slate-300 rounded-xl text-sm font-semibold hover:bg-slate-700"
+                className="flex-1 py-2.5 bg-neutral-900 text-neutral-300 rounded-none clip-path-rog text-sm font-semibold hover:bg-slate-700"
               >
                 Hủy
               </button>
               <button
                 onClick={handleReject}
-                className="flex-1 py-2.5 bg-rose-500 text-white font-bold rounded-xl text-sm hover:bg-rose-400 flex items-center justify-center gap-2"
+                className="flex-1 py-2.5 bg-rose-500 text-white font-bold rounded-none clip-path-rog text-sm hover:bg-rose-400 flex items-center justify-center gap-2"
               >
                 <XCircle className="w-4 h-4" />
                 Từ Chối & Gửi Email

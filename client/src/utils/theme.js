@@ -23,28 +23,28 @@ export const ORDER_STATUS_CONFIG = {
   confirmed: {
     label: 'Đã xác nhận',
     short: 'Xác nhận',
-    color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+    color: 'bg-red-600/20 text-red-400 border-red-600/30',
     icon: CheckCircle,
     stepIndex: 1
   },
   packing: {
     label: 'Đang đóng gói',
     short: 'Đóng gói',
-    color: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+    color: 'bg-red-600/20 text-blue-300 border-red-600/30',
     icon: Box,
     stepIndex: 2
   },
   shipping: {
     label: 'Đang vận chuyển',
     short: 'Vận chuyển',
-    color: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    color: 'bg-red-600/20 text-purple-300 border-red-600/30',
     icon: TruckIcon,
     stepIndex: 3
   },
   delivered: {
     label: 'Giao thành công',
     short: 'Hoàn thành',
-    color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    color: 'bg-red-600/20 text-emerald-300 border-red-600/30',
     icon: Truck,
     stepIndex: 4
   },
@@ -78,7 +78,7 @@ export const PAYMENT_STATUS_CONFIG = {
   },
   approved: {
     label: 'Đã duyệt',
-    color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    color: 'bg-red-600/20 text-emerald-300 border-red-600/30',
     icon: CheckCircle
   },
   rejected: {

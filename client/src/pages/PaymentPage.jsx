@@ -14,7 +14,7 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 
 const STATUS_CONFIG = {
   pending:  { label: 'Chờ duyệt',   color: 'bg-amber-500/20 text-amber-300 border-amber-500/30',   icon: Clock },
-  approved: { label: 'Đã xác nhận', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30', icon: CheckCircle },
+  approved: { label: 'Đã xác nhận', color: 'bg-red-600/20 text-emerald-300 border-red-600/30', icon: CheckCircle },
   rejected: { label: 'Bị từ chối',  color: 'bg-rose-500/20 text-rose-300 border-rose-500/30',      icon: XCircle }
 };
 
@@ -188,32 +188,32 @@ export default function PaymentPage() {
   if (billSubmitted) {
     return (
       <div className="max-w-2xl mx-auto my-12 px-4 space-y-6">
-        <div className="glass-card p-10 rounded-3xl glow-blue space-y-6 text-center">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog p-10 rounded-none clip-path-rog glow-rog space-y-6 text-center">
           <div className="w-20 h-20 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto border border-amber-500/30 animate-pulse">
             <Clock className="w-12 h-12" />
           </div>
 
           <div className="space-y-2">
             <h2 className="text-3xl font-extrabold text-white">Đang Chờ Admin Duyệt</h2>
-            <p className="text-cyan-400 text-sm font-semibold">
+            <p className="text-red-500 text-sm font-semibold">
               Mã đơn hàng: <strong>#{submittedOrderId}</strong>
             </p>
             {submittedAmount > 0 && (
-              <p className="text-slate-300 text-xs">
-                Số tiền: <strong className="text-cyan-300">{formatPrice(submittedAmount)}</strong>
+              <p className="text-neutral-300 text-xs">
+                Số tiền: <strong className="text-red-400">{formatPrice(submittedAmount)}</strong>
               </p>
             )}
           </div>
 
-          <p className="text-slate-300 text-sm leading-relaxed max-w-lg mx-auto">
+          <p className="text-neutral-300 text-sm leading-relaxed max-w-lg mx-auto">
             Bill thanh toán của bạn đã được gửi thành công. Admin sẽ kiểm tra và xác nhận trong vòng <strong className="text-amber-300">5-15 phút</strong>. Bạn sẽ nhận được thông báo khi đơn hàng được duyệt.
           </p>
 
-          <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-left space-y-2">
+          <div className="p-4 rounded-none clip-path-rog bg-amber-500/10 border border-amber-500/20 text-left space-y-2">
             <p className="text-xs text-amber-300 font-bold flex items-center gap-2">
               <AlertCircle className="w-4 h-4" /> Lưu ý
             </p>
-            <ul className="text-xs text-slate-300 space-y-1.5 list-none pl-1">
+            <ul className="text-xs text-neutral-300 space-y-1.5 list-none pl-1">
               <li className="flex items-start gap-2">
                 <span className="text-amber-400 mt-0.5">•</span>
                 <span>Nếu bill hợp lệ, đơn sẽ chuyển sang trạng thái "Đã xác nhận thanh toán" và admin sẽ xử lý đơn hàng.</span>
@@ -233,14 +233,14 @@ export default function PaymentPage() {
             <button
               type="button"
               onClick={() => navigate('/products')}
-              className="flex-1 min-w-[180px] px-6 py-3.5 bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 font-bold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all flex items-center justify-center gap-2"
+              className="flex-1 min-w-[180px] px-6 py-3.5 bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog hover:shadow-lg hover:shadow-red-600/25 transition-all flex items-center justify-center gap-2"
             >
               <ShoppingCart className="w-4 h-4" />
               Tiếp Tục Mua Sắm
             </button>
             <Link
               to="/profile"
-              className="flex-1 min-w-[180px] px-6 py-3.5 bg-slate-900 border border-slate-700 text-slate-200 font-semibold rounded-xl hover:bg-slate-800 hover:border-cyan-500/50 transition-colors text-center flex items-center justify-center gap-2"
+              className="flex-1 min-w-[180px] px-6 py-3.5 bg-black border border-slate-700 text-slate-200 font-semibold rounded-none clip-path-rog hover:bg-neutral-900 hover:border-red-600/50 transition-colors text-center flex items-center justify-center gap-2"
             >
               <Package className="w-4 h-4" />
               Xem Lịch Sử Đơn Hàng
@@ -250,7 +250,7 @@ export default function PaymentPage() {
           <button
             type="button"
             onClick={() => setBillSubmitted(false)}
-            className="text-xs text-slate-500 hover:text-cyan-400 underline-offset-4 hover:underline"
+            className="text-xs text-slate-500 hover:text-red-500 underline-offset-4 hover:underline"
           >
             ← Quay lại trang thanh toán để gửi bill khác
           </button>
@@ -262,13 +262,13 @@ export default function PaymentPage() {
   if (!isAuthenticated) {
     return (
       <div className="max-w-lg mx-auto my-16 px-4 text-center space-y-6">
-        <div className="glass-card p-10 rounded-3xl space-y-4">
-          <div className="w-16 h-16 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mx-auto border border-cyan-500/30">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog p-10 rounded-none clip-path-rog space-y-4">
+          <div className="w-16 h-16 bg-red-600/10 text-red-500 rounded-none clip-path-rog flex items-center justify-center mx-auto border border-red-600/30">
             <CreditCard className="w-8 h-8" />
           </div>
           <h2 className="text-2xl font-extrabold text-white">Yêu Cầu Đăng Nhập</h2>
-          <p className="text-slate-400 text-sm">Vui lòng đăng nhập để truy cập trang thanh toán.</p>
-          <Link to="/login" className="inline-block px-6 py-3 bg-cyan-500 text-slate-950 font-bold rounded-xl">
+          <p className="text-neutral-400 text-sm">Vui lòng đăng nhập để truy cập trang thanh toán.</p>
+          <Link to="/login" className="inline-block px-6 py-3 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog">
             Đăng Nhập Ngay
           </Link>
         </div>
@@ -283,10 +283,10 @@ export default function PaymentPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-            <CreditCard className="w-7 h-7 text-cyan-400" />
+            <CreditCard className="w-7 h-7 text-red-500" />
             Thanh Toán
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Quét mã QR để chuyển khoản và tải lên bill xác nhận</p>
+          <p className="text-neutral-400 text-sm mt-1">Quét mã QR để chuyển khoản và tải lên bill xác nhận</p>
         </div>
       </div>
 
@@ -295,10 +295,10 @@ export default function PaymentPage() {
         <div className="lg:col-span-7 space-y-6">
 
           {/* QR Info Card */}
-          <div className="glass-card rounded-2xl p-6 space-y-5">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 space-y-5">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <QrCode className="w-5 h-5 text-cyan-400" />
+                <QrCode className="w-5 h-5 text-red-500" />
                 Thông Tin Thanh Toán
               </h2>
               <button
@@ -306,52 +306,52 @@ export default function PaymentPage() {
                   paymentService.getQRInfo().then(res => setQrInfo(res?.data));
                   showToast.success('Đã làm mới thông tin');
                 }}
-                className="text-xs text-slate-500 hover:text-cyan-400 flex items-center gap-1"
+                className="text-xs text-slate-500 hover:text-red-500 flex items-center gap-1"
               >
                 <RefreshCw className="w-3 h-3" /> Làm mới
               </button>
             </div>
 
             {qrLoading ? (
-              <div className="p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-cyan-400" /></div>
+              <div className="p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-red-500" /></div>
             ) : (
               <>
                 {/* QR Image */}
-                <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-white/5 rounded-2xl border border-slate-800">
+                <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-white/5 rounded-none clip-path-rog border border-neutral-800">
                   {qrInfo?.qr_image_url ? (
                     <img
                       src={getBackendUrl(qrInfo.qr_image_url)}
                       alt="QR Code"
-                      className="w-48 h-48 rounded-2xl object-contain bg-white p-2"
+                      className="w-48 h-48 rounded-none clip-path-rog object-contain bg-white p-2"
                     />
                   ) : (
-                    <div className="w-48 h-48 rounded-2xl bg-slate-800 flex items-center justify-center">
+                    <div className="w-48 h-48 rounded-none clip-path-rog bg-neutral-900 flex items-center justify-center">
                       <QrCode className="w-16 h-16 text-slate-600" />
                     </div>
                   )}
                   <div className="space-y-2 flex-1">
-                    <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+                    <div className="p-3 rounded-none clip-path-rog bg-black/80 border border-neutral-800 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-slate-400">Ngân hàng</span>
+                        <span className="text-xs text-neutral-400">Ngân hàng</span>
                         <span className="font-bold text-white">{qrInfo?.bank_name || '—'}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-slate-400">Số tài khoản</span>
-                        <span className="font-mono font-bold text-cyan-400 text-lg">{qrInfo?.account_number || '—'}</span>
+                        <span className="text-xs text-neutral-400">Số tài khoản</span>
+                        <span className="font-mono font-bold text-red-500 text-lg">{qrInfo?.account_number || '—'}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-slate-400">Tên chủ TK</span>
+                        <span className="text-xs text-neutral-400">Tên chủ TK</span>
                         <span className="font-semibold text-white">{qrInfo?.account_holder || '—'}</span>
                       </div>
                       {qrInfo?.account_content && (
                         <div className="flex items-center justify-between">
-                          <span className="text-xs text-slate-400">Nội dung CK</span>
+                          <span className="text-xs text-neutral-400">Nội dung CK</span>
                           <span className="text-amber-400 font-semibold text-sm">{qrInfo.account_content}</span>
                         </div>
                       )}
                     </div>
                     {qrInfo?.instructions && (
-                      <p className="text-xs text-slate-400 bg-amber-500/10 border border-amber-500/20 rounded-xl p-2">
+                      <p className="text-xs text-neutral-400 bg-amber-500/10 border border-amber-500/20 rounded-none clip-path-rog p-2">
                         <AlertCircle className="w-3 h-3 inline mr-1 text-amber-400" />
                         {qrInfo.instructions}
                       </p>
@@ -361,10 +361,10 @@ export default function PaymentPage() {
 
                 {/* Amount reminder */}
                 {selectedOrder && (
-                  <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                  <div className="p-4 rounded-none clip-path-rog bg-red-600/10 border border-red-600/20">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-slate-300">Số tiền cần chuyển khoản:</span>
-                      <span className="text-xl font-bold text-cyan-400">{formatPrice(selectedOrder.final_amount || selectedOrder.total_amount)}</span>
+                      <span className="text-sm text-neutral-300">Số tiền cần chuyển khoản:</span>
+                      <span className="text-xl font-bold text-red-500">{formatPrice(selectedOrder.final_amount || selectedOrder.total_amount)}</span>
                     </div>
                   </div>
                 )}
@@ -373,20 +373,20 @@ export default function PaymentPage() {
           </div>
 
           {/* Upload Bill Form */}
-          <div className="glass-card rounded-2xl p-6 space-y-5">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 space-y-5">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <Upload className="w-5 h-5 text-cyan-400" />
+              <Upload className="w-5 h-5 text-red-500" />
               Gửi Bill Thanh Toán
             </h2>
 
             {/* Select Order */}
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-2">Chọn đơn hàng cần thanh toán</label>
+              <label className="block text-xs font-semibold text-neutral-400 mb-2">Chọn đơn hàng cần thanh toán</label>
               {orders.length === 0 ? (
-                <div className="p-6 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-2">
+                <div className="p-6 rounded-none clip-path-rog bg-black/60 border border-neutral-800 text-center space-y-2">
                   <ShoppingBag className="w-10 h-10 mx-auto text-slate-600" />
-                  <p className="text-slate-400 text-sm font-semibold">Không có đơn hàng chuyển khoản nào cần thanh toán.</p>
-                  <p className="text-slate-500 text-xs">Đơn COD sẽ không hiển thị tại đây. Bạn có thể xem đơn hàng trong <Link to="/profile" className="text-cyan-400 hover:underline">Lịch sử đơn hàng</Link>.</p>
+                  <p className="text-neutral-400 text-sm font-semibold">Không có đơn hàng chuyển khoản nào cần thanh toán.</p>
+                  <p className="text-slate-500 text-xs">Đơn COD sẽ không hiển thị tại đây. Bạn có thể xem đơn hàng trong <Link to="/profile" className="text-red-500 hover:underline">Lịch sử đơn hàng</Link>.</p>
                 </div>
               ) : (
                 <select
@@ -400,7 +400,7 @@ export default function PaymentPage() {
                     setBillPreview(null);
                     if (fileInputRef.current) fileInputRef.current.value = '';
                   }}
-                  className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-4 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   <option value="">— Chọn đơn hàng —</option>
                   {orders.map(o => (
@@ -415,14 +415,14 @@ export default function PaymentPage() {
             {/* Bill upload - ẩn nếu đã có bill pending/rejected, hiện bill cũ + nút "Gửi lại" */}
             {hasExistingBill && canResend ? (
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-2">
+                <label className="block text-xs font-semibold text-neutral-400 mb-2">
                   Ảnh bill hiện tại {existingRequest.status === 'pending' ? '(đang chờ duyệt)' : '(đã bị từ chối)'}
                 </label>
                 <div className="relative inline-block">
                   <img
                     src={getBackendUrl(existingRequest.bill_image_url)}
                     alt="Bill hiện tại"
-                    className="w-64 h-auto rounded-2xl border border-slate-700 cursor-pointer hover:border-cyan-500 transition-colors"
+                    className="w-64 h-auto rounded-none clip-path-rog border border-slate-700 cursor-pointer hover:border-red-600 transition-colors"
                     onClick={() => setPreviewImage(getBackendUrl(existingRequest.bill_image_url))}
                     onError={e => { e.target.style.display = 'none'; }}
                   />
@@ -444,33 +444,33 @@ export default function PaymentPage() {
                     // Scroll xuống phần upload
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                   }}
-                  className="mt-3 px-4 py-2 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-bold rounded-xl hover:bg-cyan-500/30 flex items-center gap-1.5"
+                  className="mt-3 px-4 py-2 bg-red-600/20 text-red-400 border border-red-600/40 text-xs font-bold rounded-none clip-path-rog hover:bg-red-600/30 flex items-center gap-1.5"
                 >
                   <Upload className="w-3.5 h-3.5" /> Gửi lại bill khác
                 </button>
               </div>
             ) : (
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-2">
+                <label className="block text-xs font-semibold text-neutral-400 mb-2">
                   Ảnh bill thanh toán <span className="text-rose-400">*</span>
                 </label>
 
                 {billPreview ? (
                   <div className="relative inline-block">
-                    <img src={billPreview} alt="Bill Preview" className="w-64 h-auto rounded-2xl border border-cyan-500/40" />
+                    <img src={billPreview} alt="Bill Preview" className="w-64 h-auto rounded-none clip-path-rog border border-red-600/40" />
                     <button
                       onClick={() => { setBillFile(null); setBillPreview(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
                       className="absolute -top-2 -right-2 w-7 h-7 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-lg"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
-                    <p className="text-xs text-slate-400 mt-1">{billFile?.name}</p>
+                    <p className="text-xs text-neutral-400 mt-1">{billFile?.name}</p>
                   </div>
                 ) : (
-                  <label className="flex flex-col items-center gap-3 p-8 border-2 border-dashed border-slate-700 rounded-2xl cursor-pointer hover:border-cyan-500/60 transition-colors">
+                  <label className="flex flex-col items-center gap-3 p-8 border-2 border-dashed border-slate-700 rounded-none clip-path-rog cursor-pointer hover:border-red-600/60 transition-colors">
                     <ImageIcon className="w-10 h-10 text-slate-600" />
                     <div className="text-center">
-                      <p className="text-sm text-slate-300 font-semibold">Tải lên ảnh chụp màn hình biên lai</p>
+                      <p className="text-sm text-neutral-300 font-semibold">Tải lên ảnh chụp màn hình biên lai</p>
                       <p className="text-xs text-slate-500 mt-1">JPG, PNG, WEBP — Tối đa 5MB</p>
                     </div>
                     <input
@@ -487,7 +487,7 @@ export default function PaymentPage() {
 
             {/* Nếu đã có bill approved → chỉ hiện thông báo */}
             {existingRequest && existingRequest.status === 'approved' && (
-              <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-sm flex items-start gap-2">
+              <div className="p-3 rounded-none clip-path-rog bg-red-600/15 border border-red-600/30 text-emerald-300 text-sm flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <span>Đơn hàng này đã được admin duyệt thanh toán. Bạn không thể gửi bill mới.</span>
               </div>
@@ -495,7 +495,7 @@ export default function PaymentPage() {
 
             {/* Error message */}
             {uploadError && (
-              <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-sm flex items-start gap-2">
+              <div className="p-3 rounded-none clip-path-rog bg-rose-500/15 border border-rose-500/30 text-rose-300 text-sm flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <span>{uploadError}</span>
               </div>
@@ -505,7 +505,7 @@ export default function PaymentPage() {
             <button
               onClick={handleUploadBill}
               disabled={uploadLoading || !selectedOrder || !billFile}
-              className="w-full py-3.5 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 font-extrabold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-gradient-to-r from-red-500 via-sky-400 to-red-600 text-white font-bold tracking-widest uppercase font-extrabold rounded-none clip-path-rog hover:shadow-lg hover:shadow-red-600/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {uploadLoading ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Đang gửi bill...</>
@@ -521,12 +521,12 @@ export default function PaymentPage() {
             {/* Progress indicator */}
             {uploadLoading && (
               <div className="space-y-1">
-                <div className="flex justify-between text-xs text-slate-400">
+                <div className="flex justify-between text-xs text-neutral-400">
                   <span>Đang tải lên...</span>
                   <span>100%</span>
                 </div>
-                <div className="w-full bg-slate-800 rounded-full h-1.5">
-                  <div className="bg-cyan-400 h-1.5 rounded-full animate-pulse w-full"></div>
+                <div className="w-full bg-neutral-900 rounded-full h-1.5">
+                  <div className="bg-red-500 h-1.5 rounded-full animate-pulse w-full"></div>
                 </div>
               </div>
             )}
@@ -539,19 +539,19 @@ export default function PaymentPage() {
 
         {/* RIGHT: My Payment Requests */}
         <div className="lg:col-span-5">
-          <div className="glass-card rounded-2xl p-6 space-y-5 sticky top-4">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 space-y-5 sticky top-4">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-cyan-400" />
+              <Clock className="w-5 h-5 text-red-500" />
               Yêu Cầu Của Tôi
             </h2>
 
             {requestsLoading ? (
-              <div className="p-8 text-center"><Loader2 className="w-5 h-5 animate-spin mx-auto text-cyan-400" /></div>
+              <div className="p-8 text-center"><Loader2 className="w-5 h-5 animate-spin mx-auto text-red-500" /></div>
             ) : myRequests.length === 0 ? (
               <div className="p-8 text-center space-y-2">
                 <CreditCard className="w-10 h-10 mx-auto text-slate-600" />
-                <p className="text-slate-400 text-sm font-semibold">Bạn chưa có yêu cầu thanh toán nào.</p>
-                <Link to="/products" className="inline-block text-xs text-cyan-400 hover:underline">
+                <p className="text-neutral-400 text-sm font-semibold">Bạn chưa có yêu cầu thanh toán nào.</p>
+                <Link to="/products" className="inline-block text-xs text-red-500 hover:underline">
                   Khám phá sản phẩm →
                 </Link>
               </div>
@@ -561,10 +561,10 @@ export default function PaymentPage() {
                   const cfg = STATUS_CONFIG[req.status] || STATUS_CONFIG.pending;
                   const StatusIcon = cfg.icon;
                   return (
-                    <div key={req.id} className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2.5">
+                    <div key={req.id} className="p-4 rounded-none clip-path-rog bg-black/70 border border-neutral-800 space-y-2.5">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-cyan-400 font-bold text-sm">#{req.order_id}</span>
+                          <span className="font-mono text-red-500 font-bold text-sm">#{req.order_id}</span>
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${cfg.color}`}>
                             <StatusIcon className="w-3 h-3" />
                             {cfg.label}
@@ -573,13 +573,13 @@ export default function PaymentPage() {
                         {req.bill_image_url && (
                           <button
                             onClick={() => setPreviewImage(getBackendUrl(req.bill_image_url))}
-                            className="text-[10px] text-slate-500 hover:text-cyan-400 flex items-center gap-1"
+                            className="text-[10px] text-slate-500 hover:text-red-500 flex items-center gap-1"
                           >
                             <Eye className="w-3 h-3" /> Xem bill
                           </button>
                         )}
                       </div>
-                      <div className="flex items-center justify-between text-xs text-slate-400">
+                      <div className="flex items-center justify-between text-xs text-neutral-400">
                         <span>Số tiền:</span>
                         <span className="font-bold text-white">{formatPrice(req.amount)}</span>
                       </div>
@@ -597,8 +597,8 @@ export default function PaymentPage() {
                         </div>
                       )}
                       {req.status === 'approved' && (
-                        <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-1.5">
-                          <CheckCheck className="w-3.5 h-3.5 text-emerald-400" />
+                        <div className="p-2 rounded-lg bg-red-600/10 border border-red-600/20 flex items-center gap-1.5">
+                          <CheckCheck className="w-3.5 h-3.5 text-red-500" />
                           <p className="text-[10px] text-emerald-300 font-semibold">
                             Thanh toán đã được xác nhận. Đơn hàng đang được xử lý!
                           </p>
@@ -619,14 +619,14 @@ export default function PaymentPage() {
           <div className="relative max-w-xl w-full" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setPreviewImage(null)}
-              className="absolute -top-3 -right-3 w-8 h-8 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white z-10"
+              className="absolute -top-3 -right-3 w-8 h-8 bg-neutral-900 border border-slate-700 rounded-full flex items-center justify-center text-neutral-400 hover:text-white z-10"
             >
               <X className="w-4 h-4" />
             </button>
             <img
               src={previewImage}
               alt="Bill Preview"
-              className="w-full rounded-2xl border border-slate-700 shadow-2xl"
+              className="w-full rounded-none clip-path-rog border border-slate-700 shadow-2xl"
             />
             <p className="text-center text-xs text-slate-500 mt-2">Ảnh bill thanh toán của bạn</p>
           </div>

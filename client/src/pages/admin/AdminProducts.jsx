@@ -282,18 +282,18 @@ export default function AdminProducts() {
 
   return (
     <div className="space-y-5">
-      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-neutral-800 pb-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-            <Package className="w-6 h-6 text-cyan-400" /> Quản Lý Sản Phẩm
+            <Package className="w-6 h-6 text-red-500" /> Quản Lý Sản Phẩm
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Tổng <span className="text-cyan-300 font-bold">{total}</span> sản phẩm
+          <p className="text-neutral-400 text-sm mt-1">
+            Tổng <span className="text-red-400 font-bold">{total}</span> sản phẩm
             {activeFiltersCount > 0 && <span className="text-purple-300 ml-2">· {activeFiltersCount} bộ lọc đang áp dụng</span>}
           </p>
         </div>
         <Can permission="products.create">
-          <button onClick={openAddModal} className="flex items-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold rounded-xl text-xs hover:opacity-90 transition">
+          <button onClick={openAddModal} className="flex items-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs hover:opacity-90 transition">
             <Plus className="w-4 h-4" /> Thêm Laptop Mới
           </button>
         </Can>
@@ -301,36 +301,36 @@ export default function AdminProducts() {
 
       {/* Search + Filter toggle */}
       <div className="space-y-3">
-        <form onSubmit={handleSearch} className="glass-card rounded-2xl p-3 flex gap-2 border border-slate-800">
+        <form onSubmit={handleSearch} className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-3 flex gap-2 border border-neutral-800">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             <input
               type="text" value={search} onChange={(e) => setSearch(e.target.value)}
               placeholder="Tìm theo tên, SKU, CPU..."
-              className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+              className="w-full pl-9 pr-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 focus:outline-none focus:border-red-600"
             />
           </div>
           <button type="button" onClick={() => setFiltersOpen(o => !o)}
-            className={`flex items-center gap-1.5 px-3 py-2 border rounded-xl text-xs font-bold transition ${
+            className={`flex items-center gap-1.5 px-3 py-2 border rounded-none clip-path-rog text-xs font-bold transition ${
               filtersOpen || activeFiltersCount > 0
-                ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
-                : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-800'
+                ? 'bg-red-600/20 border-red-600/40 text-purple-300'
+                : 'bg-black border-neutral-800 text-neutral-300 hover:bg-neutral-900'
             }`}
           >
             <Filter className="w-3.5 h-3.5" /> Bộ lọc
             {activeFiltersCount > 0 && (
-              <span className="px-1.5 py-0.5 rounded-full bg-purple-500/40 text-[10px]">{activeFiltersCount}</span>
+              <span className="px-1.5 py-0.5 rounded-full bg-red-600/40 text-[10px]">{activeFiltersCount}</span>
             )}
           </button>
-          <button type="submit" className="px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl text-xs hover:bg-cyan-400">Tìm</button>
+          <button type="submit" className="px-4 py-2 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs hover:bg-red-500">Tìm</button>
         </form>
 
         {/* Advanced filters */}
         {filtersOpen && (
-          <div className="glass-card rounded-2xl p-4 border border-slate-800 space-y-3 animate-slideUp">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 border border-neutral-800 space-y-3 animate-slideUp">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <Filter className="w-3.5 h-3.5 text-purple-400" /> Bộ lọc nâng cao
+                <Filter className="w-3.5 h-3.5 text-red-500" /> Bộ lọc nâng cao
               </h3>
               <button onClick={handleResetFilters} className="text-[10px] text-rose-300 hover:text-rose-200 font-bold">Xoá tất cả</button>
             </div>
@@ -341,7 +341,7 @@ export default function AdminProducts() {
                 <select
                   value={filters.category_id}
                   onChange={(e) => { setFilters({ ...filters, category_id: e.target.value }); setPage(1); }}
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   <option value="">Tất cả danh mục</option>
                   {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -353,7 +353,7 @@ export default function AdminProducts() {
                 <select
                   value={filters.brand_id}
                   onChange={(e) => { setFilters({ ...filters, brand_id: e.target.value }); setPage(1); }}
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   <option value="">Tất cả thương hiệu</option>
                   {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
@@ -365,7 +365,7 @@ export default function AdminProducts() {
                 <select
                   value={filters.price}
                   onChange={(e) => { setFilters({ ...filters, price: e.target.value }); setPage(1); }}
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   {PRICE_RANGES.map(p => <option key={p.v} value={p.v}>{p.label}</option>)}
                 </select>
@@ -376,7 +376,7 @@ export default function AdminProducts() {
                 <select
                   value={filters.stock}
                   onChange={(e) => { setFilters({ ...filters, stock: e.target.value }); setPage(1); }}
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   {STOCK_FILTERS.map(s => <option key={s.v} value={s.v}>{s.label}</option>)}
                 </select>
@@ -387,7 +387,7 @@ export default function AdminProducts() {
                 <select
                   value={filters.is_active}
                   onChange={(e) => { setFilters({ ...filters, is_active: e.target.value }); setPage(1); }}
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   <option value="all">Tất cả</option>
                   <option value="active">Đang hiển thị</option>
@@ -403,7 +403,7 @@ export default function AdminProducts() {
                     const [sortBy, sortOrder] = e.target.value.split('_');
                     setFilters({ ...filters, sortBy, sortOrder });
                   }}
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-red-600"
                 >
                   <option value="created_at_DESC">Mới nhất</option>
                   <option value="created_at_ASC">Cũ nhất</option>
@@ -421,10 +421,10 @@ export default function AdminProducts() {
       </div>
 
       {/* Table */}
-      <div className="glass-card rounded-2xl p-3 sm:p-4 border border-slate-800 overflow-hidden">
+      <div className="bg-neutral-900/80 backdrop-blur-md border border-neutral-800 hover:border-red-600/30 rounded-none clip-path-rog p-3 sm:p-4 overflow-hidden transition-all duration-300">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-300">
-            <thead className="text-[10px] uppercase text-slate-400 border-b border-slate-800">
+          <table className="w-full text-left text-sm text-neutral-300">
+            <thead className="text-[10px] uppercase text-neutral-400 border-b border-red-600/30 bg-gradient-to-r from-red-600/10 to-transparent">
               <tr>
                 <th className="py-3 px-3 font-bold">Sản Phẩm</th>
                 <th className="py-3 px-3 font-bold">Danh Mục / Brand</th>
@@ -437,17 +437,17 @@ export default function AdminProducts() {
             </thead>
             <tbody className="divide-y divide-slate-800/60">
               {loading ? (
-                <tr><td colSpan="7" className="py-12 text-center"><Loader2 className="w-5 h-5 animate-spin mx-auto text-cyan-400" /></td></tr>
+                <tr><td colSpan="7" className="py-12 text-center"><Loader2 className="w-5 h-5 animate-spin mx-auto text-red-500" /></td></tr>
               ) : products.length === 0 ? (
                 <tr><td colSpan="7" className="py-12 text-center text-slate-500">
                   <Package className="w-10 h-10 mx-auto text-slate-600 mb-2" />
                   Không có sản phẩm nào phù hợp
                 </td></tr>
               ) : products.map(prod => (
-                <tr key={prod.id} className="hover:bg-slate-900/40 transition">
+                <tr key={prod.id} className="hover:bg-black/40 transition">
                   <td className="py-3 px-3">
                     <div className="flex items-center gap-3 min-w-0 max-w-[260px]">
-                      <img src={resolveImage(prod.image_url)} onError={onImageError} className="w-10 h-10 rounded-xl object-cover bg-slate-800 flex-shrink-0" alt="" />
+                      <img src={resolveImage(prod.image_url)} onError={onImageError} className="w-10 h-10 rounded-none clip-path-rog object-cover bg-neutral-900 flex-shrink-0" alt="" />
                       <div className="min-w-0 flex-1">
                         <p className="font-semibold text-white line-clamp-1 text-xs">{prod.name}</p>
                         {prod.sku ? (
@@ -458,7 +458,7 @@ export default function AdminProducts() {
                                 navigator.clipboard.writeText(prod.sku).then(() => showToast.success(`Đã copy SKU: ${prod.sku}`)).catch(() => {});
                               }
                             }}
-                            className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-mono font-bold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-1.5 py-0.5 rounded hover:bg-cyan-500/20 transition"
+                            className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-mono font-bold text-red-400 bg-red-600/10 border border-red-600/30 px-1.5 py-0.5 rounded hover:bg-red-600/20 transition"
                             title="Click để copy SKU"
                           >
                             <Tag className="w-2.5 h-2.5" />
@@ -471,20 +471,20 @@ export default function AdminProducts() {
                     </div>
                   </td>
                   <td className="py-3 px-3 text-xs">
-                    <p className="text-slate-300">{prod.category_name || 'Chưa phân loại'}</p>
+                    <p className="text-neutral-300">{prod.category_name || 'Chưa phân loại'}</p>
                     <p className="text-[10px] text-slate-500">{prod.brand_name || 'Khác'}</p>
                   </td>
-                  <td className="py-3 px-3 text-[11px] text-slate-400">
+                  <td className="py-3 px-3 text-[11px] text-neutral-400">
                     <p className="line-clamp-1">{prod.cpu || 'Tiêu chuẩn'}</p>
                     <p className="text-[10px] text-slate-500">{prod.ram || '8GB'} · {prod.storage || '512GB'}</p>
                   </td>
                   <td className="py-3 px-3 text-right">
-                    <p className="font-bold text-cyan-300 text-xs">{formatVND(prod.sale_price || prod.price)}</p>
+                    <p className="font-bold text-red-400 text-xs">{formatVND(prod.sale_price || prod.price)}</p>
                     {prod.sale_price && <p className="text-[10px] text-slate-500 line-through">{formatVND(prod.price)}</p>}
                   </td>
                   <td className="py-3 px-3 text-center">
                     <span className={`inline-flex items-center gap-1 text-xs font-bold ${
-                      Number(prod.stock) <= 0 ? 'text-rose-400' : Number(prod.stock) <= 10 ? 'text-amber-400' : 'text-emerald-400'
+                      Number(prod.stock) <= 0 ? 'text-rose-400' : Number(prod.stock) <= 10 ? 'text-amber-400' : 'text-red-500'
                     }`}>
                       {Number(prod.stock) <= 10 && <AlertTriangle className="w-3 h-3" />}
                       {prod.stock}
@@ -492,7 +492,7 @@ export default function AdminProducts() {
                   </td>
                   <td className="py-3 px-3 text-center">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold inline-flex items-center gap-1 ${
-                      prod.is_active !== false ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-700 text-slate-400'
+                      prod.is_active !== false ? 'bg-red-600/20 text-emerald-300 border border-red-600/30' : 'bg-slate-700 text-neutral-400'
                     }`}>
                       {prod.is_active !== false ? <Eye className="w-2.5 h-2.5" /> : <X className="w-2.5 h-2.5" />}
                       {prod.is_active !== false ? 'Hiển thị' : 'Ẩn'}
@@ -505,21 +505,21 @@ export default function AdminProducts() {
                           <button
                             onClick={() => handleRestore(prod.id, prod.name)}
                             title="Mở lại sản phẩm (Cho phép hiển thị trên cửa hàng)"
-                            className="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold rounded-lg transition flex items-center gap-1"
+                            className="px-2 py-1 bg-red-600/20 hover:bg-red-600/30 border border-red-600/40 text-emerald-300 text-[10px] font-bold rounded-lg transition flex items-center gap-1"
                           >
-                            <Eye className="w-3 h-3 text-emerald-400" /> Mở lại
+                            <Eye className="w-3 h-3 text-red-500" /> Mở lại
                           </button>
                         </Can>
                       )}
                       <Can permission="products.update">
                         <button onClick={() => openEditModal(prod)} title="Chỉnh sửa sản phẩm"
-                          className="p-2 bg-slate-800 hover:bg-cyan-500/20 text-cyan-400 rounded-lg transition">
+                          className="p-2 bg-neutral-900 hover:bg-red-600/20 text-red-500 rounded-lg transition">
                           <Edit className="w-3.5 h-3.5" />
                         </button>
                       </Can>
                       {canDelete && (
                         <button onClick={() => setDeleteModalProduct({ id: prod.id, name: prod.name })} title="Tùy chọn xóa / ẩn sản phẩm"
-                          className="p-2 bg-slate-800 hover:bg-rose-500/20 text-rose-400 rounded-lg transition">
+                          className="p-2 bg-neutral-900 hover:bg-rose-500/20 text-rose-400 rounded-lg transition">
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       )}
@@ -548,29 +548,29 @@ export default function AdminProducts() {
       {/* Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="glass-card p-6 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto space-y-4 border border-cyan-500/30">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog p-6 rounded-none clip-path-rog w-full max-w-2xl max-h-[90vh] overflow-y-auto space-y-4 border border-red-600/30">
+            <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Package className="w-5 h-5 text-cyan-400" />
+                <Package className="w-5 h-5 text-red-500" />
                 {editing ? 'Chỉnh Sửa Sản Phẩm' : 'Thêm Sản Phẩm Mới'}
               </h3>
-              <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-white"><X className="w-5 h-5" /></button>
+              <button onClick={() => setModalOpen(false)} className="text-neutral-400 hover:text-white"><X className="w-5 h-5" /></button>
             </div>
 
             <form onSubmit={handleSave} className="space-y-4">
               {/* Tên sản phẩm */}
               <div>
-                <label className="text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1">
+                <label className="text-xs font-semibold text-neutral-300 mb-1.5 flex items-center gap-1">
                   Tên sản phẩm <span className="text-rose-400">*</span>
                 </label>
                 <input required type="text" placeholder="VD: Laptop Dell XPS 15 2024" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})}
-                  className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:border-cyan-500" />
+                  className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:border-red-600" />
               </div>
 
               {/* SKU, Danh mục, Thương hiệu */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div className="col-span-2">
-                  <label className="text-xs font-semibold text-slate-300 mb-1.5 flex items-center justify-between">
+                  <label className="text-xs font-semibold text-neutral-300 mb-1.5 flex items-center justify-between">
                     <span>SKU (Mã sản phẩm)</span>
                     <button
                       type="button"
@@ -601,27 +601,27 @@ export default function AdminProducts() {
                         const rand = String(Math.floor(1000 + Math.random() * 9000));
                         setForm(f => ({ ...f, sku: `LAP-${brandCode}-${catCode}-${ymd}-${rand}` }));
                       }}
-                      className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/25 transition"
+                      className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-red-600/15 border border-red-600/40 text-red-400 hover:bg-red-600/25 transition"
                       title="Tự động sinh SKU theo brand + category + ngày tạo"
                     >
                       ⚡ Tự động
                     </button>
                   </label>
                   <input type="text" placeholder="VD: LAP-DEL-VAN-0001 hoặc để trống rồi bấm Tự động" value={form.sku} onChange={(e) => setForm({...form, sku: e.target.value.toUpperCase()})}
-                    className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 uppercase font-mono" />
+                    className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 uppercase font-mono" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1.5">Danh mục</label>
+                  <label className="text-xs font-semibold text-neutral-300 mb-1.5">Danh mục</label>
                   <select value={form.category_id} onChange={(e) => setForm({...form, category_id: e.target.value})}
-                    className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100">
+                    className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100">
                     <option value="">-- Chọn --</option>
                     {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1.5">Thương hiệu</label>
+                  <label className="text-xs font-semibold text-neutral-300 mb-1.5">Thương hiệu</label>
                   <select value={form.brand_id} onChange={(e) => setForm({...form, brand_id: e.target.value})}
-                    className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100">
+                    className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100">
                     <option value="">-- Chọn --</option>
                     {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
                   </select>
@@ -631,61 +631,61 @@ export default function AdminProducts() {
               {/* Giá bán, Giá khuyến mãi, Tồn kho */}
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1">
+                  <label className="text-xs font-semibold text-neutral-300 mb-1.5 flex items-center gap-1">
                     Giá bán (VND) <span className="text-rose-400">*</span>
                   </label>
                   <input required type="number" min="0" placeholder="VD: 25000000" value={form.price} onChange={(e) => setForm({...form, price: e.target.value})}
-                    className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100" />
+                    className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1.5">Giá KM (VND)</label>
+                  <label className="text-xs font-semibold text-neutral-300 mb-1.5">Giá KM (VND)</label>
                   <input type="number" min="0" placeholder="VD: 22000000" value={form.sale_price} onChange={(e) => setForm({...form, sale_price: e.target.value})}
-                    className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100" />
+                    className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1">
+                  <label className="text-xs font-semibold text-neutral-300 mb-1.5 flex items-center gap-1">
                     Tồn kho <span className="text-rose-400">*</span>
                   </label>
                   <input required type="number" min="0" placeholder="VD: 50" value={form.stock} onChange={(e) => setForm({...form, stock: e.target.value})}
-                    className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100" />
+                    className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100" />
                 </div>
               </div>
 
               {/* Thông số kỹ thuật */}
-              <div className="border-t border-slate-800 pt-4">
-                <p className="text-xs font-semibold text-slate-400 mb-3">Thông số kỹ thuật</p>
+              <div className="border-t border-neutral-800 pt-4">
+                <p className="text-xs font-semibold text-neutral-400 mb-3">Thông số kỹ thuật</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="text-[10px] text-slate-500 block mb-1">CPU</label>
                     <input type="text" placeholder="VD: Intel Core i7-1360P" value={form.cpu} onChange={(e) => setForm({...form, cpu: e.target.value})}
-                      className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 w-full" />
+                      className="px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 w-full" />
                   </div>
                   <div>
                     <label className="text-[10px] text-slate-500 block mb-1">RAM</label>
                     <input type="text" placeholder="VD: 16GB DDR5" value={form.ram} onChange={(e) => setForm({...form, ram: e.target.value})}
-                      className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 w-full" />
+                      className="px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 w-full" />
                   </div>
                   <div>
                     <label className="text-[10px] text-slate-500 block mb-1">SSD</label>
                     <input type="text" placeholder="VD: 512GB NVMe" value={form.storage} onChange={(e) => setForm({...form, storage: e.target.value})}
-                      className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 w-full" />
+                      className="px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 w-full" />
                   </div>
                   <div>
                     <label className="text-[10px] text-slate-500 block mb-1">GPU</label>
                     <input type="text" placeholder="VD: RTX 4050 6GB" value={form.gpu} onChange={(e) => setForm({...form, gpu: e.target.value})}
-                      className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 w-full" />
+                      className="px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 w-full" />
                   </div>
                   <div>
                     <label className="text-[10px] text-slate-500 block mb-1">Màn hình</label>
                     <input type="text" placeholder='VD: 15.6" FHD IPS' value={form.screen_size} onChange={(e) => setForm({...form, screen_size: e.target.value})}
-                      className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 w-full" />
+                      className="px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 w-full" />
                   </div>
                 </div>
               </div>
 
               {/* Hình ảnh sản phẩm */}
-              <div className="border-t border-slate-800 pt-4">
-                <label className="text-xs font-semibold text-slate-300 mb-2 block">Hình ảnh sản phẩm</label>
+              <div className="border-t border-neutral-800 pt-4">
+                <label className="text-xs font-semibold text-neutral-300 mb-2 block">Hình ảnh sản phẩm</label>
                 
                 <input
                   type="file"
@@ -700,9 +700,9 @@ export default function AdminProducts() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploadingImage}
-                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20 text-cyan-300 rounded-xl text-sm font-semibold transition disabled:opacity-50"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-red-600/10 border border-red-600/30 hover:bg-red-600/20 text-red-400 rounded-none clip-path-rog text-sm font-semibold transition disabled:opacity-50"
                   >
-                    {uploadingImage ? <Loader2 className="w-4 h-4 animate-spin text-cyan-400" /> : <Upload className="w-4 h-4" />}
+                    {uploadingImage ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Upload className="w-4 h-4" />}
                     Tải hình từ máy tính
                   </button>
                   <span className="text-xs text-slate-500 text-center sm:text-left">hoặc dán URL bên dưới</span>
@@ -713,23 +713,23 @@ export default function AdminProducts() {
                   value={form.image_url.startsWith('data:') ? '' : form.image_url}
                   onChange={(e) => setForm({...form, image_url: e.target.value})}
                   placeholder="https://example.com/image.jpg"
-                  className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:border-cyan-500 mb-3"
+                  className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 focus:border-red-600 mb-3"
                 />
 
                 {form.image_url && (
-                  <div className="p-3 rounded-xl bg-slate-900/80 border border-emerald-500/30 flex items-center justify-between gap-3">
+                  <div className="p-3 rounded-none clip-path-rog bg-black/80 border border-red-600/30 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       <img
                         src={resolveImageFresh(form.image_url)}
                         alt="Preview"
-                        className="w-14 h-14 rounded-lg object-cover bg-slate-800 border border-slate-700 flex-shrink-0"
+                        className="w-14 h-14 rounded-lg object-cover bg-neutral-900 border border-slate-700 flex-shrink-0"
                         onError={(e) => { e.target.style.display = 'none'; }}
                       />
                       <div className="min-w-0">
-                        <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 mb-0.5">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Hình ảnh đã sẵn sàng!
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-red-500 mb-0.5">
+                          <CheckCircle2 className="w-4 h-4 text-red-500" /> Hình ảnh đã sẵn sàng!
                         </span>
-                        <p className="text-[11px] text-slate-400 truncate max-w-[240px] sm:max-w-[300px] font-mono">
+                        <p className="text-[11px] text-neutral-400 truncate max-w-[240px] sm:max-w-[300px] font-mono">
                           {form.image_url.startsWith('data:') ? 'Ảnh từ máy tính (Data URL)' : form.image_url}
                         </p>
                       </div>
@@ -737,7 +737,7 @@ export default function AdminProducts() {
                     <button
                       type="button"
                       onClick={() => setForm({ ...form, image_url: '' })}
-                      className="p-2 bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-lg transition flex-shrink-0"
+                      className="p-2 bg-neutral-900 hover:bg-rose-500/20 text-neutral-400 hover:text-rose-400 rounded-lg transition flex-shrink-0"
                       title="Xóa ảnh"
                     >
                       <X className="w-4 h-4" />
@@ -748,21 +748,21 @@ export default function AdminProducts() {
 
               {/* Mô tả chi tiết */}
               <div>
-                <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Mô tả chi tiết</label>
+                <label className="text-xs font-semibold text-neutral-300 mb-1.5 block">Mô tả chi tiết</label>
                 <textarea rows="4" value={form.description} onChange={(e) => setForm({...form, description: e.target.value})}
                   placeholder="Nhập mô tả chi tiết về sản phẩm..."
-                  className="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 resize-none focus:border-cyan-500" />
+                  className="w-full px-3 py-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-100 resize-none focus:border-red-600" />
               </div>
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.is_active} onChange={(e) => setForm({...form, is_active: e.target.checked})}
-                  className="w-4 h-4 rounded accent-cyan-500" />
-                <span className="text-xs font-bold text-slate-300">Hiển thị sản phẩm trên cửa hàng</span>
+                  className="w-4 h-4 rounded accent-red-600" />
+                <span className="text-xs font-bold text-neutral-300">Hiển thị sản phẩm trên cửa hàng</span>
               </label>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
-                <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold rounded-xl text-xs">Huỷ</button>
-                <button type="submit" disabled={saving} className="px-5 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl text-xs disabled:opacity-50 flex items-center gap-2">
+              <div className="flex justify-end gap-2 pt-3 border-t border-neutral-800">
+                <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 bg-neutral-900 text-neutral-300 font-semibold rounded-none clip-path-rog text-xs">Huỷ</button>
+                <button type="submit" disabled={saving} className="px-5 py-2 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs disabled:opacity-50 flex items-center gap-2">
                   {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />} Lưu sản phẩm
                 </button>
               </div>
@@ -774,52 +774,52 @@ export default function AdminProducts() {
       {/* Delete Confirmation Modal with 2 Options */}
       {deleteModalProduct && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="glass-card p-6 rounded-3xl w-full max-w-md space-y-4 border border-rose-500/30">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog p-6 rounded-none clip-path-rog w-full max-w-md space-y-4 border border-rose-500/30">
+            <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-rose-400" /> Tùy Chọn Xóa Sản Phẩm
               </h3>
-              <button onClick={() => setDeleteModalProduct(null)} className="text-slate-400 hover:text-white"><X className="w-5 h-5" /></button>
+              <button onClick={() => setDeleteModalProduct(null)} className="text-neutral-400 hover:text-white"><X className="w-5 h-5" /></button>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Bạn đang thao tác với sản phẩm: <strong className="text-cyan-300 font-bold">{deleteModalProduct.name}</strong>. Vui lòng chọn 1 trong 2 phương án:
+            <p className="text-xs text-neutral-300 leading-relaxed">
+              Bạn đang thao tác với sản phẩm: <strong className="text-red-400 font-bold">{deleteModalProduct.name}</strong>. Vui lòng chọn 1 trong 2 phương án:
             </p>
 
             <div className="space-y-3">
               {/* Option 1: Soft Delete / Hide */}
-              <div className="p-4 rounded-2xl bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-500 transition space-y-2">
+              <div className="p-4 rounded-none clip-path-rog bg-black/90 border border-red-600/30 hover:border-red-600 transition space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-red-400 flex items-center gap-1.5">
                     <Eye className="w-4 h-4" /> Phương Án 1: Ẩn Sản Phẩm
                   </span>
-                  <span className="text-[10px] bg-cyan-500/20 text-cyan-300 font-bold px-2 py-0.5 rounded-full">Khuyên dùng</span>
+                  <span className="text-[10px] bg-red-600/20 text-red-400 font-bold px-2 py-0.5 rounded-full">Khuyên dùng</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-neutral-400 leading-relaxed">
                   Sản phẩm sẽ bị <strong>ẩn ngay lập tức</strong> và <strong>không hiển thị ở trang khách hàng</strong>. Bạn có thể bấm <strong>"Mở lại"</strong> bất cứ lúc nào.
                 </p>
                 <button
                   onClick={handleSoftDelete}
-                  className="w-full py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-xl text-xs transition"
+                  className="w-full py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs transition"
                 >
                   Ẩn Sản Phẩm (Có Thể Mở Lại)
                 </button>
               </div>
 
               {/* Option 2: Hard Delete */}
-              <div className="p-4 rounded-2xl bg-slate-900/90 border border-rose-500/30 hover:border-rose-500 transition space-y-2">
+              <div className="p-4 rounded-none clip-path-rog bg-black/90 border border-rose-500/30 hover:border-rose-500 transition space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-rose-400 flex items-center gap-1.5">
                     <Trash2 className="w-4 h-4" /> Phương Án 2: Xóa Vĩnh Viễn
                   </span>
                   <span className="text-[10px] bg-rose-500/20 text-rose-400 font-bold px-2 py-0.5 rounded-full">Không thể hoàn tác</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-neutral-400 leading-relaxed">
                   Xóa hoàn toàn sản phẩm khỏi CSDL. <strong>Không thể khôi phục</strong> sau khi xóa vĩnh viễn.
                 </p>
                 <button
                   onClick={handleHardDelete}
-                  className="w-full py-2 bg-rose-500/20 hover:bg-rose-500 border border-rose-500/40 text-rose-300 hover:text-white font-bold rounded-xl text-xs transition"
+                  className="w-full py-2 bg-rose-500/20 hover:bg-rose-500 border border-rose-500/40 text-rose-300 hover:text-white font-bold rounded-none clip-path-rog text-xs transition"
                 >
                   Xóa Vĩnh Viễn Khỏi CSDL
                 </button>
@@ -827,7 +827,7 @@ export default function AdminProducts() {
             </div>
 
             <div className="flex justify-end pt-2">
-              <button onClick={() => setDeleteModalProduct(null)} className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold rounded-xl text-xs hover:bg-slate-700">
+              <button onClick={() => setDeleteModalProduct(null)} className="px-4 py-2 bg-neutral-900 text-neutral-300 font-semibold rounded-none clip-path-rog text-xs hover:bg-slate-700">
                 Đóng / Hủy
               </button>
             </div>

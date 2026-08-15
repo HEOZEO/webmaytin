@@ -1087,32 +1087,26 @@ export default function Checkout() {
 
 
     return (
+      <div className="min-h-screen bg-[#f4f5f6] text-slate-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] py-12">
+        <div className="max-w-2xl mx-auto px-4 space-y-6">
+          <div className="bg-white border border-slate-200 shadow-sm clip-path-rog p-10 space-y-6 text-center">
+            <div className="w-20 h-20 bg-red-600/10 text-red-500 rounded-full flex items-center justify-center mx-auto border border-red-600/20">
+              <CheckCircle className="w-10 h-10" />
+            </div>
 
-      <div className="max-w-2xl mx-auto my-12 px-4 space-y-6">
+            <div className="space-y-2">
 
-        <div className="glass-card p-10 rounded-3xl glow-blue space-y-6 text-center">
+            <h2 className="text-3xl font-extrabold text-slate-900">Đặt Hàng Thành Công!</h2>
 
-          <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
-
-            <CheckCircle className="w-12 h-12" />
-
-          </div>
-
-
-
-          <div className="space-y-2">
-
-            <h2 className="text-3xl font-extrabold text-white">Đặt Hàng Thành Công!</h2>
-
-            <p className="text-cyan-400 text-sm font-semibold">Mã đơn hàng: <strong>#{orderId}</strong></p>
+            <p className="text-red-500 text-sm font-semibold">Mã đơn hàng: <strong>#{orderId}</strong></p>
 
           </div>
 
 
 
-          <p className="text-slate-300 text-sm leading-relaxed max-w-lg mx-auto">
+          <p className="text-slate-700 text-sm leading-relaxed max-w-lg mx-auto">
 
-            Hệ thống đã nhận đơn hàng của bạn. Nhân viên hỗ trợ sẽ gọi xác nhận qua số <strong className="text-white">{formData.phone}</strong> trong vòng 15 phút.
+            Hệ thống đã nhận đơn hàng của bạn. Nhân viên hỗ trợ sẽ gọi xác nhận qua số <strong className="text-slate-900">{formData.phone}</strong> trong vòng 15 phút.
 
           </p>
 
@@ -1120,13 +1114,13 @@ export default function Checkout() {
 
           {/* Thông tin thanh toán */}
 
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-left space-y-2">
+          <div className="p-4 rounded-none clip-path-rog bg-white/60 border border-slate-200 text-left space-y-2">
 
             <div className="flex justify-between text-sm">
 
-              <span className="text-slate-400">Tổng tiền:</span>
+              <span className="text-slate-600">Tổng tiền:</span>
 
-              <span className="font-bold text-cyan-400 text-lg">{formatPrice(displayFinalPrice)}</span>
+              <span className="font-bold text-red-500 text-lg">{formatPrice(displayFinalPrice)}</span>
 
             </div>
 
@@ -1134,7 +1128,7 @@ export default function Checkout() {
 
               <div className="flex justify-between text-sm">
 
-                <span className="text-slate-400">Đã giảm:</span>
+                <span className="text-slate-600">Đã giảm:</span>
 
                 <span className="text-rose-400">-{formatPrice(orderDiscountAmount)}</span>
 
@@ -1146,9 +1140,9 @@ export default function Checkout() {
 
               <div className="flex justify-between text-sm">
 
-                <span className="text-slate-400">Phí vận chuyển:</span>
+                <span className="text-slate-600">Phí vận chuyển:</span>
 
-                <span className="text-slate-300">{formatPrice(orderShippingFeeAmount)}</span>
+                <span className="text-slate-700">{formatPrice(orderShippingFeeAmount)}</span>
 
               </div>
 
@@ -1160,17 +1154,17 @@ export default function Checkout() {
 
           {displayPaymentMethod === 'BANK_TRANSFER' && (
 
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-slate-900/95 to-slate-950/95 border border-cyan-500/40 space-y-4 shadow-2xl shadow-cyan-500/10">
+            <div className="p-6 rounded-none clip-path-rog bg-gradient-to-br from-slate-900/95 to-slate-950/95 border border-red-600/40 space-y-4 shadow-2xl shadow-red-600/10">
 
-              <div className="flex items-center justify-between text-sm font-bold text-white border-b border-slate-800 pb-3">
+              <div className="flex items-center justify-between text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">
 
                 <span className="flex items-center gap-2">
 
-                  <QrCode className="w-4 h-4 text-cyan-400" /> Quét Mã QR Thanh Toán
+                  <QrCode className="w-4 h-4 text-red-500" /> Quét Mã QR Thanh Toán
 
                 </span>
 
-                <span className="px-2.5 py-1 bg-cyan-500/15 text-cyan-300 rounded-lg text-xs font-extrabold border border-cyan-500/30">
+                <span className="px-2.5 py-1 bg-red-600/15 text-red-400 rounded-lg text-xs font-extrabold border border-red-600/30">
 
                   {formatPrice(displayFinalPrice)}
 
@@ -1182,7 +1176,7 @@ export default function Checkout() {
 
               {qrLoading ? (
 
-                <div className="flex items-center justify-center py-10 text-xs text-slate-400">
+                <div className="flex items-center justify-center py-10 text-xs text-slate-600">
 
                   <Loader2 className="w-4 h-4 animate-spin mr-2" /> Đang tải thông tin thanh toán...
 
@@ -1196,7 +1190,7 @@ export default function Checkout() {
 
                   <div className="flex-shrink-0 mx-auto md:mx-0">
 
-                    <div className="relative w-44 h-44 rounded-2xl bg-white p-3 flex items-center justify-center shadow-lg shadow-cyan-500/20 ring-2 ring-cyan-500/30">
+                    <div className="relative w-44 h-44 rounded-none clip-path-rog bg-white p-3 flex items-center justify-center shadow-lg shadow-red-600/20 ring-2 ring-red-600/30">
 
                       {qrInfo?.qr_image_url ? (
 
@@ -1222,7 +1216,7 @@ export default function Checkout() {
 
                       <div className={qrInfo?.qr_image_url ? 'hidden w-full h-full flex-col items-center justify-center text-center' : 'w-full h-full flex flex-col items-center justify-center text-center'}>
 
-                        <QrCode className="w-14 h-14 text-slate-300" />
+                        <QrCode className="w-14 h-14 text-slate-700" />
 
                         <p className="text-[10px] text-slate-600 mt-2 font-bold leading-tight">
 
@@ -1244,25 +1238,25 @@ export default function Checkout() {
 
                   <div className="flex-1 grid grid-cols-1 gap-2 min-w-0">
 
-                    <div className="flex items-center gap-3 px-3 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl">
+                    <div className="flex items-center gap-3 px-3 py-2.5 bg-white/80 border border-slate-200 rounded-none clip-path-rog">
 
-                      <Building2 className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                      <Building2 className="w-4 h-4 text-red-500 flex-shrink-0" />
 
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wide font-semibold w-20 flex-shrink-0">Ngân hàng</span>
+                      <span className="text-[10px] text-slate-600 uppercase tracking-wide font-semibold w-20 flex-shrink-0">Ngân hàng</span>
 
-                      <span className="font-bold text-white text-sm truncate">{qrInfo?.bank_name || '—'}</span>
+                      <span className="font-bold text-slate-900 text-sm truncate">{qrInfo?.bank_name || '—'}</span>
 
                     </div>
 
 
 
-                    <div className="flex items-center gap-3 px-3 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl">
+                    <div className="flex items-center gap-3 px-3 py-2.5 bg-white/80 border border-slate-200 rounded-none clip-path-rog">
 
-                      <Hash className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                      <Hash className="w-4 h-4 text-red-500 flex-shrink-0" />
 
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wide font-semibold w-20 flex-shrink-0">Số TK</span>
+                      <span className="text-[10px] text-slate-600 uppercase tracking-wide font-semibold w-20 flex-shrink-0">Số TK</span>
 
-                      <span className="font-mono font-extrabold text-cyan-300 text-base tracking-wider whitespace-nowrap truncate">
+                      <span className="font-mono font-extrabold text-red-400 text-base tracking-wider whitespace-nowrap truncate">
 
                         {(qrInfo?.account_number || '—').replace(/[\s\-\/]/g, '')}
 
@@ -1286,7 +1280,7 @@ export default function Checkout() {
 
                         }}
 
-                        className="ml-auto text-[10px] text-slate-500 hover:text-cyan-400 font-semibold flex-shrink-0"
+                        className="ml-auto text-[10px] text-slate-500 hover:text-red-500 font-semibold flex-shrink-0"
 
                       >
 
@@ -1298,19 +1292,19 @@ export default function Checkout() {
 
 
 
-                    <div className="flex items-center gap-3 px-3 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl">
+                    <div className="flex items-center gap-3 px-3 py-2.5 bg-white/80 border border-slate-200 rounded-none clip-path-rog">
 
-                      <UserIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                      <UserIcon className="w-4 h-4 text-red-500 flex-shrink-0" />
 
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wide font-semibold w-20 flex-shrink-0">Chủ TK</span>
+                      <span className="text-[10px] text-slate-600 uppercase tracking-wide font-semibold w-20 flex-shrink-0">Chủ TK</span>
 
-                      <span className="font-bold text-white text-sm truncate">{qrInfo?.account_holder || '—'}</span>
+                      <span className="font-bold text-slate-900 text-sm truncate">{qrInfo?.account_holder || '—'}</span>
 
                     </div>
 
 
 
-                    <div className="flex items-center gap-3 px-3 py-2.5 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                    <div className="flex items-center gap-3 px-3 py-2.5 bg-amber-500/10 border border-amber-500/30 rounded-none clip-path-rog">
 
                       <Coins className="w-4 h-4 text-amber-400 flex-shrink-0" />
 
@@ -1322,7 +1316,7 @@ export default function Checkout() {
 
 
 
-                    <div className="flex items-center gap-3 px-3 py-2.5 bg-rose-500/10 border border-rose-500/30 rounded-xl">
+                    <div className="flex items-center gap-3 px-3 py-2.5 bg-rose-500/10 border border-rose-500/30 rounded-none clip-path-rog">
 
                       <FileText className="w-4 h-4 text-rose-400 flex-shrink-0" />
 
@@ -1360,7 +1354,7 @@ export default function Checkout() {
 
                     {qrInfo?.instructions && (
 
-                      <div className="flex items-start gap-2 px-3 py-2 rounded-xl bg-sky-500/10 border border-sky-500/20 text-[11px] text-sky-200">
+                      <div className="flex items-start gap-2 px-3 py-2 rounded-none clip-path-rog bg-sky-500/10 border border-sky-500/20 text-[11px] text-sky-200">
 
                         <AlertCircle className="w-3.5 h-3.5 text-sky-400 mt-0.5 flex-shrink-0" />
 
@@ -1382,7 +1376,7 @@ export default function Checkout() {
 
                 onClick={() => navigate(`/payment?orderId=${orderId}`)}
 
-                className="w-full py-3 bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/25 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gradient-to-r from-red-500 to-red-500 text-slate-900 font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog hover:shadow-lg hover:shadow-red-600/25 transition-all flex items-center justify-center gap-2"
 
               >
 
@@ -1396,7 +1390,7 @@ export default function Checkout() {
 
               {displayPaymentMethod === 'BANK_TRANSFER' && !billUploaded && (
 
-                <div className="mt-4 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-3">
+                <div className="mt-4 p-4 rounded-none clip-path-rog bg-amber-500/10 border border-amber-500/20 space-y-3">
 
                   <h4 className="text-sm font-bold text-amber-300 flex items-center gap-2">
 
@@ -1412,11 +1406,11 @@ export default function Checkout() {
 
                       <div className="flex items-center gap-3">
 
-                        <img src={billPreview} alt="Bill Preview" className="w-24 h-24 rounded-xl object-cover border border-slate-700" />
+                        <img src={billPreview} alt="Bill Preview" className="w-24 h-24 rounded-none clip-path-rog object-cover border border-slate-700" />
 
                         <div className="flex-1">
 
-                          <p className="text-xs text-slate-300 font-medium">{billFile?.name}</p>
+                          <p className="text-xs text-slate-700 font-medium">{billFile?.name}</p>
 
                           <p className="text-[10px] text-slate-500">{(billFile?.size / 1024).toFixed(1)} KB</p>
 
@@ -1448,7 +1442,7 @@ export default function Checkout() {
 
                         disabled={billUploading}
 
-                        className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-sm transition disabled:opacity-50 flex items-center justify-center gap-2"
 
                       >
 
@@ -1468,11 +1462,11 @@ export default function Checkout() {
 
                   ) : (
 
-                    <label className="flex flex-col items-center gap-2 p-4 border-2 border-dashed border-amber-500/30 rounded-xl cursor-pointer hover:border-amber-500/50 transition">
+                    <label className="flex flex-col items-center gap-2 p-4 border-2 border-dashed border-amber-500/30 rounded-none clip-path-rog cursor-pointer hover:border-amber-500/50 transition">
 
                       <Upload className="w-6 h-6 text-amber-400" />
 
-                      <p className="text-xs text-slate-300 text-center">Tải lên ảnh chụp bill chuyển khoản</p>
+                      <p className="text-xs text-slate-700 text-center">Tải lên ảnh chụp bill chuyển khoản</p>
 
                       <p className="text-[10px] text-slate-500">JPG, PNG, WEBP — Tối đa 5MB</p>
 
@@ -1496,7 +1490,7 @@ export default function Checkout() {
 
 
 
-                  <p className="text-[10px] text-slate-400 text-center">
+                  <p className="text-[10px] text-slate-600 text-center">
 
                     Sau khi gửi bill, admin sẽ xác nhận và cập nhật trạng thái đơn hàng cho bạn.
 
@@ -1512,15 +1506,15 @@ export default function Checkout() {
 
               {displayPaymentMethod === 'BANK_TRANSFER' && billUploaded && (
 
-                <div className="mt-4 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
+                <div className="mt-4 p-4 rounded-none clip-path-rog bg-red-600/10 border border-red-600/30 flex items-center gap-3">
 
-                  <CheckCircle className="w-6 h-6 text-emerald-400 flex-shrink-0" />
+                  <CheckCircle className="w-6 h-6 text-red-500 flex-shrink-0" />
 
                   <div>
 
                     <p className="text-sm font-bold text-emerald-300">Bill đã được gửi!</p>
 
-                    <p className="text-xs text-slate-400 mt-0.5">Admin sẽ xác nhận trong vài phút. Bạn sẽ nhận được thông báo.</p>
+                    <p className="text-xs text-slate-600 mt-0.5">Admin sẽ xác nhận trong vài phút. Bạn sẽ nhận được thông báo.</p>
 
                   </div>
 
@@ -1538,7 +1532,7 @@ export default function Checkout() {
 
             <div className="space-y-5">
 
-              <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-3 text-left">
+              <div className="p-5 rounded-none clip-path-rog bg-amber-500/10 border border-amber-500/30 space-y-3 text-left">
 
                 <div className="flex items-center gap-3">
 
@@ -1552,13 +1546,13 @@ export default function Checkout() {
 
                     <p className="text-base font-bold text-amber-300">Đang chờ admin duyệt</p>
 
-                    <p className="text-xs text-slate-400 mt-0.5">Bill của bạn đã được gửi thành công. Vui lòng chờ trong giây lát.</p>
+                    <p className="text-xs text-slate-600 mt-0.5">Bill của bạn đã được gửi thành công. Vui lòng chờ trong giây lát.</p>
 
                   </div>
 
                 </div>
 
-                <div className="text-[11px] text-slate-300 bg-slate-900/60 rounded-lg p-2.5 border border-slate-800">
+                <div className="text-[11px] text-slate-700 bg-white/60 rounded-lg p-2.5 border border-slate-200">
 
                   <p>• Admin sẽ kiểm tra bill chuyển khoản và xác nhận đơn hàng trong <strong className="text-amber-300">5-15 phút</strong></p>
 
@@ -1571,15 +1565,10 @@ export default function Checkout() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
 
                 <button
-
                   type="button"
-
                   onClick={() => { continueShopping(); navigate('/products'); }}
-
-                  className="flex-1 min-w-[180px] px-6 py-3.5 bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 font-bold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all flex items-center justify-center gap-2"
-
+                  className="flex-1 min-w-[180px] px-6 py-3.5 bg-red-600 text-white font-bold tracking-widest uppercase rounded-none clip-path-rog hover:bg-red-500 transition-colors flex items-center justify-center gap-2"
                 >
-
                   <ShoppingCart className="w-4 h-4" />
 
                   Tiếp Tục Mua Sắm
@@ -1590,7 +1579,7 @@ export default function Checkout() {
 
                   to="/profile"
 
-                  className="flex-1 min-w-[180px] px-6 py-3.5 bg-slate-900 border border-slate-700 text-slate-200 font-semibold rounded-xl hover:bg-slate-800 hover:border-cyan-500/50 transition-colors text-center flex items-center justify-center gap-2"
+                  className="flex-1 min-w-[180px] px-6 py-3.5 bg-slate-50 border border-slate-300 text-slate-700 font-semibold rounded-none clip-path-rog hover:bg-neutral-900 hover:border-red-600/50 transition-colors text-center flex items-center justify-center gap-2"
 
                 >
 
@@ -1605,189 +1594,106 @@ export default function Checkout() {
             </div>
 
           ) : (
-
             <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
-
               <button
-
                 type="button"
-
                 onClick={() => { continueShopping(); navigate('/products'); }}
-
-                className="px-6 py-3.5 bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2"
-
+                className="px-6 py-3.5 bg-red-600 text-white font-bold tracking-widest uppercase rounded-none clip-path-rog hover:bg-red-500 transition-colors flex items-center justify-center gap-2"
               >
-
                 <ShoppingCart className="w-4 h-4" />
-
                 Tiếp Tục Mua Sắm Thêm
-
               </button>
-
-              <Link to="/profile" className="px-6 py-3.5 bg-slate-900 border border-slate-800 text-slate-200 font-semibold rounded-xl hover:bg-slate-800 transition-colors text-center">
-
+              <Link to="/profile" className="px-6 py-3.5 bg-slate-50 border border-slate-300 text-slate-700 font-semibold rounded-none clip-path-rog hover:bg-neutral-900 transition-colors text-center">
                 Xem Lịch Sử Đơn Hàng
-
               </Link>
-
-            <Link to="/" className="px-6 py-3.5 bg-slate-900 border border-slate-800 text-slate-200 font-semibold rounded-xl hover:bg-slate-800 transition-colors text-center">
-
-              Về Trang Chủ
-
-            </Link>
-
-          </div>
+              <Link to="/" className="px-6 py-3.5 bg-slate-50 border border-slate-300 text-slate-700 font-semibold rounded-none clip-path-rog hover:bg-neutral-900 transition-colors text-center">
+                Về Trang Chủ
+              </Link>
+            </div>
           )}
-
+          </div>
         </div>
-
       </div>
-
     );
-
   }
-
-
 
   if (cart.length === 0) {
-
     return (
-
-      <div className="max-w-xl mx-auto my-16 px-4 text-center space-y-6">
-
-        <div className="glass-card p-10 rounded-3xl space-y-4">
-
-          <ShoppingBag className="w-16 h-16 text-slate-600 mx-auto" />
-
-          <h2 className="text-2xl font-bold text-white">Giỏ Hàng Trống</h2>
-
-          <p className="text-slate-400 text-sm">Bạn chưa chọn sản phẩm máy tính nào vào giỏ hàng.</p>
-
-          <Link to="/products" className="inline-block px-6 py-3 bg-cyan-500 text-slate-950 font-bold rounded-xl">
-
-            Khám Phá Sản Phẩm
-
-          </Link>
-
+      <div className="min-h-screen bg-[#f4f5f6] text-slate-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] py-16">
+        <div className="max-w-xl mx-auto px-4 text-center space-y-6">
+          <div className="bg-white border border-slate-200 shadow-sm clip-path-rog p-10 space-y-4">
+            <ShoppingBag className="w-16 h-16 text-neutral-600 mx-auto" />
+            <h2 className="text-2xl font-bold text-slate-900">Giỏ Hàng Trống</h2>
+            <p className="text-slate-600 text-sm">Bạn chưa chọn sản phẩm máy tính nào vào giỏ hàng.</p>
+            <Link to="/products" className="inline-block px-6 py-3 bg-red-600 text-white font-bold tracking-widest uppercase rounded-none clip-path-rog hover:bg-red-500 transition-colors">
+              Khám Phá Sản Phẩm
+            </Link>
+          </div>
         </div>
-
       </div>
-
     );
-
   }
-
-
 
   // Yêu cầu đăng nhập trước khi thanh toán
-
   if (!isAuthenticated) {
-
     return (
+      <div className="min-h-screen bg-[#f4f5f6] text-slate-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] py-12">
+        <div className="max-w-xl mx-auto px-4 space-y-6">
+          <div className="bg-white border border-slate-200 shadow-sm clip-path-rog p-10 space-y-6 text-center">
+            <div className="w-16 h-16 bg-red-600/10 text-red-500 rounded-none clip-path-rog flex items-center justify-center mx-auto border border-red-600/20">
+              <Lock className="w-8 h-8" />
+            </div>
 
-      <div className="max-w-xl mx-auto my-12 px-4 space-y-6">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-extrabold text-slate-900">Yêu Cầu Đăng Nhập</h2>
+              <p className="text-slate-700 text-sm">
+                Vui lòng đăng nhập hoặc đăng ký tài khoản để tiến hành thanh toán đơn hàng.
+              </p>
+            </div>
 
-        <div className="glass-card p-10 rounded-3xl glow-blue space-y-6 text-center">
+            <div className="p-4 rounded-none clip-path-rog bg-white/60 border border-slate-200 text-left space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-slate-600">Sản phẩm trong giỏ:</span>
+                <span className="font-bold text-slate-900">{cart.length} món</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-slate-600">Tổng tạm tính:</span>
+                <span className="font-bold text-red-500">{formatPrice(totalPrice)}</span>
+              </div>
+            </div>
 
-          <div className="w-16 h-16 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mx-auto border border-cyan-500/30">
+            <div className="space-y-3 pt-2">
+              <Link
+                to="/login"
+                state={{ redirect: '/checkout' }}
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-red-600 hover:bg-red-500 text-white font-bold tracking-widest uppercase rounded-none clip-path-rog transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                Đăng Nhập / Đăng Ký Để Thanh Toán
+              </Link>
+              <Link
+                to="/products"
+                className="block w-full py-2.5 bg-slate-50 border border-slate-300 hover:border-red-600/40 text-slate-700 font-semibold rounded-none clip-path-rog text-sm transition-colors"
+              >
+                Tiếp Tục Mua Sắm
+              </Link>
+            </div>
 
-            <Lock className="w-8 h-8" />
-
-          </div>
-
-
-
-          <div className="space-y-2">
-
-            <h2 className="text-2xl font-extrabold text-white">Yêu Cầu Đăng Nhập</h2>
-
-            <p className="text-slate-300 text-sm">
-
-              Vui lòng đăng nhập hoặc đăng ký tài khoản để tiến hành thanh toán đơn hàng.
-
+            <p className="text-[10px] text-slate-500 pt-2 flex items-center justify-center gap-1">
+              <ShieldCheck className="w-3 h-3" /> Thông tin của bạn được bảo mật bởi chuẩn SSL 256-bit
             </p>
-
           </div>
-
-
-
-          <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-left space-y-2">
-
-            <div className="flex items-center justify-between text-sm">
-
-              <span className="text-slate-400">Sản phẩm trong giỏ:</span>
-
-              <span className="font-bold text-white">{cart.length} món</span>
-
-            </div>
-
-            <div className="flex items-center justify-between text-sm">
-
-              <span className="text-slate-400">Tổng tạm tính:</span>
-
-              <span className="font-bold text-cyan-400">{formatPrice(totalPrice)}</span>
-
-            </div>
-
-          </div>
-
-
-
-          <div className="space-y-3 pt-2">
-
-            <Link
-
-              to="/login"
-
-              state={{ redirect: '/checkout' }}
-
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 font-extrabold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
-
-            >
-
-              <LogIn className="w-4 h-4" />
-
-              Đăng Nhập / Đăng Ký Để Thanh Toán
-
-            </Link>
-
-            <Link
-
-              to="/products"
-
-              className="block w-full py-2.5 bg-slate-900 border border-slate-800 hover:border-cyan-500/40 text-slate-300 font-semibold rounded-xl text-sm transition-colors"
-
-            >
-
-              Tiếp Tục Mua Sắm
-
-            </Link>
-
-          </div>
-
-
-
-          <p className="text-[10px] text-slate-500 pt-2 flex items-center justify-center gap-1">
-
-            <ShieldCheck className="w-3 h-3" /> Thông tin của bạn được bảo mật bởi chuẩn SSL 256-bit
-
-          </p>
-
         </div>
-
       </div>
-
     );
-
   }
 
 
 
-  return (
-
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-
-      <h1 className="text-3xl font-bold text-white">Giỏ Hàng & Thanh Toán</h1>
+    return (
+      <div className="min-h-screen bg-[#f4f5f6] text-slate-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pb-20 pt-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <h1 className="text-3xl font-black uppercase tracking-tight text-slate-900">Giỏ Hàng & Thanh Toán</h1>
 
 
 
@@ -1795,43 +1701,43 @@ export default function Checkout() {
 
         <div className="lg:col-span-7 space-y-6">
 
-          <div className="glass-card rounded-2xl p-6 space-y-4">
+          <div className="bg-white border border-slate-200 shadow-sm clip-path-rog rounded-none clip-path-rog p-6 space-y-4">
 
-            <h2 className="text-lg font-bold text-white border-b border-slate-800 pb-3 flex items-center justify-between">
+            <h2 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3 flex items-center justify-between">
 
               <span>Sản Phẩm Trong Giỏ ({cart.length})</span>
 
-              <button onClick={() => navigate('/products')} className="text-xs text-cyan-400 hover:underline">+ Thêm sản phẩm</button>
+              <button onClick={() => navigate('/products')} className="text-xs text-red-500 hover:underline">+ Thêm sản phẩm</button>
 
             </h2>
 
 
 
-            <div className="divide-y divide-slate-800/60">
+            <div className="divide-y divide-slate-200">
 
               {cart.map(item => (
 
                 <div key={item.id} className="py-4 flex items-center gap-4">
 
-                  <img src={resolveImage(item.image_url)} alt={item.name} className="w-20 h-20 rounded-xl object-cover bg-slate-900" onError={onImageError} />
+                  <img src={resolveImage(item.image_url)} alt={item.name} className="w-20 h-20 rounded-none clip-path-rog object-cover bg-white" onError={onImageError} />
 
                   <div className="flex-1 min-w-0">
 
-                    <h3 className="font-semibold text-white text-sm truncate">{item.name}</h3>
+                    <h3 className="font-semibold text-slate-900 text-sm truncate">{item.name}</h3>
 
-                    <div className="text-xs text-slate-400 mt-1">{item.cpu} • {item.ram}</div>
+                    <div className="text-xs text-slate-600 mt-1">{item.cpu} • {item.ram}</div>
 
-                    <div className="text-cyan-400 font-bold text-sm mt-1">{formatPrice(item.price)}</div>
+                    <div className="text-red-500 font-bold text-sm mt-1">{formatPrice(item.price)}</div>
 
                   </div>
 
-                  <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-lg p-1">
+                  <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-lg p-1">
 
                     <button
 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
 
-                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30"
+                      className="p-1 text-slate-600 hover:text-slate-900 disabled:opacity-30"
 
                       aria-label="Giảm số lượng"
 
@@ -1849,7 +1755,7 @@ export default function Checkout() {
 
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
 
-                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30"
+                      className="p-1 text-slate-600 hover:text-slate-900 disabled:opacity-30"
 
                       aria-label="Tăng số lượng"
 
@@ -1911,15 +1817,15 @@ export default function Checkout() {
 
 
 
-          <div className="glass-card rounded-2xl p-5 space-y-3">
+          <div className="bg-white border border-slate-200 shadow-sm clip-path-rog rounded-none clip-path-rog p-5 space-y-3">
 
-            <h3 className="text-sm font-bold text-white flex items-center gap-2"><Tag className="w-4 h-4 text-cyan-400" /> Mã Giảm Giá Ưu Đãi</h3>
+            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2"><Tag className="w-4 h-4 text-red-500" /> Mã Giảm Giá Ưu Đãi</h3>
 
 
 
             {appliedCoupon ? (
 
-              <div className="flex items-center justify-between gap-3 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
+              <div className="flex items-center justify-between gap-3 p-3 bg-red-600/10 border border-red-600/30 rounded-none clip-path-rog">
 
                 <div>
 
@@ -1929,7 +1835,7 @@ export default function Checkout() {
 
                   </div>
 
-                  <div className="text-xs text-slate-400 mt-0.5">Đã giảm {formatPrice(discountAmount)}</div>
+                  <div className="text-xs text-slate-600 mt-0.5">Đã giảm {formatPrice(discountAmount)}</div>
 
                 </div>
 
@@ -1953,7 +1859,7 @@ export default function Checkout() {
 
                     onChange={(e) => { setCouponCode(e.target.value.toUpperCase()); setCouponError(''); }}
 
-                    className="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 uppercase focus:outline-none focus:border-cyan-500"
+                    className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 uppercase focus:outline-none focus:border-red-600"
 
                   />
 
@@ -1963,7 +1869,7 @@ export default function Checkout() {
 
                     disabled={couponLoading}
 
-                    className="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-2 transition-colors"
+                    className="px-5 py-2.5 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-slate-900 font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs flex items-center gap-2 transition-colors"
 
                   >
 
@@ -1985,7 +1891,7 @@ export default function Checkout() {
 
                     onClick={() => setShowCouponList(!showCouponList)}
 
-                    className="w-full mt-2 px-4 py-2 border border-dashed border-cyan-500/40 hover:border-cyan-500 rounded-xl text-xs text-cyan-400 flex items-center justify-center gap-2 transition-colors"
+                    className="w-full mt-2 px-4 py-2 border border-dashed border-red-600/40 hover:border-red-600 rounded-none clip-path-rog text-xs text-red-500 flex items-center justify-center gap-2 transition-colors"
 
                   >
 
@@ -2023,13 +1929,13 @@ export default function Checkout() {
 
                           key={coupon.id}
 
-                          className={`relative p-3 rounded-xl border ${
+                          className={`relative p-3 rounded-none clip-path-rog border ${
 
                             isDisabled 
 
                               ? 'bg-rose-950/20 border-rose-500/40 opacity-60' 
 
-                              : 'bg-slate-800/50 border-slate-700 hover:border-cyan-500/50'
+                              : 'bg-neutral-900/50 border-slate-700 hover:border-red-600/50'
 
                           }`}
 
@@ -2037,9 +1943,9 @@ export default function Checkout() {
 
                           {isDisabled && (
 
-                            <div className="absolute inset-0 flex items-center justify-center bg-rose-950/30 rounded-xl z-10">
+                            <div className="absolute inset-0 flex items-center justify-center bg-rose-950/30 rounded-none clip-path-rog z-10">
 
-                              <span className="px-2 py-1 bg-rose-500 text-white text-[10px] font-bold rounded-full">
+                              <span className="px-2 py-1 bg-rose-500 text-slate-900 text-[10px] font-bold rounded-full">
 
                                 {isExpired ? 'ĐÃ HẾT HẠN' : 'ĐÃ HẾT LƯỢT DÙNG'}
 
@@ -2057,19 +1963,19 @@ export default function Checkout() {
 
                                 <span className="font-bold text-amber-400 text-sm">{coupon.code}</span>
 
-                                <span className="text-xs text-cyan-400">-{coupon.discount_percent}%</span>
+                                <span className="text-xs text-red-500">-{coupon.discount_percent}%</span>
 
                               </div>
 
                               {coupon.min_order_amount > 0 && (
 
-                                <div className="text-[10px] text-slate-400">Đơn tối thiểu {formatPrice(coupon.min_order_amount)}</div>
+                                <div className="text-[10px] text-slate-600">Đơn tối thiểu {formatPrice(coupon.min_order_amount)}</div>
 
                               )}
 
                               {coupon.max_uses > 0 && !isOutOfUses && (
 
-                                <div className="text-[10px] text-slate-400">
+                                <div className="text-[10px] text-slate-600">
 
                                   Còn {coupon.remaining_uses !== undefined ? coupon.remaining_uses : coupon.max_uses} lượt dùng
 
@@ -2103,7 +2009,7 @@ export default function Checkout() {
 
                                 onClick={() => handleQuickApplyCoupon(coupon)}
 
-                                className="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-400 text-xs font-bold rounded-lg transition-colors"
+                                className="px-3 py-1.5 bg-red-600/20 hover:bg-red-600/30 border border-red-600/40 text-red-500 text-xs font-bold rounded-lg transition-colors"
 
                               >
 
@@ -2147,13 +2053,13 @@ export default function Checkout() {
 
         <div className="lg:col-span-5">
 
-          <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-6 space-y-5">
+          <form onSubmit={handleSubmit} className="bg-white border border-slate-200 shadow-sm clip-path-rog rounded-none clip-path-rog p-6 space-y-5">
 
-            <h2 className="text-lg font-bold text-white border-b border-slate-800 pb-3 flex items-center justify-between">
+            <h2 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3 flex items-center justify-between">
 
               <span className="flex items-center gap-2">
 
-                <MapPin className="w-5 h-5 text-cyan-400" /> Thông Tin Nhận Hàng
+                <MapPin className="w-5 h-5 text-red-500" /> Thông Tin Nhận Hàng
 
               </span>
 
@@ -2167,7 +2073,7 @@ export default function Checkout() {
 
                   onClick={() => setShowAddressList(!showAddressList)}
 
-                  className="px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-lg text-xs font-semibold hover:bg-cyan-500/20 transition-colors flex items-center gap-1.5"
+                  className="px-3 py-1.5 bg-red-600/10 border border-red-600/30 text-red-400 rounded-lg text-xs font-semibold hover:bg-red-600/20 transition-colors flex items-center gap-1.5"
 
                 >
 
@@ -2187,13 +2093,13 @@ export default function Checkout() {
 
             {showAddressList && savedAddresses.length > 0 && (
 
-              <div className="p-3 bg-cyan-500/5 border border-cyan-500/20 rounded-xl space-y-2">
+              <div className="p-3 bg-red-600/5 border border-red-600/20 rounded-none clip-path-rog space-y-2">
 
-                <p className="text-xs text-slate-400 font-semibold">Địa chỉ đã lưu - nhấn để chọn nhanh:</p>
+                <p className="text-xs text-slate-600 font-semibold">Địa chỉ đã lưu - nhấn để chọn nhanh:</p>
 
                 {loadingAddresses ? (
 
-                  <div className="flex items-center gap-2 text-xs text-slate-400">
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
 
                     <Loader2 className="w-3.5 h-3.5 animate-spin" /> Đang tải địa chỉ...
 
@@ -2213,17 +2119,17 @@ export default function Checkout() {
 
                         onClick={() => applySavedAddress(addr)}
 
-                        className="p-3 bg-slate-900 border border-slate-700 hover:border-cyan-500/50 rounded-xl text-left transition-colors"
+                        className="p-3 bg-slate-50 border border-slate-300 hover:border-red-600/50 rounded-none clip-path-rog text-left transition-colors"
 
                       >
 
                         <div className="flex items-center justify-between">
 
-                          <span className="font-semibold text-white text-xs">{addr.full_name}</span>
+                          <span className="font-semibold text-slate-900 text-xs">{addr.full_name}</span>
 
                           {addr.is_default && (
 
-                            <span className="px-1.5 py-0.5 bg-cyan-500/20 text-cyan-300 text-[9px] font-bold rounded-full">
+                            <span className="px-1.5 py-0.5 bg-red-600/20 text-red-400 text-[9px] font-bold rounded-full">
 
                               Mặc định
 
@@ -2233,7 +2139,7 @@ export default function Checkout() {
 
                         </div>
 
-                        <p className="text-[10px] text-slate-400 mt-0.5">{addr.phone}</p>
+                        <p className="text-[10px] text-slate-600 mt-0.5">{addr.phone}</p>
 
                         <p className="text-[10px] text-slate-500 mt-0.5 line-clamp-1">
 
@@ -2259,7 +2165,7 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Họ và Tên *</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Họ và Tên *</label>
 
                 <input
 
@@ -2271,7 +2177,7 @@ export default function Checkout() {
 
                   placeholder="Nguyễn Văn A"
 
-                  className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600"
 
                 />
 
@@ -2283,7 +2189,7 @@ export default function Checkout() {
 
                 <div>
 
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Số Điện Thoại *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Số Điện Thoại *</label>
 
                   <input
 
@@ -2295,7 +2201,7 @@ export default function Checkout() {
 
                     placeholder="0912 345 678"
 
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600"
 
                   />
 
@@ -2303,7 +2209,7 @@ export default function Checkout() {
 
                 <div>
 
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Email</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Email</label>
 
                   <input
 
@@ -2315,7 +2221,7 @@ export default function Checkout() {
 
                     placeholder="email@example.com"
 
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600"
 
                   />
 
@@ -2327,7 +2233,7 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
 
                   Tỉnh/Thành phố
 
@@ -2341,7 +2247,7 @@ export default function Checkout() {
 
                   readOnly
 
-                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-slate-400 cursor-not-allowed"
+                  className="w-full px-4 py-2.5 bg-neutral-900 border border-slate-700 rounded-none clip-path-rog text-sm text-slate-600 cursor-not-allowed"
 
                 />
 
@@ -2351,7 +2257,7 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
 
                   Quận / Huyện <span className="text-rose-400">*</span>
 
@@ -2359,7 +2265,7 @@ export default function Checkout() {
 
                 {loadingLocations ? (
 
-                  <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-400">
+                  <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-600">
 
                     <Loader2 className="w-4 h-4 animate-spin" /> Đang tải...
 
@@ -2375,7 +2281,7 @@ export default function Checkout() {
 
                       onChange={e => setSelectedDistrict(e.target.value)}
 
-                      className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500 appearance-none pr-10 cursor-pointer"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600 appearance-none pr-10 cursor-pointer"
 
                     >
 
@@ -2405,7 +2311,7 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
 
                   Phường / Xã <span className="text-rose-400">*</span>
 
@@ -2421,7 +2327,7 @@ export default function Checkout() {
 
                     disabled={!selectedDistrict}
 
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500 appearance-none pr-10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600 appearance-none pr-10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
 
                   >
 
@@ -2451,7 +2357,7 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
 
                   Địa chỉ chi tiết <span className="text-rose-400">*</span>
 
@@ -2467,7 +2373,7 @@ export default function Checkout() {
 
                   placeholder="VD: 123 Nguyễn Huệ"
 
-                  className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600"
 
                 />
 
@@ -2479,17 +2385,17 @@ export default function Checkout() {
 
               {selectedDistrictInfo && (
 
-                <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-between">
+                <div className="p-3 rounded-none clip-path-rog bg-red-600/10 border border-red-600/20 flex items-center justify-between">
 
                   <div className="flex items-center gap-2">
 
-                    <MapPin className="w-4 h-4 text-cyan-400" />
+                    <MapPin className="w-4 h-4 text-red-500" />
 
-                    <span className="text-xs text-slate-300">Phí giao hàng khu vực này:</span>
+                    <span className="text-xs text-slate-700">Phí giao hàng khu vực này:</span>
 
                   </div>
 
-                  <span className="font-bold text-cyan-400">{formatPrice(selectedDistrictInfo.shipping_fee)}</span>
+                  <span className="font-bold text-red-500">{formatPrice(selectedDistrictInfo.shipping_fee)}</span>
 
                 </div>
 
@@ -2499,7 +2405,7 @@ export default function Checkout() {
 
               {/* Delivery zone notice */}
 
-              <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-2">
+              <div className="p-2.5 rounded-none clip-path-rog bg-amber-500/10 border border-amber-500/20 flex items-start gap-2">
 
                 <AlertCircle className="w-3.5 h-3.5 text-amber-400 mt-0.5 flex-shrink-0" />
 
@@ -2519,7 +2425,7 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Ghi Chú (tùy chọn)</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Ghi Chú (tùy chọn)</label>
 
                 <textarea
 
@@ -2531,7 +2437,7 @@ export default function Checkout() {
 
                   placeholder="Yêu cầu giao hàng giờ hành chính..."
 
-                  className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-none clip-path-rog text-sm text-slate-800 focus:outline-none focus:border-red-600"
 
                 />
 
@@ -2541,25 +2447,25 @@ export default function Checkout() {
 
               <div>
 
-                <label className="block text-xs font-semibold text-slate-300 mb-2">Phương Thức Thanh Toán</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-2">Phương Thức Thanh Toán</label>
 
                 <div className="space-y-2">
 
-                  <label className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer text-xs font-medium ${formData.payment_method === 'COD' ? 'border-cyan-500 bg-cyan-950/40 text-cyan-300' : 'border-slate-800 text-slate-400'}`}>
+                  <label className={`flex items-center gap-3 p-3 rounded-none clip-path-rog border cursor-pointer text-xs font-medium ${formData.payment_method === 'COD' ? 'border-red-600 bg-cyan-950/40 text-red-400' : 'border-slate-200 text-slate-600'}`}>
 
-                    <input type="radio" name="payment" value="COD" checked={formData.payment_method === 'COD'} onChange={() => setFormData({ ...formData, payment_method: 'COD' })} className="accent-cyan-500" />
+                    <input type="radio" name="payment" value="COD" checked={formData.payment_method === 'COD'} onChange={() => setFormData({ ...formData, payment_method: 'COD' })} className="accent-red-600" />
 
-                    <Truck className="w-4 h-4 text-cyan-400" />
+                    <Truck className="w-4 h-4 text-red-500" />
 
                     <span>COD (Thanh toán khi nhận hàng)</span>
 
                   </label>
 
-                  <label className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer text-xs font-medium ${formData.payment_method === 'BANK_TRANSFER' ? 'border-cyan-500 bg-cyan-950/40 text-cyan-300' : 'border-slate-800 text-slate-400'}`}>
+                  <label className={`flex items-center gap-3 p-3 rounded-none clip-path-rog border cursor-pointer text-xs font-medium ${formData.payment_method === 'BANK_TRANSFER' ? 'border-red-600 bg-cyan-950/40 text-red-400' : 'border-slate-200 text-slate-600'}`}>
 
-                    <input type="radio" name="payment" value="BANK_TRANSFER" checked={formData.payment_method === 'BANK_TRANSFER'} onChange={() => setFormData({ ...formData, payment_method: 'BANK_TRANSFER' })} className="accent-cyan-500" />
+                    <input type="radio" name="payment" value="BANK_TRANSFER" checked={formData.payment_method === 'BANK_TRANSFER'} onChange={() => setFormData({ ...formData, payment_method: 'BANK_TRANSFER' })} className="accent-red-600" />
 
-                    <CreditCard className="w-4 h-4 text-purple-400" />
+                    <CreditCard className="w-4 h-4 text-red-500" />
 
                     <span>Chuyển Khoản Ngân Hàng Qua Mã QR</span>
 
@@ -2573,9 +2479,9 @@ export default function Checkout() {
 
 
 
-            <div className="pt-4 border-t border-slate-800 space-y-2">
+            <div className="pt-4 border-t border-slate-200 space-y-2">
 
-              <div className="flex justify-between text-xs text-slate-400">
+              <div className="flex justify-between text-xs text-slate-600">
 
                 <span>Tạm tính:</span>
 
@@ -2595,11 +2501,11 @@ export default function Checkout() {
 
               )}
 
-              <div className="flex justify-between text-xs text-slate-400">
+              <div className="flex justify-between text-xs text-slate-600">
 
                 <span>Phí vận chuyển:</span>
 
-                <span className={shippingFee === 0 ? 'text-emerald-400 font-semibold' : ''}>
+                <span className={shippingFee === 0 ? 'text-red-500 font-semibold' : ''}>
 
                   {shippingFee === 0 ? 'MIỄN PHÍ' : formatPrice(shippingFee)}
 
@@ -2607,11 +2513,11 @@ export default function Checkout() {
 
               </div>
 
-              <div className="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
+              <div className="flex justify-between text-base font-bold text-slate-900 pt-2 border-t border-slate-200">
 
                 <span>Tổng cộng:</span>
 
-                <span className="text-xl text-cyan-400">{formatPrice(finalPrice)}</span>
+                <span className="text-xl text-red-500">{formatPrice(finalPrice)}</span>
 
               </div>
 
@@ -2620,17 +2526,11 @@ export default function Checkout() {
 
 
             <button
-
               type="submit"
-
               disabled={loading}
-
-              className="w-full py-4 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 font-extrabold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50"
-
+              className="w-full py-4 bg-red-600 hover:bg-red-500 text-white font-black tracking-widest uppercase rounded-none clip-path-rog transition-colors disabled:opacity-50"
             >
-
-              {loading ? 'Đang Xử Lý...' : 'Xác Nhận Đặt Hàng Ngay'}
-
+              {loading ? 'Đang Xử Lý...' : 'Xác Nhận Đặt Hàng'}
             </button>
 
 
@@ -2642,40 +2542,25 @@ export default function Checkout() {
             </p>
 
           </form>
-
         </div>
-
       </div>
 
 
 
       {confirmState && (
-
         <ConfirmDialog
-
           open={Boolean(confirmState)}
-
           title={confirmState.title}
-
           message={confirmState.message}
-
           variant={confirmState.variant || 'danger'}
-
           confirmText={confirmState.confirmText || 'Xác nhận'}
-
           cancelText={confirmState.cancelText || 'Hủy'}
-
           onConfirm={confirmState.onConfirm}
-
           onCancel={closeConfirm}
-
         />
-
       )}
-
+      </div>
     </div>
-
   );
-
 }
 

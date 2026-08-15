@@ -5,7 +5,7 @@ export default function Logo({ size = 44, showText = true, className = '' }) {
     <div className={`flex items-center gap-3 select-none ${className}`}>
       <div className="relative flex-shrink-0 flex items-center justify-center">
         {/* Neon Glow Aura Behind Logo */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur-md opacity-40 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 rounded-none clip-path-rog blur-md opacity-40 animate-pulse" />
 
         <svg
           width={size}
@@ -80,12 +80,12 @@ export default function Logo({ size = 44, showText = true, className = '' }) {
             <span className="text-xl font-black text-white tracking-tight">
               Laptop
             </span>
-            <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 tracking-tight">
+            <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-sky-300 to-red-600 tracking-tight">
               Store
             </span>
           </div>
           <div className="flex items-center gap-1 mt-1">
-            <span className="text-[9px] font-extrabold tracking-[0.2em] uppercase text-cyan-400/90">
+            <span className="text-[9px] font-extrabold tracking-[0.2em] uppercase text-red-500/90">
               HIGH TECH HUB
             </span>
           </div>

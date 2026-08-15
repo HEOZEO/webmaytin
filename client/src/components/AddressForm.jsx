@@ -82,25 +82,25 @@ export default function AddressForm({
   const formatPrice = (p) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p || 0);
 
   const fieldClass = (hasError) =>
-    `w-full px-4 py-2.5 bg-slate-900 border rounded-xl text-sm text-slate-100 focus:outline-none transition-colors ${
-      hasError ? 'border-rose-500 focus:border-rose-500' : 'border-slate-800 focus:border-cyan-500'
+    `w-full px-4 py-2.5 bg-black border rounded-none clip-path-rog text-sm text-slate-100 focus:outline-none transition-colors ${
+      hasError ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-800 focus:border-red-600'
     }`;
 
-  const labelClass = 'block text-xs font-semibold text-slate-400 mb-1.5';
+  const labelClass = 'block text-xs font-semibold text-neutral-400 mb-1.5';
   const errorClass = 'text-[10px] text-rose-400 mt-1';
 
   if (loadingLocations) {
     return (
       <div className="flex items-center justify-center p-8">
-        <Loader2 className="w-5 h-5 animate-spin text-cyan-400" />
-        <span className="ml-2 text-sm text-slate-400">Đang tải khu vực giao hàng...</span>
+        <Loader2 className="w-5 h-5 animate-spin text-red-500" />
+        <span className="ml-2 text-sm text-neutral-400">Đang tải khu vực giao hàng...</span>
       </div>
     );
   }
 
   if (districts.length === 0) {
     return (
-      <div className="p-6 text-center text-sm text-slate-400 flex items-center justify-center gap-2">
+      <div className="p-6 text-center text-sm text-neutral-400 flex items-center justify-center gap-2">
         <AlertCircle className="w-4 h-4 text-amber-400" />
         Không thể tải danh sách khu vực giao hàng. Vui lòng tải lại trang.
       </div>
@@ -194,12 +194,12 @@ export default function AddressForm({
 
       {/* Shipping fee preview */}
       {selectedDistrictInfo && (
-        <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-between">
+        <div className="p-3 rounded-none clip-path-rog bg-red-600/10 border border-red-600/20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-cyan-400" />
-            <span className="text-xs text-slate-300">Phí giao hàng cho khu vực này:</span>
+            <MapPin className="w-4 h-4 text-red-500" />
+            <span className="text-xs text-neutral-300">Phí giao hàng cho khu vực này:</span>
           </div>
-          <span className="font-bold text-cyan-400">{formatPrice(selectedDistrictInfo.shipping_fee)}</span>
+          <span className="font-bold text-red-500">{formatPrice(selectedDistrictInfo.shipping_fee)}</span>
         </div>
       )}
 
@@ -210,15 +210,15 @@ export default function AddressForm({
             type="checkbox"
             checked={isDefault}
             onChange={e => setIsDefault(e.target.checked)}
-            className="w-4 h-4 rounded accent-cyan-500"
+            className="w-4 h-4 rounded accent-red-600"
           />
-          <span className="text-sm text-slate-300">Đặt làm địa chỉ mặc định</span>
+          <span className="text-sm text-neutral-300">Đặt làm địa chỉ mặc định</span>
         </label>
       )}
 
       {/* Delivery notice */}
       {!compact && (
-        <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
+        <div className="p-3 rounded-none clip-path-rog bg-amber-500/10 border border-amber-500/20">
           <p className="text-[10px] text-amber-300 flex items-start gap-1.5">
             <AlertCircle className="w-3 h-3 mt-0.5 flex-shrink-0" />
             <span>
@@ -234,7 +234,7 @@ export default function AddressForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 bg-cyan-500 text-slate-950 font-bold rounded-xl hover:bg-cyan-400 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+        className="w-full py-3 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog hover:bg-red-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
       >
         {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />}
         {loading ? 'Đang lưu...' : submitLabel}

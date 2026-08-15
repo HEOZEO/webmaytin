@@ -12,7 +12,7 @@ const FALLBACK_BANNERS = [
     image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
     link: '/products?category=gaming',
     buttonText: 'Sắm Laptop Gaming',
-    gradient: 'from-cyan-500/20 via-blue-600/10 to-transparent'
+    gradient: 'from-red-600/30 via-black/80 to-black'
   }
 ];
 
@@ -35,7 +35,7 @@ export default function BannerSlider() {
             image: b.image_url,
             link: b.link || '/products',
             buttonText: b.button_text || 'Xem Ngay',
-            gradient: b.gradient || 'from-cyan-500/20 via-blue-600/10 to-transparent'
+            gradient: b.gradient || 'from-red-600/30 via-black/80 to-black'
           })));
         }
       })
@@ -52,7 +52,7 @@ export default function BannerSlider() {
   }, [banners.length]);
 
   if (loading && banners.length === 0) {
-    return <div className="w-full h-[360px] sm:h-[440px] rounded-3xl glass-card animate-pulse" />;
+    return <div className="w-full h-[360px] sm:h-[440px] bg-neutral-900 clip-path-rog animate-pulse" />;
   }
 
   if (banners.length === 0) {
@@ -63,7 +63,10 @@ export default function BannerSlider() {
   const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
 
   return (
-    <div className="relative w-full h-[360px] sm:h-[440px] rounded-3xl overflow-hidden glass-card glow-blue group">
+    <div 
+      className="relative w-full h-[500px] sm:h-[700px] overflow-hidden bg-black group"
+      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 88%, 0 100%)' }}
+    >
       {banners.map((banner, index) => (
         <div
           key={banner.id}
@@ -74,33 +77,33 @@ export default function BannerSlider() {
           <img
             src={resolveImage(banner.image)}
             alt={banner.title}
-            className="w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-1000"
+            className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
             onError={onImageError}
           />
-          <div className={`absolute inset-0 bg-gradient-to-r ${banner.gradient} via-slate-950/80 to-slate-950`} />
+          <div className={`absolute inset-0 bg-gradient-to-r ${banner.gradient || 'from-black/95'} via-black/40 to-transparent`} />
 
           <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-16 max-w-3xl space-y-4">
             {banner.badge && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-wider w-fit">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600/90 border border-red-500 text-white text-xs font-black uppercase tracking-widest w-fit shadow-[0_0_15px_rgba(255,0,41,0.6)]">
                 <Sparkles className="w-3.5 h-3.5" />
                 {banner.badge}
               </div>
             )}
 
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight font-rog uppercase tracking-wide drop-shadow-[0_0_20px_rgba(255,0,41,0.4)]">
               {banner.title}
             </h2>
 
             {banner.subtitle && (
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed line-clamp-2">
+              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed line-clamp-2">
                 {banner.subtitle}
               </p>
             )}
 
-            <div className="pt-2">
+            <div className="pt-6">
               <Link
                 to={banner.link}
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all text-sm"
+                className="inline-flex items-center gap-2.5 px-10 py-4 clip-path-rog font-bold bg-red-600 text-white hover:bg-red-500 hover:shadow-[0_0_30px_rgba(255,0,41,0.8)] hover:-translate-y-1 transition-all text-sm uppercase tracking-widest"
               >
                 {banner.buttonText || 'Xem Ngay'}
                 <ArrowRight className="w-4 h-4" />
@@ -114,7 +117,7 @@ export default function BannerSlider() {
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/50 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/60 hover:bg-red-600 text-neutral-300 hover:text-white border border-red-900/50 opacity-0 group-hover:opacity-100 transition-all clip-path-rog"
             aria-label="Previous Slide"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -122,20 +125,21 @@ export default function BannerSlider() {
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/50 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/60 hover:bg-red-600 text-neutral-300 hover:text-white border border-red-900/50 opacity-0 group-hover:opacity-100 transition-all clip-path-rog"
             aria-label="Next Slide"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2">
+          <div className="absolute bottom-16 sm:bottom-24 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-3">
             {banners.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'w-8 bg-cyan-400' : 'w-2 bg-slate-600 hover:bg-slate-400'
+                className={`h-2 transition-all duration-300 ${
+                  index === currentIndex ? 'w-12 bg-red-600' : 'w-4 bg-neutral-700/80 hover:bg-neutral-400'
                 }`}
+                style={{ transform: 'skewX(-20deg)' }}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

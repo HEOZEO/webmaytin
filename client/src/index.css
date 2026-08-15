@@ -4,14 +4,14 @@
 
 @layer base {
   body {
-    background-color: #090d16;
+    background-color: #000000;
     color: #f1f5f9;
     scroll-behavior: smooth;
   }
 
   ::selection {
-    background: rgba(6, 182, 212, 0.5);
-    color: #000;
+    background: rgba(255, 0, 41, 0.5);
+    color: #fff;
   }
 }
 
@@ -37,6 +37,23 @@
 
 .glow-purple {
   box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.25);
+}
+
+/* ROG Glow & Clip Path */
+.glow-rog {
+  box-shadow: 0 0 20px -5px rgba(255, 0, 41, 0.4);
+}
+
+.glow-rog:hover {
+  box-shadow: 0 0 30px -5px rgba(255, 0, 41, 0.8);
+}
+
+.clip-path-rog {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+.clip-path-rog-inverse {
+  clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
 }
 
 /* Smooth Micro-Animations */

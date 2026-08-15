@@ -44,12 +44,12 @@ const STATUS_MAP = {
 
 const STATUS_PILL = {
   pending: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-  processing: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-  confirmed: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-  packing: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-  shipping: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-  delivered: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
-  completed: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+  processing: 'bg-red-600/20 text-red-400 border-red-600/40',
+  confirmed: 'bg-red-600/20 text-red-400 border-red-600/40',
+  packing: 'bg-red-600/20 text-red-400 border-red-600/40',
+  shipping: 'bg-red-600/20 text-red-400 border-red-600/40',
+  delivered: 'bg-red-600/20 text-emerald-300 border-red-600/40',
+  completed: 'bg-red-600/20 text-emerald-300 border-red-600/40',
   cancelled: 'bg-rose-500/20 text-rose-300 border-rose-500/40'
 };
 
@@ -266,12 +266,12 @@ export default function Dashboard() {
         sub: stats.revenueGrowth != null
           ? `${stats.revenueGrowth >= 0 ? '+' : ''}${stats.revenueGrowth}% so với tháng trước`
           : 'Cập nhật theo thời gian thực',
-        subColor: stats.revenueGrowth >= 0 ? 'text-emerald-400' : 'text-rose-400',
+        subColor: stats.revenueGrowth >= 0 ? 'text-red-500' : 'text-rose-400',
         icon: Wallet,
-        gradient: 'from-cyan-500/30 via-cyan-500/10 to-blue-600/20',
-        accent: 'text-cyan-300',
-        border: 'border-cyan-500/40',
-        iconBg: 'from-cyan-500 to-blue-600',
+        gradient: 'from-red-600/30 via-red-600/10 to-red-700/20',
+        accent: 'text-red-400',
+        border: 'border-red-600/40',
+        iconBg: 'from-red-600 to-red-700',
         trend: stats.revenueGrowth >= 0 ? 'up' : 'down'
       },
       {
@@ -279,7 +279,7 @@ export default function Dashboard() {
         label: 'Doanh Thu Tháng',
         value: formatPrice(stats.monthRevenue),
         sub: `${stats.monthOrders || 0} đơn tháng này`,
-        subColor: 'text-cyan-300',
+        subColor: 'text-red-400',
         icon: Activity,
         gradient: 'from-teal-500/30 via-teal-500/10 to-emerald-600/20',
         accent: 'text-teal-300',
@@ -293,10 +293,10 @@ export default function Dashboard() {
         sub: `${stats.todayOrders || 0} đơn hôm nay`,
         subColor: 'text-purple-300',
         icon: Zap,
-        gradient: 'from-purple-500/30 via-purple-500/10 to-fuchsia-600/20',
+        gradient: 'from-red-600/30 via-red-600/10 to-fuchsia-600/20',
         accent: 'text-purple-300',
-        border: 'border-purple-500/40',
-        iconBg: 'from-purple-500 to-fuchsia-600'
+        border: 'border-red-600/40',
+        iconBg: 'from-red-600 to-fuchsia-600'
       },
       {
         key: 'orders',
@@ -305,10 +305,10 @@ export default function Dashboard() {
         sub: `${stats.pendingOrders || 0} đơn đang xử lý`,
         subColor: 'text-emerald-300',
         icon: ShoppingCart,
-        gradient: 'from-emerald-500/30 via-emerald-500/10 to-teal-600/20',
+        gradient: 'from-red-600/30 via-red-600/10 to-teal-600/20',
         accent: 'text-emerald-300',
-        border: 'border-emerald-500/40',
-        iconBg: 'from-emerald-500 to-teal-600'
+        border: 'border-red-600/40',
+        iconBg: 'from-red-600 to-teal-600'
       }
     ];
   }, [stats]);
@@ -328,7 +328,7 @@ export default function Dashboard() {
         value: formatNumber(stats.totalProducts),
         icon: Package,
         to: '/admin/products',
-        color: 'text-cyan-300'
+        color: 'text-red-400'
       },
       {
         label: 'Sắp Hết Hàng',
@@ -348,9 +348,9 @@ export default function Dashboard() {
   }, [stats]);
 
   const quickLinks = [
-    { to: '/admin/products', label: 'Sản phẩm', icon: Package, gradient: 'from-cyan-500 to-blue-600' },
-    { to: '/admin/orders', label: 'Đơn hàng', icon: ShoppingCart, gradient: 'from-emerald-500 to-teal-600' },
-    { to: '/admin/users', label: 'Khách hàng', icon: Users, gradient: 'from-purple-500 to-fuchsia-600' },
+    { to: '/admin/products', label: 'Sản phẩm', icon: Package, gradient: 'from-red-600 to-red-700' },
+    { to: '/admin/orders', label: 'Đơn hàng', icon: ShoppingCart, gradient: 'from-red-600 to-teal-600' },
+    { to: '/admin/users', label: 'Khách hàng', icon: Users, gradient: 'from-red-600 to-fuchsia-600' },
     { to: '/admin/coupons', label: 'Mã giảm giá', icon: Tag, gradient: 'from-amber-500 to-orange-600' },
     { to: '/admin/inventory', label: 'Tồn kho', icon: Boxes, gradient: 'from-rose-500 to-pink-600' },
     { to: '/admin/contacts', label: 'Liên hệ', icon: MessageCircle, gradient: 'from-teal-500 to-cyan-600' },
@@ -468,22 +468,22 @@ export default function Dashboard() {
   return (
     <div className="space-y-5 sm:space-y-6 pb-8">
       {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900/80 to-slate-950 p-4 sm:p-6 lg:p-8">
-        <div className="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-32 -left-16 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl" />
+      <div className="relative overflow-hidden rounded-none clip-path-rog border border-neutral-800 bg-gradient-to-br from-[#1a1a1a] via-black to-[#0a0a0a] p-4 sm:p-6 lg:p-8">
+        <div className="absolute -top-24 -right-24 w-72 h-72 bg-red-600/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-32 -left-16 w-72 h-72 bg-red-600/20 rounded-full blur-3xl" />
         <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 lg:gap-6">
           <div className="space-y-2 min-w-0 flex-1">
-            <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold text-cyan-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold text-red-500 uppercase tracking-wider">
               <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> Dashboard · Admin Panel
             </div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black text-white leading-tight">
               {greeting},{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-red-500 via-red-500 to-pink-400 bg-clip-text text-transparent">
                 {user?.full_name || 'Admin'}
               </span>
-              <span className="inline-block ml-1 animate-pulse">👋</span>
+              <span className="inline-block ml-1">👋</span>
             </h1>
-            <p className="text-slate-400 text-xs sm:text-sm">
+            <p className="text-neutral-400 text-xs sm:text-sm">
               Tổng quan hoạt động của cửa hàng · {new Date().toLocaleDateString('vi-VN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
             </p>
             {lastUpdated && (
@@ -496,7 +496,7 @@ export default function Dashboard() {
           <button
             onClick={() => { fetchAll(); fetchRevenue(); }}
             disabled={loading}
-            className="flex items-center gap-2 px-4 py-2.5 bg-slate-800/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/50 rounded-xl text-xs font-semibold text-slate-200 disabled:opacity-50 transition w-full lg:w-auto justify-center"
+            className="flex items-center gap-2 px-4 py-2.5 bg-neutral-900/80 hover:bg-neutral-900 border border-slate-700 hover:border-red-600/50 rounded-none clip-path-rog text-xs font-semibold text-slate-200 disabled:opacity-50 transition w-full lg:w-auto justify-center"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Làm mới dữ liệu
           </button>
@@ -504,7 +504,7 @@ export default function Dashboard() {
       </div>
 
       {error && !loading && (
-        <div className="glass-card border-rose-500/30 bg-rose-500/10 p-4 rounded-2xl flex items-start gap-3">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog border-rose-500/30 bg-rose-500/10 p-4 rounded-none clip-path-rog flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-rose-300 font-bold text-sm">Đã có lỗi xảy ra</p>
@@ -517,7 +517,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         {(loading || !stats)
           ? Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="glass-card rounded-2xl h-32 animate-pulse" />
+              <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog h-32 animate-pulse" />
             ))
           : kpis.map((k) => {
               const Icon = k.icon;
@@ -525,13 +525,13 @@ export default function Dashboard() {
               return (
                 <div
                   key={k.key}
-                  className={`relative overflow-hidden rounded-2xl p-4 sm:p-5 border ${k.border} bg-gradient-to-br ${k.gradient} hover:scale-[1.02] transition-transform duration-200 backdrop-blur-sm`}
+                  className={`relative overflow-hidden rounded-none clip-path-rog p-4 sm:p-5 border ${k.border} bg-gradient-to-br ${k.gradient} hover:scale-[1.02] transition-transform duration-200 backdrop-blur-sm`}
                 >
                   <div className="flex items-center justify-between mb-3 gap-2">
                     <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-200/90 truncate">
                       {k.label}
                     </span>
-                    <div className={`p-2 rounded-xl bg-gradient-to-br ${k.iconBg} flex-shrink-0`}>
+                    <div className={`p-2 rounded-none clip-path-rog bg-gradient-to-br ${k.iconBg} flex-shrink-0`}>
                       <Icon className="w-4 h-4 text-white" />
                     </div>
                   </div>
@@ -552,7 +552,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {(loading || !stats)
           ? Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="glass-card rounded-2xl h-20 animate-pulse" />
+              <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog h-20 animate-pulse" />
             ))
           : secondaryKpis.map((s, i) => {
               const Icon = s.icon;
@@ -560,9 +560,9 @@ export default function Dashboard() {
                 <Link
                   key={i}
                   to={s.to}
-                  className="glass-card rounded-2xl p-3 sm:p-4 flex items-center gap-3 hover:border-cyan-500/40 transition group"
+                  className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-3 sm:p-4 flex items-center gap-3 hover:border-red-600/40 transition group"
                 >
-                  <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center ${s.color} group-hover:scale-110 transition-transform flex-shrink-0`}>
+                  <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-none clip-path-rog bg-neutral-900/80 border border-slate-700 flex items-center justify-center ${s.color} group-hover:scale-110 transition-transform flex-shrink-0`}>
                     <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -582,13 +582,13 @@ export default function Dashboard() {
             <Link
               key={q.to + q.label}
               to={q.to}
-              className="group glass-card rounded-2xl p-3 sm:p-4 hover:border-cyan-500/50 transition-all"
+              className="group bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-3 sm:p-4 hover:border-red-600/50 transition-all"
             >
-              <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${q.gradient} flex items-center justify-center mb-2 group-hover:scale-110 transition-transform`}>
+              <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-none clip-path-rog bg-gradient-to-br ${q.gradient} flex items-center justify-center mb-2 group-hover:scale-110 transition-transform`}>
                 <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               <div className="text-xs sm:text-sm font-bold text-white truncate">{q.label}</div>
-              <div className="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 group-hover:text-cyan-400">
+              <div className="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 group-hover:text-red-500">
                 Truy cập <ArrowRight className="w-3 h-3" />
               </div>
             </Link>
@@ -599,17 +599,17 @@ export default function Dashboard() {
       {/* Charts Row: Revenue (big) + Category (side) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* ===== REVENUE CHART ===== */}
-        <div className="glass-card rounded-2xl p-4 sm:p-6 lg:col-span-2">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 sm:p-6 lg:col-span-2">
           {/* Header + date filter */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
             <div>
               <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-cyan-400" />
+                <TrendingUp className="w-4 h-4 text-red-500" />
                 Doanh Thu Theo Thời Gian
               </h2>
               {revSummary && (
                 <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                  <span className="text-[11px] text-cyan-300 font-bold">
+                  <span className="text-[11px] text-red-400 font-bold">
                     {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(revSummary.totalRev)}
                   </span>
                   <span className="text-slate-600">·</span>
@@ -621,7 +621,7 @@ export default function Dashboard() {
             </div>
 
             {/* Preset buttons */}
-            <div className="flex gap-1 bg-slate-900 border border-slate-800 rounded-xl p-1">
+            <div className="flex gap-1 bg-black border border-neutral-800 rounded-none clip-path-rog p-1">
               {[
                 { key: '1d', label: 'Hôm nay' },
                 { key: '7d', label: '7 ngày' },
@@ -633,8 +633,8 @@ export default function Dashboard() {
                   onClick={() => setRevPreset(p.key)}
                   className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${
                     revPreset === p.key
-                      ? 'bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-lg shadow-cyan-500/20'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase shadow-lg shadow-red-600/20'
+                      : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
                   }`}
                 >
                   {p.label}
@@ -652,20 +652,20 @@ export default function Dashboard() {
                   type="date"
                   value={revCustomStart}
                   onChange={e => setRevCustomStart(e.target.value)}
-                  className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-cyan-500 focus:outline-none"
+                  className="px-2.5 py-1.5 bg-black border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-red-600 focus:outline-none"
                 />
                 <span className="text-slate-500 text-xs">→</span>
                 <input
                   type="date"
                   value={revCustomEnd}
                   onChange={e => setRevCustomEnd(e.target.value)}
-                  className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-cyan-500 focus:outline-none"
+                  className="px-2.5 py-1.5 bg-black border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-red-600 focus:outline-none"
                 />
               </div>
               <button
                 onClick={() => { if (revCustomStart && revCustomEnd) fetchRevenue(); }}
                 disabled={!revCustomStart || !revCustomEnd}
-                className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 rounded-lg text-xs font-bold hover:bg-cyan-500/30 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 bg-red-600/20 border border-red-600/40 text-red-400 rounded-lg text-xs font-bold hover:bg-red-600/30 transition disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Áp dụng
               </button>
@@ -677,11 +677,11 @@ export default function Dashboard() {
         </div>
 
         {/* ===== CATEGORY SALES ===== */}
-        <div className="glass-card rounded-2xl p-4 sm:p-6">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                <Tag className="w-4 h-4 text-purple-400" /> Doanh số theo danh mục
+                <Tag className="w-4 h-4 text-red-500" /> Doanh số theo danh mục
               </h2>
               <p className="text-[11px] text-slate-500 mt-0.5">
                 {categorySales.length > 0 ? `Top ${categorySales.length} danh mục` : 'Chưa có dữ liệu'}
@@ -700,11 +700,11 @@ export default function Dashboard() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-semibold text-slate-200 truncate">{cat.name}</span>
-                        <span className="text-[11px] font-bold text-slate-300 ml-2 flex-shrink-0">
+                        <span className="text-[11px] font-bold text-neutral-300 ml-2 flex-shrink-0">
                           {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(cat.total_revenue || 0)}
                         </span>
                       </div>
-                      <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-1.5 bg-neutral-900 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-700"
                           style={{ width: `${pct}%`, backgroundColor: COLORS[i % COLORS.length] }}
@@ -724,33 +724,33 @@ export default function Dashboard() {
       {/* Bottom Row: Top Products + Recent Orders + Side widgets */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
         {/* Top Products */}
-        <div className="glass-card rounded-2xl p-4 sm:p-6 lg:col-span-4">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 sm:p-6 lg:col-span-4">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
               <Star className="w-4 h-4 text-amber-400" /> Top sản phẩm
             </h2>
-            <Link to="/admin/analytics" className="text-[11px] text-cyan-400 hover:underline flex items-center gap-1">
+            <Link to="/admin/analytics" className="text-[11px] text-red-500 hover:underline flex items-center gap-1">
               Tất cả <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
           {topProducts.length > 0 ? (
             <div className="space-y-2">
               {topProducts.slice(0, 5).map((p, i) => (
-                <div key={p.id} className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/50 transition">
+                <div key={p.id} className="flex items-center gap-3 p-2 rounded-none clip-path-rog hover:bg-neutral-900/50 transition">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-[11px] flex-shrink-0 ${
-                    i === 0 ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950' :
-                    i === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-500 text-slate-950' :
-                    i === 2 ? 'bg-gradient-to-br from-orange-400 to-amber-700 text-slate-950' :
-                    'bg-slate-800 text-slate-400'
+                    i === 0 ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white font-bold tracking-widest uppercase' :
+                    i === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-500 text-white font-bold tracking-widest uppercase' :
+                    i === 2 ? 'bg-gradient-to-br from-orange-400 to-amber-700 text-white font-bold tracking-widest uppercase' :
+                    'bg-neutral-900 text-neutral-400'
                   }`}>
                     #{i + 1}
                   </div>
-                  <img src={resolveImage(p.image_url)} onError={onImageError} alt="" className="w-10 h-10 rounded-lg object-cover bg-slate-900 flex-shrink-0" />
+                  <img src={resolveImage(p.image_url)} onError={onImageError} alt="" className="w-10 h-10 rounded-lg object-cover bg-black flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs sm:text-sm font-semibold text-white truncate">{p.name}</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-500">{p.sold || p.total_sold || 0} đã bán</p>
                   </div>
-                  <p className="text-xs sm:text-sm font-bold text-cyan-300 truncate">{formatPrice(p.price)}</p>
+                  <p className="text-xs sm:text-sm font-bold text-red-400 truncate">{formatPrice(p.price)}</p>
                 </div>
               ))}
             </div>
@@ -760,12 +760,12 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Orders */}
-        <div className="glass-card rounded-2xl p-4 sm:p-6 lg:col-span-5">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 sm:p-6 lg:col-span-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-              <ShoppingCart className="w-4 h-4 text-emerald-400" /> Đơn hàng gần đây
+              <ShoppingCart className="w-4 h-4 text-red-500" /> Đơn hàng gần đây
             </h2>
-            <Link to="/admin/orders" className="text-[11px] text-cyan-400 hover:underline flex items-center gap-1">
+            <Link to="/admin/orders" className="text-[11px] text-red-500 hover:underline flex items-center gap-1">
               Tất cả <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
@@ -774,8 +774,8 @@ export default function Dashboard() {
               {recentOrders.map(ord => {
                 const info = STATUS_MAP[ord.status] || { label: ord.status };
                 return (
-                  <div key={ord.id} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl bg-slate-900/50 border border-slate-800/60 hover:border-slate-700 transition">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-slate-700 flex items-center justify-center font-bold text-xs text-cyan-300 flex-shrink-0">
+                  <div key={ord.id} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-none clip-path-rog bg-black/50 border border-neutral-800/60 hover:border-slate-700 transition">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-red-600/20 to-red-600/20 border border-slate-700 flex items-center justify-center font-bold text-xs text-red-400 flex-shrink-0">
                       {ord.customer_initials || 'KH'}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -805,7 +805,7 @@ export default function Dashboard() {
 
         {/* Side widgets: Order status + low stock */}
         <div className="lg:col-span-3 space-y-4 sm:space-y-6">
-          <div className="glass-card rounded-2xl p-4 sm:p-6">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 sm:p-6">
             <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 mb-4">
               <Activity className="w-4 h-4 text-rose-400" /> Trạng thái đơn
             </h2>
@@ -813,14 +813,14 @@ export default function Dashboard() {
               <div className="space-y-3">
                 {orderStatus.map((s, i) => {
                   const info = STATUS_MAP[s.status] || { label: s.status };
-                  const colors = ['bg-amber-500', 'bg-cyan-500', 'bg-purple-500', 'bg-emerald-500', 'bg-rose-500'];
+                  const colors = ['bg-amber-500', 'bg-red-600', 'bg-red-600', 'bg-red-600', 'bg-rose-500'];
                   return (
                     <div key={s.status}>
                       <div className="flex items-center justify-between text-[11px] sm:text-xs mb-1.5">
-                        <span className="text-slate-300 font-semibold">{info.label}</span>
-                        <span className="text-slate-400 font-bold">{s.count}</span>
+                        <span className="text-neutral-300 font-semibold">{info.label}</span>
+                        <span className="text-neutral-400 font-bold">{s.count}</span>
                       </div>
-                      <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-1.5 bg-neutral-900 rounded-full overflow-hidden">
                         <div className={`h-full ${colors[i % colors.length]} rounded-full transition-all`} style={{ width: `${Math.min(100, parseFloat(s.percentage) || 0)}%` }} />
                       </div>
                       <p className="text-[10px] text-slate-500 mt-1">{s.percentage}%</p>
@@ -833,7 +833,7 @@ export default function Dashboard() {
             )}
           </div>
 
-          <div className="glass-card rounded-2xl p-4 sm:p-6 border-amber-500/30">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 sm:p-6 border-amber-500/30">
             <h2 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 mb-3">
               <BellRing className="w-4 h-4 text-amber-400" /> Cảnh báo tồn kho
             </h2>
@@ -848,12 +848,12 @@ export default function Dashboard() {
                     </div>
                   </div>
                 ))}
-                <Link to="/admin/inventory" className="block text-center text-[10px] sm:text-[11px] text-cyan-400 hover:underline pt-1">
+                <Link to="/admin/inventory" className="block text-center text-[10px] sm:text-[11px] text-red-500 hover:underline pt-1">
                   Xem tất cả →
                 </Link>
               </div>
             ) : (
-              <p className="text-xs text-emerald-400 text-center py-2">✓ Tồn kho ổn định</p>
+              <p className="text-xs text-red-500 text-center py-2">✓ Tồn kho ổn định</p>
             )}
           </div>
         </div>

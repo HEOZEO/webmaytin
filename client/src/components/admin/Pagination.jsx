@@ -70,9 +70,9 @@ export default function Pagination({
       disabled={disabled}
       title={title}
       className={`inline-flex items-center justify-center min-w-[34px] h-9 px-2 rounded-lg text-xs font-bold
-        bg-slate-900 border border-slate-800 text-slate-400
-        hover:border-cyan-500/50 hover:text-white
-        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-slate-800 disabled:hover:text-slate-400
+        bg-black border border-neutral-800 text-neutral-400
+        hover:border-red-600/50 hover:text-white
+        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-neutral-800 disabled:hover:text-neutral-400
         transition ${className}`}
     >
       {children}
@@ -80,13 +80,13 @@ export default function Pagination({
   );
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 glass-card rounded-2xl p-3 border border-slate-800">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-3 border border-neutral-800">
       <div className="flex items-center gap-3 flex-wrap">
-        <span className="text-xs text-slate-400">
+        <span className="text-xs text-neutral-400">
           Hiển thị{' '}
-          <span className="text-cyan-300 font-bold">{start}</span>-
-          <span className="text-cyan-300 font-bold">{end}</span>
-          {' '}trong tổng <span className="text-cyan-300 font-bold">{totalItems}</span> {itemLabel}
+          <span className="text-red-400 font-bold">{start}</span>-
+          <span className="text-red-400 font-bold">{end}</span>
+          {' '}trong tổng <span className="text-red-400 font-bold">{totalItems}</span> {itemLabel}
         </span>
         {onLimitChange && (
           <div className="flex items-center gap-1.5">
@@ -94,7 +94,7 @@ export default function Pagination({
             <select
               value={itemsPerPage}
               onChange={(e) => onLimitChange(Number(e.target.value))}
-              className="px-2 py-1 bg-slate-800 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer"
+              className="px-2 py-1 bg-neutral-900 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-red-600 cursor-pointer"
             >
               {limitOptions.map(n => (
                 <option key={n} value={n}>{n}</option>
@@ -122,7 +122,7 @@ export default function Pagination({
               disabled={p === safePage}
               title={`Trang ${p}`}
               className={p === safePage
-                ? '!bg-gradient-to-r !from-cyan-400 !to-sky-400 !text-slate-950 !border-transparent !shadow-lg'
+                ? '!bg-gradient-to-r !from-red-500 !to-sky-400 !text-white font-bold tracking-widest uppercase !border-transparent !shadow-lg'
                 : ''}
             >
               {p}

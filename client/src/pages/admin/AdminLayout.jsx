@@ -3,7 +3,7 @@ import {
   Package, Users, ShoppingCart, TrendingUp, Tag,
   LayoutDashboard, Boxes, Image as ImageIcon,
   LogOut, Home, Eye, Menu, X, ChevronLeft,
-  MessageCircle, Settings, CreditCard
+  MessageCircle, Settings, CreditCard, Star
 } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import showToast from '../../utils/toast';
@@ -21,7 +21,8 @@ const ROUTE_TITLES = {
   '/admin/analytics': 'Phân tích kinh doanh',
   '/admin/contacts': 'Tin nhắn liên hệ',
   '/admin/settings': 'Cài đặt hệ thống',
-  '/admin/payments': 'Quản lý thanh toán'
+  '/admin/payments': 'Quản lý thanh toán',
+  '/admin/reviews': 'Quản lý đánh giá'
 };
 
 const FULL_SIDEBAR = [
@@ -33,6 +34,7 @@ const FULL_SIDEBAR = [
   { to: '/admin/coupons', label: 'Mã Giảm Giá', icon: Tag, adminOnly: true, permission: null },
   { to: '/admin/analytics', label: 'Phân Tích', icon: TrendingUp, adminOnly: false, permission: 'analytics.view' },
   { to: '/admin/contacts', label: 'Liên Hệ', icon: MessageCircle, adminOnly: false, permission: 'contacts.view' },
+  { to: '/admin/reviews', label: 'Đánh Giá', icon: Star, adminOnly: false, permission: 'reviews.view' },
   { to: '/admin/payments', label: 'Thanh Toán', icon: CreditCard, adminOnly: true, permission: null },
   { to: '/admin/settings', label: 'Cài Đặt', icon: Settings, adminOnly: true, permission: null }
 ];
@@ -131,8 +133,8 @@ export default function AdminLayout() {
 
   const SidebarContent = ({ isMobile = false }) => (
     <>
-      <div className={`flex items-center gap-2 px-3 py-4 border-b border-slate-800 ${collapsed && !isMobile ? 'justify-center' : ''}`}>
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+      <div className={`flex items-center gap-2 px-3 py-4 border-b border-neutral-800 ${collapsed && !isMobile ? 'justify-center' : ''}`}>
+        <div className="w-9 h-9 rounded-none clip-path-rog bg-gradient-to-br from-red-600 to-purple-600 flex items-center justify-center flex-shrink-0">
           <LayoutDashboard className="w-4 h-4 text-white" />
         </div>
         {(!collapsed || isMobile) && (
@@ -163,12 +165,12 @@ export default function AdminLayout() {
               end={item.exact}
               title={item.label}
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded-xl text-xs font-semibold transition-all relative ${
+                `flex items-center gap-3 rounded-none clip-path-rog text-xs font-semibold transition-all relative ${
                   collapsed && !isMobile ? 'justify-center px-2 py-3' : 'px-3 py-2.5'
                 } ${
                   isActive
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/20'
-                    : 'text-slate-300 hover:bg-slate-800/70 hover:text-cyan-300'
+                    ? 'bg-gradient-to-r from-red-600 to-red-700 text-white font-bold tracking-widest uppercase shadow-lg shadow-red-600/20'
+                    : 'text-neutral-300 hover:bg-neutral-900/70 hover:text-red-400'
                 }`
               }
             >
@@ -189,11 +191,11 @@ export default function AdminLayout() {
         })}
       </nav>
 
-      <div className={`p-3 border-t border-slate-800 space-y-1 ${collapsed && !isMobile ? 'px-2' : ''}`}>
+      <div className={`p-3 border-t border-neutral-800 space-y-1 ${collapsed && !isMobile ? 'px-2' : ''}`}>
         <Link
           to="/"
           title="Về trang khách"
-          className={`flex items-center gap-3 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-800 hover:text-slate-200 ${
+          className={`flex items-center gap-3 rounded-none clip-path-rog text-xs font-medium text-neutral-400 hover:bg-neutral-900 hover:text-slate-200 ${
             collapsed && !isMobile ? 'justify-center px-2 py-2.5' : 'px-3 py-2.5'
           }`}
         >
@@ -203,7 +205,7 @@ export default function AdminLayout() {
         {(!collapsed || isMobile) && (
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-rose-400 hover:bg-rose-500/10"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-none clip-path-rog text-xs font-medium text-rose-400 hover:bg-rose-500/10"
           >
             <LogOut className="w-4 h-4" /> Đăng xuất
           </button>
@@ -213,7 +215,11 @@ export default function AdminLayout() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-[#0a0a0a] text-slate-300 relative">
+      {/* Tech Grid Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+      <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
       {/* Mobile sidebar overlay */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-black/60" onClick={() => setMobileOpen(false)} />
@@ -221,20 +227,20 @@ export default function AdminLayout() {
 
       {/* Sidebar - Desktop */}
       <aside
-        className={`hidden lg:flex fixed top-0 left-0 h-screen z-30 bg-slate-900 border-r border-slate-800 flex-col transition-all duration-300 ${sidebarWidth}`}
+        className={`hidden lg:flex fixed top-0 left-0 h-screen z-30 bg-black border-r border-neutral-800 flex-col transition-all duration-300 ${sidebarWidth}`}
       >
         <SidebarContent />
       </aside>
 
       {/* Sidebar - Mobile drawer */}
       <aside
-        className={`lg:hidden fixed top-0 left-0 h-screen w-64 z-50 bg-slate-900 border-r border-slate-800 flex flex-col transition-transform duration-300 ${
+        className={`lg:hidden fixed top-0 left-0 h-screen w-64 z-50 bg-black border-r border-neutral-800 flex flex-col transition-transform duration-300 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <button
           onClick={() => setMobileOpen(false)}
-          className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300"
+          className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-neutral-900 hover:bg-slate-700 flex items-center justify-center text-neutral-300"
         >
           <X className="w-4 h-4" />
         </button>
@@ -242,9 +248,9 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main content */}
-      <div className={`transition-all duration-300 ${mainPadding}`}>
+      <div className={`transition-all duration-300 relative z-10 ${mainPadding}`}>
         {/* Top bar */}
-        <header className="sticky top-0 z-20 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800">
+        <header className="sticky top-0 z-20 bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-neutral-800">
           <div className="flex items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 py-3">
             <div className="flex items-center gap-3 min-w-0">
               <button
@@ -252,7 +258,7 @@ export default function AdminLayout() {
                   if (typeof window !== 'undefined' && window.innerWidth < 1024) setMobileOpen(true);
                   else setCollapsed(c => !c);
                 }}
-                className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 flex items-center justify-center text-slate-300 hover:text-cyan-300 transition flex-shrink-0"
+                className="w-10 h-10 rounded-none clip-path-rog bg-black border border-neutral-800 hover:border-red-600/50 flex items-center justify-center text-neutral-300 hover:text-red-400 transition flex-shrink-0"
                 title={collapsed ? 'Mở rộng menu' : 'Thu gọn menu'}
               >
                 {collapsed ? <Menu className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -263,9 +269,9 @@ export default function AdminLayout() {
               </div>
             </div>
 
-            <div className="hidden md:flex items-center gap-3 text-xs text-slate-400">
+            <div className="hidden md:flex items-center gap-3 text-xs text-neutral-400">
               <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Hệ thống hoạt động
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> Hệ thống hoạt động
               </span>
               <span className="text-slate-700">|</span>
               <span className="font-mono">{now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</span>
@@ -277,24 +283,24 @@ export default function AdminLayout() {
               <div className="relative">
                 <button
                   onClick={() => setMenuOpen(o => !o)}
-                  className="flex items-center gap-2 p-1 pr-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 transition"
+                  className="flex items-center gap-2 p-1 pr-3 rounded-none clip-path-rog bg-black hover:bg-neutral-900 border border-neutral-800 transition"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center text-xs font-black text-white">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-600 to-purple-600 flex items-center justify-center text-xs font-black text-white">
                     {initials}
                   </div>
                   <div className="text-left hidden sm:block">
                     <p className="text-xs font-bold text-white truncate max-w-[140px]">{user.full_name || user.email}</p>
-                    <p className="text-[10px] text-cyan-400 uppercase font-bold">{user.role}</p>
+                    <p className="text-[10px] text-red-500 uppercase font-bold">{user.role}</p>
                   </div>
                 </button>
 
                 {menuOpen && (
                   <>
                     <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
-                    <div className="absolute right-0 top-12 w-60 glass-card rounded-xl p-2 border border-slate-800 shadow-2xl z-20">
-                      <div className="px-3 py-3 border-b border-slate-800 mb-1">
+                    <div className="absolute right-0 top-12 w-60 bg-[#0a0a0a] rounded-none clip-path-rog p-2 border border-neutral-800 shadow-2xl z-20">
+                      <div className="px-3 py-3 border-b border-neutral-800 mb-1">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center text-xs font-black text-white">
+                          <div className="w-10 h-10 rounded-none clip-path-rog bg-gradient-to-br from-red-600 to-purple-600 flex items-center justify-center text-xs font-black text-white">
                             {initials}
                           </div>
                           <div className="min-w-0">
@@ -303,10 +309,10 @@ export default function AdminLayout() {
                           </div>
                         </div>
                       </div>
-                      <Link to="/profile" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-800 rounded-lg">
+                      <Link to="/profile" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 text-xs text-neutral-300 hover:bg-neutral-900 rounded-lg">
                         <Eye className="w-3.5 h-3.5" /> Hồ sơ cá nhân
                       </Link>
-                      <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-800 rounded-lg">
+                      <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 text-xs text-neutral-300 hover:bg-neutral-900 rounded-lg">
                         <Home className="w-3.5 h-3.5" /> Về trang khách
                       </Link>
                       <button onClick={handleLogout} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:bg-rose-500/10 rounded-lg">

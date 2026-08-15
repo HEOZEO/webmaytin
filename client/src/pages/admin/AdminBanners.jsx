@@ -123,19 +123,19 @@ export default function AdminBanners() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex items-center justify-between gap-4 border-b border-neutral-800 pb-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">🖼️ Quản Lý Banner Trang Chủ</h1>
-          <p className="text-slate-400 text-sm mt-1">{banners.length} banner</p>
+          <p className="text-neutral-400 text-sm mt-1">{banners.length} banner</p>
         </div>
-        <button onClick={openAdd} className="flex items-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 font-bold rounded-xl text-xs hover:opacity-90 transition">
+        <button onClick={openAdd} className="flex items-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs hover:opacity-90 transition">
           <Plus className="w-4 h-4" /> Thêm Banner Mới
         </button>
       </div>
 
-      <div className="glass-card rounded-2xl p-4 overflow-x-auto">
-        <table className="w-full text-left text-sm text-slate-300">
-          <thead className="text-xs uppercase text-slate-400 border-b border-slate-800">
+      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 overflow-x-auto">
+        <table className="w-full text-left text-sm text-neutral-300">
+          <thead className="text-xs uppercase text-neutral-400 border-b border-neutral-800">
             <tr>
               <th className="py-3 px-4">#</th>
               <th className="py-3 px-4">Hình Ảnh</th>
@@ -148,29 +148,29 @@ export default function AdminBanners() {
           </thead>
           <tbody className="divide-y divide-slate-800/60">
             {loading ? (
-              <tr><td colSpan="7" className="py-12 text-center"><Loader2 className="w-5 h-5 animate-spin mx-auto text-cyan-400" /></td></tr>
+              <tr><td colSpan="7" className="py-12 text-center"><Loader2 className="w-5 h-5 animate-spin mx-auto text-red-500" /></td></tr>
             ) : banners.length === 0 ? (
               <tr><td colSpan="7" className="py-12 text-center text-slate-500">Chưa có banner nào. Hãy thêm banner đầu tiên.</td></tr>
             ) : banners.map((b, idx) => (
-              <tr key={b.id} className="hover:bg-slate-900/40">
+              <tr key={b.id} className="hover:bg-black/40">
                 <td className="py-3 px-4 text-slate-500 font-mono">{idx + 1}</td>
                 <td className="py-3 px-4">
-                  <img src={resolveImage(b.image_url)} alt={b.title} className="w-32 h-16 object-cover rounded-lg bg-slate-800 border border-slate-700" onError={(e) => { e.target.src = getBackendUrl('/images/fallback/no-image.svg'); }} />
+                  <img src={resolveImage(b.image_url)} alt={b.title} className="w-32 h-16 object-cover rounded-lg bg-neutral-900 border border-slate-700" onError={(e) => { e.target.src = getBackendUrl('/images/fallback/no-image.svg'); }} />
                 </td>
                 <td className="py-3 px-4">
                   <div className="font-semibold text-white">{b.title || 'Chưa có tiêu đề'}</div>
-                  <div className="text-xs text-slate-400 line-clamp-1">{b.subtitle || 'Không có mô tả phụ'}</div>
+                  <div className="text-xs text-neutral-400 line-clamp-1">{b.subtitle || 'Không có mô tả phụ'}</div>
                 </td>
-                <td className="py-3 px-4 text-xs text-cyan-300 max-w-[200px] truncate">{b.link || '/products'}</td>
-                <td className="py-3 px-4 text-xs text-slate-400 font-bold">{b.display_order || 0}</td>
+                <td className="py-3 px-4 text-xs text-red-400 max-w-[200px] truncate">{b.link || '/products'}</td>
+                <td className="py-3 px-4 text-xs text-neutral-400 font-bold">{b.display_order || 0}</td>
                 <td className="py-3 px-4">
-                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${b.is_active !== false ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-slate-700 text-slate-400 border-slate-600'}`}>
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${b.is_active !== false ? 'bg-red-600/20 text-emerald-300 border-red-600/30' : 'bg-slate-700 text-neutral-400 border-slate-600'}`}>
                     {b.is_active !== false ? 'HIỂN THỊ' : 'ĐÃ ẨN'}
                   </span>
                 </td>
                 <td className="py-3 px-4 text-right space-x-1">
-                  <button onClick={() => openEdit(b)} title="Sửa banner" className="p-2 bg-slate-800 hover:bg-cyan-500/20 text-cyan-400 rounded-lg transition"><Edit className="w-3.5 h-3.5" /></button>
-                  <button onClick={() => handleDelete(b.id, b.title)} title="Xóa banner" className="p-2 bg-slate-800 hover:bg-rose-500/20 text-rose-400 rounded-lg transition"><Trash2 className="w-3.5 h-3.5" /></button>
+                  <button onClick={() => openEdit(b)} title="Sửa banner" className="p-2 bg-neutral-900 hover:bg-red-600/20 text-red-500 rounded-lg transition"><Edit className="w-3.5 h-3.5" /></button>
+                  <button onClick={() => handleDelete(b.id, b.title)} title="Xóa banner" className="p-2 bg-neutral-900 hover:bg-rose-500/20 text-rose-400 rounded-lg transition"><Trash2 className="w-3.5 h-3.5" /></button>
                 </td>
               </tr>
             ))}
@@ -180,31 +180,31 @@ export default function AdminBanners() {
 
       {modalOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="glass-card p-6 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto space-y-4 border border-cyan-500/30">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog p-6 rounded-none clip-path-rog w-full max-w-xl max-h-[90vh] overflow-y-auto space-y-4 border border-red-600/30">
+            <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
               <h3 className="text-lg font-bold text-white">{editing ? 'Chỉnh Sửa' : 'Thêm'} Banner</h3>
-              <button onClick={() => setModalOpen(false)}><X className="w-5 h-5 text-slate-400 hover:text-white" /></button>
+              <button onClick={() => setModalOpen(false)}><X className="w-5 h-5 text-neutral-400 hover:text-white" /></button>
             </div>
 
             <form onSubmit={handleSave} className="space-y-3">
               <div>
                 <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Tiêu đề *</label>
-                <input required type="text" placeholder="Tiêu đề banner" value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 focus:border-cyan-500" />
+                <input required type="text" placeholder="Tiêu đề banner" value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 focus:border-red-600" />
               </div>
 
               <div>
                 <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Phụ đề / Mô tả</label>
-                <textarea rows="2" placeholder="Phụ đề mô tả banner" value={form.subtitle} onChange={(e) => setForm({...form, subtitle: e.target.value})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 resize-none focus:border-cyan-500" />
+                <textarea rows="2" placeholder="Phụ đề mô tả banner" value={form.subtitle} onChange={(e) => setForm({...form, subtitle: e.target.value})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 resize-none focus:border-red-600" />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Badge (Khuyến mãi)</label>
-                  <input type="text" placeholder="GIẢM 25% / MỚI VỀ" value={form.badge} onChange={(e) => setForm({...form, badge: e.target.value})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100" />
+                  <input type="text" placeholder="GIẢM 25% / MỚI VỀ" value={form.badge} onChange={(e) => setForm({...form, badge: e.target.value})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100" />
                 </div>
                 <div>
                   <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Tên nút bấm</label>
-                  <input type="text" placeholder="Xem Ngay" value={form.button_text} onChange={(e) => setForm({...form, button_text: e.target.value})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100" />
+                  <input type="text" placeholder="Xem Ngay" value={form.button_text} onChange={(e) => setForm({...form, button_text: e.target.value})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100" />
                 </div>
               </div>
 
@@ -212,18 +212,18 @@ export default function AdminBanners() {
                 <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Hình ảnh banner *</label>
                 <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept="image/*" className="hidden" />
                 <div className="flex items-center gap-2 mb-2">
-                  <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploadingImage} className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20 text-cyan-300 rounded-xl text-xs font-bold transition disabled:opacity-50">
-                    {uploadingImage ? <Loader2 className="w-4 h-4 animate-spin text-cyan-400" /> : <Upload className="w-4 h-4" />}
+                  <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploadingImage} className="flex items-center gap-2 px-4 py-2 bg-red-600/10 border border-red-600/30 hover:bg-red-600/20 text-red-400 rounded-none clip-path-rog text-xs font-bold transition disabled:opacity-50">
+                    {uploadingImage ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Upload className="w-4 h-4" />}
                     Tải ảnh từ máy tính
                   </button>
                   <span className="text-[10px] text-slate-500">hoặc dán URL</span>
                 </div>
-                <input required type="url" placeholder="URL Hình Ảnh https://..." value={form.image_url.startsWith('data:') ? '' : form.image_url} onChange={(e) => setForm({...form, image_url: e.target.value})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100" />
+                <input required type="url" placeholder="URL Hình Ảnh https://..." value={form.image_url.startsWith('data:') ? '' : form.image_url} onChange={(e) => setForm({...form, image_url: e.target.value})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100" />
                 {form.image_url && (
                   <div className="mt-2 relative group">
-                    <img src={form.image_url} alt="Preview" className="w-full h-32 object-cover rounded-xl border border-slate-700 bg-slate-800" onError={(e) => { e.target.style.display = 'none'; }} />
+                    <img src={form.image_url} alt="Preview" className="w-full h-32 object-cover rounded-none clip-path-rog border border-slate-700 bg-neutral-900" onError={(e) => { e.target.style.display = 'none'; }} />
                     <div className="mt-1 flex items-center justify-between text-[10px]">
-                      <span className="text-emerald-400 font-bold flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Đã tải hình ảnh thành công</span>
+                      <span className="text-red-500 font-bold flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Đã tải hình ảnh thành công</span>
                       <button type="button" onClick={() => setForm({ ...form, image_url: '' })} className="text-rose-400 hover:underline">Xóa ảnh</button>
                     </div>
                   </div>
@@ -233,22 +233,22 @@ export default function AdminBanners() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Đường dẫn liên kết</label>
-                  <input type="text" placeholder="/products" value={form.link} onChange={(e) => setForm({...form, link: e.target.value})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100" />
+                  <input type="text" placeholder="/products" value={form.link} onChange={(e) => setForm({...form, link: e.target.value})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100" />
                 </div>
                 <div>
                   <label className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Thứ tự hiển thị</label>
-                  <input type="number" placeholder="1" value={form.display_order} onChange={(e) => setForm({...form, display_order: Number(e.target.value)})} className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100" />
+                  <input type="number" placeholder="1" value={form.display_order} onChange={(e) => setForm({...form, display_order: Number(e.target.value)})} className="w-full px-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100" />
                 </div>
               </div>
 
               <label className="flex items-center gap-2 text-xs text-slate-200 pt-1 cursor-pointer">
-                <input type="checkbox" checked={form.is_active} onChange={(e) => setForm({...form, is_active: e.target.checked})} className="accent-cyan-500 w-4 h-4 rounded" />
+                <input type="checkbox" checked={form.is_active} onChange={(e) => setForm({...form, is_active: e.target.checked})} className="accent-red-600 w-4 h-4 rounded" />
                 <span className="font-bold">Hiển thị banner trên trang chủ</span>
               </label>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
-                <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold rounded-xl text-xs">Hủy</button>
-                <button type="submit" disabled={saving} className="px-5 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl text-xs disabled:opacity-50 flex items-center gap-2">
+              <div className="flex justify-end gap-2 pt-3 border-t border-neutral-800">
+                <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 bg-neutral-900 text-neutral-300 font-semibold rounded-none clip-path-rog text-xs">Hủy</button>
+                <button type="submit" disabled={saving} className="px-5 py-2 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs disabled:opacity-50 flex items-center gap-2">
                   {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />} Lưu Banner
                 </button>
               </div>

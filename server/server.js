@@ -68,6 +68,7 @@ const adminSettingsRoutes = require('./routes/admin/settingsRoutes');
 const adminAnalyticsRoutes = require('./routes/admin/analyticsRoutes');
 const adminNotificationsRoutes = require('./routes/admin/notificationsRoutes');
 const adminPaymentRoutes = require('./routes/admin/paymentRoutes');
+const adminReviewsRoutes = require('./routes/admin/reviewsRoutes');
 
 // Staff routes
 const staffOrdersRoutes = require('./routes/staff/ordersRoutes');
@@ -234,6 +235,7 @@ app.use('/api/admin/settings', adminSettingsRoutes);
 app.use('/api/admin/analytics', adminAnalyticsRoutes);
 app.use('/api/admin/notifications', adminNotificationsRoutes);
 app.use('/api/admin/payments', adminPaymentRoutes);
+app.use('/api/admin/reviews', adminReviewsRoutes);
 
 // Staff routes
 app.use('/api/staff/orders', staffOrdersRoutes);

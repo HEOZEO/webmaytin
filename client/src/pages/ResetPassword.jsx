@@ -77,38 +77,38 @@ export default function ResetPassword() {
   return (
     <div className="relative min-h-[calc(100vh-5rem)] overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[420px] h-[420px] rounded-full bg-purple-500/20 blur-3xl animate-float-slow" />
-        <div className="absolute bottom-0 right-1/4 w-[380px] h-[380px] rounded-full bg-cyan-500/20 blur-3xl animate-float-slower" />
+        <div className="absolute top-1/4 left-1/4 w-[420px] h-[420px] rounded-full bg-red-600/20 blur-3xl animate-float-slow" />
+        <div className="absolute bottom-0 right-1/4 w-[380px] h-[380px] rounded-full bg-red-600/20 blur-3xl animate-float-slower" />
       </div>
 
       <div className="max-w-md mx-auto px-4 py-12 lg:py-16">
         <div className="relative">
-          <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500/30 via-purple-500/30 to-pink-500/30 blur-2xl opacity-50" />
-          <div className="relative glass-card rounded-3xl p-6 sm:p-8 glow-blue border-cyan-500/20 animate-fadeInUp">
+          <div className="absolute -inset-1 rounded-none clip-path-rog bg-gradient-to-r from-red-600/30 via-red-600/30 to-pink-500/30 blur-2xl opacity-50" />
+          <div className="relative bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 sm:p-8 glow-rog border-red-600/20 animate-fadeInUp">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 flex items-center justify-center">
-                <KeyRound className="w-5 h-5 text-cyan-400" />
+              <div className="w-10 h-10 rounded-none clip-path-rog bg-gradient-to-br from-red-600/20 to-red-600/20 border border-red-600/30 flex items-center justify-center">
+                <KeyRound className="w-5 h-5 text-red-500" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-white">Đặt lại mật khẩu</h2>
-                <p className="text-xs text-slate-400">Nhập mật khẩu mới cho tài khoản của bạn</p>
+                <p className="text-xs text-neutral-400">Nhập mật khẩu mới cho tài khoản của bạn</p>
               </div>
             </div>
 
             {done ? (
               <div className="text-center py-6 space-y-3">
-                <div className="mx-auto w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                  <CheckCircle2 className="w-7 h-7 text-emerald-400" />
+                <div className="mx-auto w-14 h-14 rounded-none clip-path-rog bg-red-600/10 border border-red-600/30 flex items-center justify-center">
+                  <CheckCircle2 className="w-7 h-7 text-red-500" />
                 </div>
                 <h3 className="text-base font-bold text-white">Mật khẩu đã được cập nhật!</h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-neutral-400">
                   Đang chuyển về trang đăng nhập...
                 </p>
               </div>
             ) : (
               <form onSubmit={submit} noValidate className="space-y-4">
                 {error && (
-                  <div className="p-3 rounded-xl text-xs font-medium bg-rose-500/10 border border-rose-500/30 text-rose-300 flex items-start gap-2">
+                  <div className="p-3 rounded-none clip-path-rog text-xs font-medium bg-rose-500/10 border border-rose-500/30 text-rose-300 flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                     <span>{error}</span>
                   </div>
@@ -116,8 +116,8 @@ export default function ResetPassword() {
 
                 {/* Password */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-semibold text-slate-300">Mật khẩu mới</label>
-                  <div className="relative rounded-xl bg-slate-900/80 border border-slate-800 focus-within:border-cyan-500/60 focus-within:ring-2 focus-within:ring-cyan-500/15">
+                  <label className="block text-xs font-semibold text-neutral-300">Mật khẩu mới</label>
+                  <div className="relative rounded-none clip-path-rog bg-black/80 border border-neutral-800 focus-within:border-red-600/60 focus-within:ring-2 focus-within:ring-red-600/15">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                     <input
                       ref={pwRef}
@@ -132,7 +132,7 @@ export default function ResetPassword() {
                       type="button"
                       onClick={() => setShowPw((v) => !v)}
                       tabIndex={-1}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-cyan-400"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-red-500"
                     >
                       {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -142,7 +142,7 @@ export default function ResetPassword() {
                       {PASSWORD_RULES.map((rule) => {
                         const passed = rule.test(password);
                         return (
-                          <div key={rule.id} className={`flex items-center gap-1.5 ${passed ? 'text-emerald-400' : 'text-slate-500'}`}>
+                          <div key={rule.id} className={`flex items-center gap-1.5 ${passed ? 'text-red-500' : 'text-slate-500'}`}>
                             {passed ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />}
                             <span>{rule.label}</span>
                           </div>
@@ -154,13 +154,13 @@ export default function ResetPassword() {
 
                 {/* Confirm */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-semibold text-slate-300">Xác nhận mật khẩu mới</label>
-                  <div className={`relative rounded-xl bg-slate-900/80 border transition-all ${
+                  <label className="block text-xs font-semibold text-neutral-300">Xác nhận mật khẩu mới</label>
+                  <div className={`relative rounded-none clip-path-rog bg-black/80 border transition-all ${
                     confirm && confirm !== password
                       ? 'border-rose-500/60 ring-1 ring-rose-500/20'
                       : confirm && confirm === password
-                      ? 'border-emerald-500/40 ring-1 ring-emerald-500/10'
-                      : 'border-slate-800'
+                      ? 'border-red-600/40 ring-1 ring-red-600/10'
+                      : 'border-neutral-800'
                   }`}>
                     <Shield className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                     <input
@@ -175,7 +175,7 @@ export default function ResetPassword() {
                       type="button"
                       onClick={() => setShowConfirm((v) => !v)}
                       tabIndex={-1}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-cyan-400"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-red-500"
                     >
                       {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -185,7 +185,7 @@ export default function ResetPassword() {
                 <button
                   type="submit"
                   disabled={submitting || !allValid}
-                  className="w-full py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-cyan-500 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/30"
+                  className="w-full py-3.5 rounded-none clip-path-rog font-bold text-sm text-white font-bold tracking-widest uppercase bg-gradient-to-r from-red-500 via-red-600 to-sky-500 hover:from-red-400 hover:to-sky-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-600/30"
                 >
                   {submitting ? (
                     <span className="inline-flex items-center gap-2">
@@ -200,8 +200,8 @@ export default function ResetPassword() {
                   )}
                 </button>
 
-                <p className="text-center text-xs text-slate-400">
-                  <Link to="/login" className="text-cyan-400 hover:underline font-semibold">
+                <p className="text-center text-xs text-neutral-400">
+                  <Link to="/login" className="text-red-500 hover:underline font-semibold">
                     Quay lại đăng nhập
                   </Link>
                 </p>

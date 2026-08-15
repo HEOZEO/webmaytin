@@ -152,13 +152,13 @@ export default function AdminSettings() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-neutral-800 pb-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-            <Settings className="w-7 h-7 text-cyan-400" />
+            <Settings className="w-7 h-7 text-red-500" />
             Cài Đặt Hệ Thống
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Quản lý cấu hình cửa hàng và hệ thống</p>
+          <p className="text-neutral-400 text-sm mt-1">Quản lý cấu hình cửa hàng và hệ thống</p>
         </div>
         <div className="flex items-center gap-2">
           {changesExist && (
@@ -173,7 +173,7 @@ export default function AdminSettings() {
           <button
             onClick={handleSave}
             disabled={saving || !changesExist}
-            className="flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-lg text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-cyan-600 text-white font-bold rounded-lg text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saving ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -188,8 +188,8 @@ export default function AdminSettings() {
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar Categories */}
         <div className="lg:w-64 flex-shrink-0">
-          <div className="glass-card rounded-2xl p-3 sticky top-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase mb-3 px-2">Danh mục</h3>
+          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-3 sticky top-4">
+            <h3 className="text-xs font-bold text-neutral-400 uppercase mb-3 px-2">Danh mục</h3>
             <nav className="space-y-1">
               {SETTING_CATEGORIES.map(cat => {
                 const Icon = cat.icon;
@@ -200,17 +200,17 @@ export default function AdminSettings() {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition ${
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none clip-path-rog text-sm transition ${
                       isActive
-                        ? 'bg-cyan-500/20 text-cyan-300 font-medium'
-                        : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                        ? 'bg-red-600/20 text-red-400 font-medium'
+                        : 'text-neutral-400 hover:bg-neutral-900 hover:text-white'
                     }`}
                   >
                     <div className="flex items-center gap-2">
                       <Icon className="w-4 h-4" />
                       <span>{cat.label}</span>
                     </div>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-cyan-500/30' : 'bg-slate-700'}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-red-600/30' : 'bg-slate-700'}`}>
                       {count}
                     </span>
                   </button>
@@ -223,14 +223,14 @@ export default function AdminSettings() {
         {/* Settings Content */}
         <div className="flex-1">
           {loading ? (
-            <div className="glass-card rounded-2xl p-12 flex flex-col items-center justify-center gap-4">
-              <Loader2 className="w-10 h-10 animate-spin text-cyan-400" />
-              <span className="text-slate-400">Đang tải cài đặt...</span>
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-12 flex flex-col items-center justify-center gap-4">
+              <Loader2 className="w-10 h-10 animate-spin text-red-500" />
+              <span className="text-neutral-400">Đang tải cài đặt...</span>
             </div>
           ) : (
-            <div className="glass-card rounded-2xl p-6">
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6">
               <div className="flex items-center gap-3 mb-6">
-                {currentCategory && <currentCategory.icon className="w-6 h-6 text-cyan-400" />}
+                {currentCategory && <currentCategory.icon className="w-6 h-6 text-red-500" />}
                 <h2 className="text-lg font-bold text-white">
                   {currentCategory?.label || 'Cài đặt'}
                 </h2>
@@ -244,17 +244,17 @@ export default function AdminSettings() {
                   return (
                     <div
                       key={key}
-                      className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border transition-all ${
+                      className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-none clip-path-rog border transition-all ${
                         isChanged
-                          ? 'bg-cyan-500/5 border-cyan-500/30 shadow-sm shadow-cyan-500/10'
-                          : 'bg-slate-800/50 border-slate-700/50'
+                          ? 'bg-red-600/5 border-red-600/30 shadow-sm shadow-red-600/10'
+                          : 'bg-neutral-900/50 border-slate-700/50'
                       }`}
                     >
                       <div className="flex-1">
                         <label className="text-sm font-semibold text-white flex items-center gap-2">
                           {config?.label}
                           {isChanged && (
-                            <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-300 text-[10px] font-bold rounded-full">
+                            <span className="px-2 py-0.5 bg-red-600/20 text-red-400 text-[10px] font-bold rounded-full">
                               Đã thay đổi
                             </span>
                           )}
@@ -271,7 +271,7 @@ export default function AdminSettings() {
                                 setTimeout(() => handleSaveSingle(key), 100);
                               }}
                               className={`relative w-14 h-7 rounded-full transition-all duration-200 ${
-                                config.value === 'true' ? 'bg-cyan-500 shadow-lg shadow-cyan-500/30' : 'bg-slate-600'
+                                config.value === 'true' ? 'bg-red-600 shadow-lg shadow-red-600/30' : 'bg-slate-600'
                               }`}
                               type="button"
                             >
@@ -287,7 +287,7 @@ export default function AdminSettings() {
                               value={config.value}
                               onChange={(e) => handleChange(key, e.target.value)}
                               onBlur={() => isChanged && handleSaveSingle(key)}
-                              className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
+                              className="w-full px-3 py-2 bg-black border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-red-600/50"
                               min="0"
                             />
                           ) : (
@@ -296,7 +296,7 @@ export default function AdminSettings() {
                               value={config.value}
                               onChange={(e) => handleChange(key, e.target.value)}
                               onBlur={() => isChanged && handleSaveSingle(key)}
-                              className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
+                              className="w-full px-3 py-2 bg-black border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-red-600/50"
                             />
                           )}
                         </div>
@@ -304,7 +304,7 @@ export default function AdminSettings() {
                           <button
                             onClick={() => handleSaveSingle(key)}
                             disabled={isSaving}
-                            className="px-3 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded-lg transition disabled:opacity-50"
+                            className="px-3 py-2 bg-red-600 hover:bg-cyan-600 text-white text-xs font-bold rounded-lg transition disabled:opacity-50"
                           >
                             {isSaving ? <Loader2 className="w-3 h-3 animate-spin" /> : 'Lưu'}
                           </button>
@@ -327,24 +327,24 @@ export default function AdminSettings() {
       </div>
 
       {/* Info Card */}
-      <div className="glass-card rounded-2xl p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 bg-gradient-to-r from-red-600/10 to-red-600/10 border border-red-600/20">
         <div className="flex items-start gap-3">
-          <div className="p-2 bg-cyan-500/20 rounded-lg flex-shrink-0">
-            <Shield className="w-5 h-5 text-cyan-400" />
+          <div className="p-2 bg-red-600/20 rounded-lg flex-shrink-0">
+            <Shield className="w-5 h-5 text-red-500" />
           </div>
           <div>
             <h3 className="text-sm font-bold text-white">Mẹo sử dụng</h3>
-            <ul className="text-xs text-slate-400 mt-2 space-y-1">
+            <ul className="text-xs text-neutral-400 mt-2 space-y-1">
               <li className="flex items-start gap-1.5">
-                <span className="text-cyan-400">•</span>
+                <span className="text-red-500">•</span>
                 Toggle switches tự động lưu khi bật/tắt
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-cyan-400">•</span>
+                <span className="text-red-500">•</span>
                 Các trường text/number: thay đổi → nhấn nút "Lưu" bên cạnh
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-cyan-400">•</span>
+                <span className="text-red-500">•</span>
                 Nhấn "Lưu thay đổi" để lưu tất cả cùng lúc
               </li>
             </ul>

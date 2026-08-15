@@ -8,8 +8,8 @@ import api from '../../services/api';
 
 const STATUS_BADGE = {
   pending: { label: 'Chờ xử lý', cls: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
-  read: { label: 'Đã đọc', cls: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
-  replied: { label: 'Đã phản hồi', cls: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' }
+  read: { label: 'Đã đọc', cls: 'bg-red-600/20 text-blue-300 border-red-600/30' },
+  replied: { label: 'Đã phản hồi', cls: 'bg-red-600/20 text-emerald-300 border-red-600/30' }
 };
 
 export default function AdminContactMessages() {
@@ -110,17 +110,17 @@ export default function AdminContactMessages() {
 
   return (
     <div className="space-y-5">
-      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-neutral-800 pb-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-            <MessageCircle className="w-6 h-6 text-cyan-400" /> Tin Nhắn Liên Hệ
+            <MessageCircle className="w-6 h-6 text-red-500" /> Tin Nhắn Liên Hệ
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Tổng: {pagination.total} tin nhắn · {counts.pending} chưa xử lý</p>
+          <p className="text-neutral-400 text-sm mt-1">Tổng: {pagination.total} tin nhắn · {counts.pending} chưa xử lý</p>
         </div>
       </header>
 
       {/* Filters */}
-      <div className="glass-card rounded-2xl p-3 border border-slate-800 space-y-3">
+      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-3 border border-neutral-800 space-y-3">
         <div className="flex gap-2">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -128,7 +128,7 @@ export default function AdminContactMessages() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Tìm theo tên, email, nội dung..."
-              className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-100 focus:outline-none focus:border-cyan-500"
+              className="w-full pl-9 pr-3 py-2 bg-black border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 focus:outline-none focus:border-red-600"
             />
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function AdminContactMessages() {
               key={t.v}
               onClick={() => { setStatusFilter(t.v); setPage(1); }}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
-                statusFilter === t.v ? 'bg-cyan-500 text-slate-950' : 'bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800'
+                statusFilter === t.v ? 'bg-red-600 text-white font-bold tracking-widest uppercase' : 'bg-black border border-neutral-800 text-neutral-300 hover:bg-neutral-900'
               }`}
             >
               {t.label}
@@ -158,11 +158,11 @@ export default function AdminContactMessages() {
         {/* List */}
         <div className="lg:col-span-2 space-y-2">
           {loading ? (
-            <div className="glass-card rounded-2xl p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-cyan-400" /></div>
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-red-500" /></div>
           ) : filtered.length === 0 ? (
-            <div className="glass-card rounded-2xl p-12 text-center">
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-12 text-center">
               <Inbox className="w-10 h-10 mx-auto text-slate-600 mb-2" />
-              <p className="text-slate-400 text-sm">Không có tin nhắn</p>
+              <p className="text-neutral-400 text-sm">Không có tin nhắn</p>
             </div>
           ) : (
             <div className="space-y-2 max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
@@ -177,8 +177,8 @@ export default function AdminContactMessages() {
                       setReplyText('');
                       if (m.status === 'pending') handleMarkRead(m);
                     }}
-                    className={`glass-card rounded-2xl p-4 cursor-pointer transition-all border ${
-                      selected?.id === m.id ? 'border-cyan-500/60 bg-cyan-500/5' : 'border-slate-800 hover:border-slate-700'
+                    className={`bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 cursor-pointer transition-all border ${
+                      selected?.id === m.id ? 'border-red-600/60 bg-red-600/5' : 'border-neutral-800 hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2 mb-1">
@@ -186,7 +186,7 @@ export default function AdminContactMessages() {
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${status.cls} flex-shrink-0`}>{status.label}</span>
                     </div>
                     <p className="text-[11px] text-slate-500 mb-2 truncate">{m.email}</p>
-                    <p className="text-xs text-slate-300 line-clamp-2">{m.subject ? `[${m.subject}] ` : ''}{m.message}</p>
+                    <p className="text-xs text-neutral-300 line-clamp-2">{m.subject ? `[${m.subject}] ` : ''}{m.message}</p>
                     <p className="text-[10px] text-slate-500 mt-2 flex items-center gap-1">
                       <Calendar className="w-3 h-3" /> {new Date(m.created_at).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
                     </p>
@@ -201,7 +201,7 @@ export default function AdminContactMessages() {
               {Array.from({ length: pagination.pages }, (_, i) => i + 1).map(p => (
                 <button
                   key={p} onClick={() => setPage(p)}
-                  className={`w-9 h-9 rounded-lg text-xs font-bold ${page === p ? 'bg-cyan-500 text-slate-950' : 'bg-slate-900 border border-slate-800 text-slate-400'}`}
+                  className={`w-9 h-9 rounded-lg text-xs font-bold ${page === p ? 'bg-red-600 text-white font-bold tracking-widest uppercase' : 'bg-black border border-neutral-800 text-neutral-400'}`}
                 >{p}</button>
               ))}
             </div>
@@ -211,8 +211,8 @@ export default function AdminContactMessages() {
         {/* Detail & Reply Box */}
         <div className="lg:col-span-3">
           {selected ? (
-            <div className="glass-card rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-4 sticky top-24">
-              <div className="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog border border-neutral-800 p-5 sm:p-6 space-y-4 sticky top-24">
+              <div className="flex items-start justify-between gap-3 border-b border-neutral-800 pb-3">
                 <div className="flex-1 min-w-0">
                   <h3 className="text-lg font-black text-white truncate">{selected.subject || 'Tin nhắn liên hệ'}</h3>
                   <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
@@ -225,38 +225,38 @@ export default function AdminContactMessages() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="p-3 rounded-none clip-path-rog bg-black/60 border border-neutral-800">
                   <p className="text-[10px] uppercase text-slate-500 font-bold mb-1">Họ tên</p>
                   <p className="text-sm font-bold text-white truncate">{selected.name}</p>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="p-3 rounded-none clip-path-rog bg-black/60 border border-neutral-800">
                   <p className="text-[10px] uppercase text-slate-500 font-bold mb-1 flex items-center gap-1"><Mail className="w-3 h-3" /> Email</p>
-                  <a href={`mailto:${selected.email}`} className="text-xs font-bold text-cyan-300 hover:text-cyan-200 truncate block">{selected.email}</a>
+                  <a href={`mailto:${selected.email}`} className="text-xs font-bold text-red-400 hover:text-cyan-200 truncate block">{selected.email}</a>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="p-3 rounded-none clip-path-rog bg-black/60 border border-neutral-800">
                   <p className="text-[10px] uppercase text-slate-500 font-bold mb-1 flex items-center gap-1"><Phone className="w-3 h-3" /> SĐT</p>
                   <p className="text-xs font-bold text-white truncate">{selected.phone || 'Chưa cung cấp SĐT'}</p>
                 </div>
               </div>
 
               {/* Original Customer Message */}
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+              <div className="p-4 rounded-none clip-path-rog bg-black/60 border border-neutral-800 space-y-1">
                 <p className="text-[10px] uppercase text-slate-500 font-bold">Nội dung câu hỏi từ khách hàng</p>
                 <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">{selected.message}</p>
               </div>
 
               {/* Past Reply if exists */}
               {selected.reply && (
-                <div className="p-4 rounded-xl bg-cyan-950/40 border border-cyan-500/30 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-cyan-300 font-bold">
-                    <span className="flex items-center gap-1.5"><CheckCheck className="w-4 h-4 text-cyan-400" /> Phản hồi từ Admin:</span>
+                <div className="p-4 rounded-none clip-path-rog bg-cyan-950/40 border border-red-600/30 space-y-2">
+                  <div className="flex items-center justify-between text-xs text-red-400 font-bold">
+                    <span className="flex items-center gap-1.5"><CheckCheck className="w-4 h-4 text-red-500" /> Phản hồi từ Admin:</span>
                     {selected.replied_at && (
-                      <span className="text-[10px] text-slate-400 font-normal">
+                      <span className="text-[10px] text-neutral-400 font-normal">
                         {new Date(selected.replied_at).toLocaleString('vi-VN')}
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap pl-2 border-l-2 border-cyan-500/60">
+                  <p className="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap pl-2 border-l-2 border-red-600/60">
                     {selected.reply}
                   </p>
                 </div>
@@ -264,15 +264,15 @@ export default function AdminContactMessages() {
 
               {/* Inline Reply Form */}
               {showReplyForm ? (
-                <form onSubmit={handleSendReply} className="p-4 rounded-2xl bg-slate-900 border border-cyan-500/40 space-y-3">
+                <form onSubmit={handleSendReply} className="p-4 rounded-none clip-path-rog bg-black border border-red-600/40 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-red-500 flex items-center gap-1.5">
                       <Reply className="w-4 h-4" /> Soạn phản hồi gửi tới {selected.email}
                     </span>
                     <button
                       type="button"
                       onClick={() => setShowReplyForm(false)}
-                      className="text-xs text-slate-400 hover:text-white"
+                      className="text-xs text-neutral-400 hover:text-white"
                     >
                       Hủy
                     </button>
@@ -284,21 +284,21 @@ export default function AdminContactMessages() {
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
                     placeholder="Nhập nội dung phản hồi của Admin (sẽ tự động gửi Gmail & Thông báo tài khoản cho khách hàng)..."
-                    className="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                    className="w-full p-3 bg-slate-950 border border-neutral-800 rounded-none clip-path-rog text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-600"
                   />
 
                   <div className="flex items-center justify-end gap-2 pt-1">
                     <button
                       type="button"
                       onClick={() => setShowReplyForm(false)}
-                      className="px-3 py-2 bg-slate-800 text-slate-300 font-bold rounded-xl text-xs hover:bg-slate-700"
+                      className="px-3 py-2 bg-neutral-900 text-neutral-300 font-bold rounded-none clip-path-rog text-xs hover:bg-slate-700"
                     >
                       Đóng
                     </button>
                     <button
                       type="submit"
                       disabled={sendingReply}
-                      className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 font-extrabold rounded-xl text-xs hover:opacity-90 disabled:opacity-50"
+                      className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase font-extrabold rounded-none clip-path-rog text-xs hover:opacity-90 disabled:opacity-50"
                     >
                       {sendingReply ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Reply className="w-3.5 h-3.5" />}
                       Gửi Email & Thông Báo
@@ -306,25 +306,25 @@ export default function AdminContactMessages() {
                   </div>
                 </form>
               ) : (
-                <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-800">
+                <div className="flex flex-wrap gap-2 pt-3 border-t border-neutral-800">
                   <button
                     onClick={() => setShowReplyForm(true)}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold rounded-xl text-xs hover:opacity-90 shadow-lg shadow-cyan-500/20"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs hover:opacity-90 shadow-lg shadow-red-600/20"
                   >
                     <Reply className="w-3.5 h-3.5" /> Phản hồi trực tiếp
                   </button>
 
                   <button
                     onClick={() => handleReplyByExternalEmail(selected)}
-                    className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl text-xs hover:bg-slate-800"
+                    className="flex items-center gap-1.5 px-3.5 py-2 bg-black border border-neutral-800 text-neutral-300 font-bold rounded-none clip-path-rog text-xs hover:bg-neutral-900"
                     title="Mở ứng dụng Email mặc định"
                   >
-                    <Mail className="w-3.5 h-3.5 text-cyan-400" /> Mở Client Mail
+                    <Mail className="w-3.5 h-3.5 text-red-500" /> Mở Client Mail
                   </button>
 
                   <button
                     onClick={() => handleDelete(selected.id)}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold rounded-xl text-xs hover:bg-rose-500/30 ml-auto"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold rounded-none clip-path-rog text-xs hover:bg-rose-500/30 ml-auto"
                   >
                     <Trash2 className="w-3.5 h-3.5" /> Xoá
                   </button>
@@ -332,9 +332,9 @@ export default function AdminContactMessages() {
               )}
             </div>
           ) : (
-            <div className="glass-card rounded-2xl border border-slate-800 p-12 text-center">
+            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog border border-neutral-800 p-12 text-center">
               <Inbox className="w-12 h-12 mx-auto text-slate-600 mb-3" />
-              <p className="text-slate-400 font-semibold">Chọn một tin nhắn để xem chi tiết</p>
+              <p className="text-neutral-400 font-semibold">Chọn một tin nhắn để xem chi tiết</p>
               <p className="text-slate-500 text-xs mt-1">Tin nhắn từ khách hàng sẽ hiển thị ở đây</p>
             </div>
           )}

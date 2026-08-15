@@ -488,13 +488,13 @@ export default function AdminAnalytics() {
 
   /* ============ Sub-components for chart UI ============ */
   const GroupBySelector = (
-    <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 rounded-xl p-1">
+    <div className="flex items-center gap-1.5 bg-black border border-neutral-800 rounded-none clip-path-rog p-1">
       <button
         onClick={() => setGroupBy('auto')}
         className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${
           groupBy === 'auto'
-            ? 'bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950'
-            : 'text-slate-400 hover:text-white hover:bg-slate-800'
+            ? 'bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase'
+            : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
         }`}
         title="Tự động chọn mức gộp theo khoảng thời gian"
       >
@@ -506,8 +506,8 @@ export default function AdminAnalytics() {
           onClick={() => setGroupBy(opt.key)}
           className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${
             groupBy === opt.key
-              ? 'bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              ? 'bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase'
+              : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
           }`}
         >
           {opt.label}
@@ -519,27 +519,27 @@ export default function AdminAnalytics() {
   return (
     <div className="space-y-6 pb-8">
       {/* ===== Header ===== */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-neutral-800 pb-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-            <TrendingUp className="w-7 h-7 text-cyan-400" />
+            <TrendingUp className="w-7 h-7 text-red-500" />
             Phân Tích & Báo Cáo
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-neutral-400 text-sm mt-1">
             Dữ liệu doanh thu, đơn hàng và sản phẩm bán chạy
           </p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 px-3 py-2 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold rounded-xl text-xs hover:bg-emerald-500/30 transition"
+            className="flex items-center gap-1.5 px-3 py-2 bg-red-600/20 border border-red-600/40 text-emerald-300 font-bold rounded-none clip-path-rog text-xs hover:bg-red-600/30 transition"
           >
             <Download className="w-3.5 h-3.5" /> Excel
           </button>
           <button
             onClick={loadAll}
             disabled={loading}
-            className="flex items-center gap-1.5 px-3 py-2 bg-slate-800 border border-slate-700 text-slate-300 font-bold rounded-xl text-xs hover:border-cyan-500/50 transition disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 py-2 bg-neutral-900 border border-slate-700 text-neutral-300 font-bold rounded-none clip-path-rog text-xs hover:border-red-600/50 transition disabled:opacity-50"
             title="Tải lại dữ liệu"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -548,13 +548,13 @@ export default function AdminAnalytics() {
       </div>
 
       {/* ===== Date range bar (dùng cho TOÀN BỘ trang) ===== */}
-      <div className="glass-card rounded-2xl p-4 border border-slate-800">
+      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 border border-neutral-800">
         <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
-          <div className="flex items-center gap-2 text-slate-300">
-            <Calendar className="w-4 h-4 text-cyan-400" />
+          <div className="flex items-center gap-2 text-neutral-300">
+            <Calendar className="w-4 h-4 text-red-500" />
             <span className="text-xs font-bold uppercase">Khoảng thời gian:</span>
           </div>
-          <div className="flex gap-1 bg-slate-900 border border-slate-800 rounded-xl p-1 flex-wrap">
+          <div className="flex gap-1 bg-black border border-neutral-800 rounded-none clip-path-rog p-1 flex-wrap">
             {PRESETS.map(p => (
               <button
                 key={p.key}
@@ -567,8 +567,8 @@ export default function AdminAnalytics() {
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   preset === p.key
-                    ? 'bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-lg'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-gradient-to-r from-red-500 to-sky-400 text-white font-bold tracking-widest uppercase shadow-lg'
+                    : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
                 }`}
               >
                 {p.label}
@@ -582,7 +582,7 @@ export default function AdminAnalytics() {
                 value={customStart}
                 max={customEnd || undefined}
                 onChange={e => setCustomStart(e.target.value)}
-                className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-cyan-500 focus:outline-none"
+                className="px-2.5 py-1.5 bg-black border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-red-600 focus:outline-none"
               />
               <span className="text-slate-500 text-xs">→</span>
               <input
@@ -590,16 +590,16 @@ export default function AdminAnalytics() {
                 value={customEnd}
                 min={customStart || undefined}
                 onChange={e => setCustomEnd(e.target.value)}
-                className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-cyan-500 focus:outline-none"
+                className="px-2.5 py-1.5 bg-black border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-red-600 focus:outline-none"
               />
               {customDateError && (
                 <span className="text-[11px] text-rose-400 font-semibold">⚠ {customDateError}</span>
               )}
             </div>
           )}
-          <div className="lg:ml-auto text-[11px] text-slate-400 font-mono">
+          <div className="lg:ml-auto text-[11px] text-neutral-400 font-mono">
             📅 {dateRange.startDate} → {dateRange.endDate}
-            <span className="ml-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">
+            <span className="ml-2 px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-300">
               {daysBetween(dateRange.startDate, dateRange.endDate)} ngày
             </span>
           </div>
@@ -608,15 +608,15 @@ export default function AdminAnalytics() {
 
       {/* ===== KPI summary ===== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div className="glass-card rounded-2xl p-5 border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
-            <div className="p-2 rounded-xl bg-cyan-500/20 border border-cyan-500/30">
-              <DollarSign className="w-4 h-4 text-cyan-400" />
+            <div className="p-2 rounded-none clip-path-rog bg-red-600/20 border border-red-600/30">
+              <DollarSign className="w-4 h-4 text-red-500" />
             </div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase">Tổng Doanh Thu</span>
+            <span className="text-[11px] font-bold text-neutral-400 uppercase">Tổng Doanh Thu</span>
           </div>
           {loading ? (
-            <div className="h-8 bg-slate-800 rounded-lg animate-pulse" />
+            <div className="h-8 bg-neutral-900 rounded-lg animate-pulse" />
           ) : (
             <p className="text-2xl font-black text-white">{formatVND(totalRevenue)}</p>
           )}
@@ -625,45 +625,45 @@ export default function AdminAnalytics() {
           </p>
         </div>
 
-        <div className="glass-card rounded-2xl p-5 border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
-            <div className="p-2 rounded-xl bg-emerald-500/20 border border-emerald-500/30">
-              <ShoppingCart className="w-4 h-4 text-emerald-400" />
+            <div className="p-2 rounded-none clip-path-rog bg-red-600/20 border border-red-600/30">
+              <ShoppingCart className="w-4 h-4 text-red-500" />
             </div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase">Tổng Đơn Hàng</span>
+            <span className="text-[11px] font-bold text-neutral-400 uppercase">Tổng Đơn Hàng</span>
           </div>
           {loading ? (
-            <div className="h-8 bg-slate-800 rounded-lg animate-pulse" />
+            <div className="h-8 bg-neutral-900 rounded-lg animate-pulse" />
           ) : (
             <p className="text-2xl font-black text-white">{totalOrders.toLocaleString()}</p>
           )}
-          <p className="text-[11px] text-emerald-400 mt-1">Đơn đã xử lý</p>
+          <p className="text-[11px] text-red-500 mt-1">Đơn đã xử lý</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-5 border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
-            <div className="p-2 rounded-xl bg-purple-500/20 border border-purple-500/30">
-              <TrendingUp className="w-4 h-4 text-purple-400" />
+            <div className="p-2 rounded-none clip-path-rog bg-red-600/20 border border-red-600/30">
+              <TrendingUp className="w-4 h-4 text-red-500" />
             </div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase">Giá Trị TB / Đơn</span>
+            <span className="text-[11px] font-bold text-neutral-400 uppercase">Giá Trị TB / Đơn</span>
           </div>
           {loading ? (
-            <div className="h-8 bg-slate-800 rounded-lg animate-pulse" />
+            <div className="h-8 bg-neutral-900 rounded-lg animate-pulse" />
           ) : (
             <p className="text-2xl font-black text-white">{formatVND(avgOrder)}</p>
           )}
-          <p className="text-[11px] text-purple-400 mt-1">Mỗi đơn hàng</p>
+          <p className="text-[11px] text-red-500 mt-1">Mỗi đơn hàng</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-5 border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
-            <div className="p-2 rounded-xl bg-amber-500/20 border border-amber-500/30">
+            <div className="p-2 rounded-none clip-path-rog bg-amber-500/20 border border-amber-500/30">
               <Package className="w-4 h-4 text-amber-400" />
             </div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase">Sản Phẩm Bán Chạy</span>
+            <span className="text-[11px] font-bold text-neutral-400 uppercase">Sản Phẩm Bán Chạy</span>
           </div>
           {loading ? (
-            <div className="h-8 bg-slate-800 rounded-lg animate-pulse" />
+            <div className="h-8 bg-neutral-900 rounded-lg animate-pulse" />
           ) : (
             <p className="text-2xl font-black text-white">{topProducts.length}</p>
           )}
@@ -672,20 +672,20 @@ export default function AdminAnalytics() {
       </div>
 
       {/* ===== Revenue Chart (with date picker + groupBy on header) ===== */}
-      <div className="glass-card rounded-2xl p-6 border border-cyan-500/20">
+      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-red-600/20">
         <div className="flex flex-col gap-3 mb-6">
           <div className="flex items-start sm:items-center justify-between gap-3 flex-col sm:flex-row">
             <div>
               <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <BarChart3 className="w-5 h-5 text-cyan-400" />
+                <BarChart3 className="w-5 h-5 text-red-500" />
                 Doanh Thu Theo Ngày
               </h2>
               <p className="text-[11px] text-slate-500 mt-1">
                 Biểu đồ cột (doanh thu) + đường (số đơn) · Tổng{' '}
-                <span className="text-cyan-300 font-bold">{formatVND(totalRevenue)}</span>{' '}
+                <span className="text-red-400 font-bold">{formatVND(totalRevenue)}</span>{' '}
                 · <span className="text-purple-300 font-bold">{totalOrders}</span> đơn
                 {groupBy === 'auto' && (
-                  <span className="ml-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">
+                  <span className="ml-2 px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400">
                     Tự động: {effectiveGroupBy === 'day' ? 'Theo Ngày' : effectiveGroupBy === 'week' ? 'Theo Tuần' : 'Theo Tháng'}
                   </span>
                 )}
@@ -693,7 +693,7 @@ export default function AdminAnalytics() {
             </div>
             {/* Dedicated chart date picker + groupBy */}
             <div className="flex items-center gap-2 flex-wrap">
-              <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-xl p-1">
+              <div className="flex items-center gap-1 bg-black border border-neutral-800 rounded-none clip-path-rog p-1">
                 <Calendar className="w-3.5 h-3.5 text-slate-500 ml-1.5" />
                 <input
                   type="date"
@@ -728,7 +728,7 @@ export default function AdminAnalytics() {
               <button
                 onClick={loadAll}
                 disabled={chartLoading}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 border border-slate-700 text-slate-300 font-bold rounded-xl text-[11px] hover:border-cyan-500/50 transition disabled:opacity-50"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-neutral-900 border border-slate-700 text-neutral-300 font-bold rounded-none clip-path-rog text-[11px] hover:border-red-600/50 transition disabled:opacity-50"
                 title="Tải lại biểu đồ"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${chartLoading ? 'animate-spin' : ''}`} />
@@ -739,13 +739,13 @@ export default function AdminAnalytics() {
 
         {loading ? (
           <div className="h-[340px] flex items-center justify-center">
-            <Loader2 className="w-8 h-8 animate-spin text-cyan-400" />
+            <Loader2 className="w-8 h-8 animate-spin text-red-500" />
           </div>
         ) : filledRevenue.length > 0 ? (
           <div style={{ width: '100%', height: 360 }} className="relative">
             {chartLoading && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/40 backdrop-blur-[1px] rounded-xl">
-                <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/40 backdrop-blur-[1px] rounded-none clip-path-rog">
+                <Loader2 className="w-6 h-6 animate-spin text-red-500" />
               </div>
             )}
             <ResponsiveContainer width="100%" height="100%">
@@ -830,15 +830,15 @@ export default function AdminAnalytics() {
       {/* ===== Charts row ===== */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Order Status Pie */}
-        <div className="glass-card rounded-2xl p-6 border border-slate-700">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-slate-700">
           <h2 className="text-base font-bold text-white flex items-center gap-2 mb-1">
-            <ShoppingCart className="w-5 h-5 text-emerald-400" />
+            <ShoppingCart className="w-5 h-5 text-red-500" />
             Phân Bố Trạng Thái Đơn Hàng
           </h2>
           <p className="text-[11px] text-slate-500 mb-4">Tỷ lệ đơn hàng theo trạng thái</p>
           {loading ? (
             <div className="h-56 flex items-center justify-center">
-              <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
+              <Loader2 className="w-6 h-6 animate-spin text-red-500" />
             </div>
           ) : orderStatus.length > 0 ? (
             <div className="flex items-center gap-6">
@@ -880,7 +880,7 @@ export default function AdminAnalytics() {
                   <div key={s.status || i} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full" style={{ backgroundColor: statusColorMap[s.status] || COLORS[i % COLORS.length] }} />
-                      <span className="text-xs font-semibold text-slate-300">
+                      <span className="text-xs font-semibold text-neutral-300">
                         {statusLabel(s.status)}
                       </span>
                     </div>
@@ -898,15 +898,15 @@ export default function AdminAnalytics() {
         </div>
 
         {/* Category Sales */}
-        <div className="glass-card rounded-2xl p-6 border border-slate-700">
+        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-slate-700">
           <h2 className="text-base font-bold text-white flex items-center gap-2 mb-1">
-            <TrendingUp className="w-5 h-5 text-purple-400" />
+            <TrendingUp className="w-5 h-5 text-red-500" />
             Doanh Số Theo Danh Mục
           </h2>
           <p className="text-[11px] text-slate-500 mb-4">Top danh mục sản phẩm bán chạy</p>
           {loading ? (
             <div className="h-56 flex items-center justify-center">
-              <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
+              <Loader2 className="w-6 h-6 animate-spin text-red-500" />
             </div>
           ) : categorySales.length > 0 ? (
             <ResponsiveContainer width="100%" height={220}>
@@ -933,7 +933,7 @@ export default function AdminAnalytics() {
       </div>
 
       {/* ===== Top Products Table ===== */}
-      <div className="glass-card rounded-2xl p-6 border border-slate-700">
+      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-slate-700">
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
@@ -946,20 +946,20 @@ export default function AdminAnalytics() {
           </div>
           <Link
             to="/admin/products"
-            className="text-[11px] text-cyan-400 hover:underline flex items-center gap-1 font-semibold"
+            className="text-[11px] text-red-500 hover:underline flex items-center gap-1 font-semibold"
           >
             Quản lý sản phẩm →
           </Link>
         </div>
         {loading ? (
           <div className="py-12 flex items-center justify-center">
-            <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
+            <Loader2 className="w-6 h-6 animate-spin text-red-500" />
           </div>
         ) : topProducts.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-slate-800">
+                <tr className="border-b border-neutral-800">
                   <th className="text-left py-3 px-3 text-[11px] font-bold text-slate-500 uppercase">#</th>
                   <th className="text-left py-3 px-3 text-[11px] font-bold text-slate-500 uppercase">Sản Phẩm</th>
                   <th className="text-right py-3 px-3 text-[11px] font-bold text-slate-500 uppercase">Đã Bán</th>
@@ -969,13 +969,13 @@ export default function AdminAnalytics() {
               </thead>
               <tbody className="divide-y divide-slate-800/50">
                 {topProducts.map((p, i) => (
-                  <tr key={p.id} className="hover:bg-slate-900/40 transition-colors">
+                  <tr key={p.id} className="hover:bg-black/40 transition-colors">
                     <td className="py-3 px-3">
                       <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg font-black text-[11px] ${
-                        i === 0 ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950'
-                        : i === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-500 text-slate-950'
-                        : i === 2 ? 'bg-gradient-to-br from-orange-400 to-amber-700 text-slate-950'
-                        : 'bg-slate-800 text-slate-400'
+                        i === 0 ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white font-bold tracking-widest uppercase'
+                        : i === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-500 text-white font-bold tracking-widest uppercase'
+                        : i === 2 ? 'bg-gradient-to-br from-orange-400 to-amber-700 text-white font-bold tracking-widest uppercase'
+                        : 'bg-neutral-900 text-neutral-400'
                       }`}>
                         {i + 1}
                       </span>
@@ -986,7 +986,7 @@ export default function AdminAnalytics() {
                           src={resolveImage(p.image_url)}
                           onError={onImageError}
                           alt=""
-                          className="w-10 h-10 rounded-xl object-cover bg-slate-900 border border-slate-700"
+                          className="w-10 h-10 rounded-none clip-path-rog object-cover bg-black border border-slate-700"
                         />
                         <div>
                           <p className="font-semibold text-white">{p.name}</p>
@@ -994,10 +994,10 @@ export default function AdminAnalytics() {
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-3 text-right font-bold text-cyan-300">
+                    <td className="py-3 px-3 text-right font-bold text-red-400">
                       {Number(p.total_sold || p.sold || 0).toLocaleString()}
                     </td>
-                    <td className="py-3 px-3 text-right text-slate-300">
+                    <td className="py-3 px-3 text-right text-neutral-300">
                       {Number(p.order_count || 0).toLocaleString()}
                     </td>
                     <td className="py-3 px-3 text-right font-bold text-emerald-300">

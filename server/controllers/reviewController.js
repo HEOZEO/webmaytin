@@ -12,14 +12,14 @@ exports.getProductReviews = async (req, res) => {
       `SELECT r.*, u.full_name, u.email
        FROM reviews r
        JOIN users u ON r.user_id = u.id
-       WHERE r.product_id = $1
+       WHERE r.product_id = $1 AND r.is_hidden = false
        ORDER BY r.created_at DESC
        LIMIT $2 OFFSET $3`,
       [productId, limit, offset]
     );
 
     const countResult = await pool.query(
-      'SELECT COUNT(*) as total FROM reviews WHERE product_id = $1',
+      'SELECT COUNT(*) as total FROM reviews WHERE product_id = $1 AND is_hidden = false',
       [productId]
     );
 

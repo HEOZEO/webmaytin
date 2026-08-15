@@ -74,7 +74,7 @@ export default function AdminAlerts() {
       <button
         onClick={() => setOpen(!open)}
         aria-label="Cảnh báo"
-        className="relative p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 text-slate-300 transition"
+        className="relative p-2 rounded-none clip-path-rog bg-black border border-neutral-800 hover:border-red-600/40 text-neutral-300 transition"
       >
         <Bell className="w-5 h-5" />
         {totalAlerts > 0 && (
@@ -85,11 +85,11 @@ export default function AdminAlerts() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 z-50 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden">
+        <div className="absolute right-0 mt-2 w-80 sm:w-96 z-50 rounded-none clip-path-rog bg-black border border-neutral-800 shadow-2xl overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
             <div className="flex items-center gap-2">
-              <Bell className="w-4 h-4 text-cyan-400" />
+              <Bell className="w-4 h-4 text-red-500" />
               <h3 className="text-sm font-bold text-white">Cảnh báo</h3>
               {totalAlerts > 0 && (
                 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold">
@@ -100,7 +100,7 @@ export default function AdminAlerts() {
             <button
               onClick={() => fetchAlerts(false)}
               disabled={loading}
-              className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-cyan-300"
+              className="p-1 rounded hover:bg-neutral-900 text-neutral-400 hover:text-red-400"
               aria-label="Làm mới"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -116,8 +116,8 @@ export default function AdminAlerts() {
               </div>
             ) : totalAlerts === 0 ? (
               <div className="p-8 text-center space-y-2">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/10 flex items-center justify-center">
-                  <Bell className="w-6 h-6 text-emerald-400" />
+                <div className="w-12 h-12 mx-auto rounded-full bg-red-600/10 flex items-center justify-center">
+                  <Bell className="w-6 h-6 text-red-500" />
                 </div>
                 <p className="text-sm text-emerald-300 font-semibold">Mọi thứ ổn!</p>
                 <p className="text-xs text-slate-500">Không có cảnh báo nào.</p>
@@ -129,7 +129,7 @@ export default function AdminAlerts() {
                   <Link
                     to="/admin/payments"
                     onClick={() => setOpen(false)}
-                    className="flex items-start gap-3 p-4 hover:bg-slate-800/40 transition-colors"
+                    className="flex items-start gap-3 p-4 hover:bg-neutral-900/40 transition-colors"
                   >
                     <div className="w-9 h-9 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0">
                       <CreditCard className="w-4 h-4 text-amber-400" />
@@ -141,7 +141,7 @@ export default function AdminAlerts() {
                           {alerts.pendingPaymentsCount}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400 mt-0.5">Vào trang Quản lý thanh toán để xét duyệt.</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">Vào trang Quản lý thanh toán để xét duyệt.</p>
                     </div>
                     <ChevronRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2" />
                   </Link>
@@ -152,7 +152,7 @@ export default function AdminAlerts() {
                   <Link
                     to="/admin/products"
                     onClick={() => setOpen(false)}
-                    className="block px-4 py-3 hover:bg-slate-800/40 transition-colors"
+                    className="block px-4 py-3 hover:bg-neutral-900/40 transition-colors"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-9 h-9 rounded-lg bg-rose-500/15 flex items-center justify-center">
@@ -171,7 +171,7 @@ export default function AdminAlerts() {
                       {alerts.lowStockProducts.slice(0, 3).map(p => (
                         <div key={p.id} className="flex items-center gap-2 text-xs">
                           <Package className="w-3 h-3 text-slate-500" />
-                          <span className="text-slate-300 truncate flex-1">{p.name}</span>
+                          <span className="text-neutral-300 truncate flex-1">{p.name}</span>
                           <span className="text-rose-300 font-bold">{p.stock}</span>
                         </div>
                       ))}
@@ -187,16 +187,16 @@ export default function AdminAlerts() {
                   <Link
                     to="/admin/coupons"
                     onClick={() => setOpen(false)}
-                    className="block px-4 py-3 hover:bg-slate-800/40 transition-colors"
+                    className="block px-4 py-3 hover:bg-neutral-900/40 transition-colors"
                   >
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-9 h-9 rounded-lg bg-purple-500/15 flex items-center justify-center">
-                        <Tag className="w-4 h-4 text-purple-400" />
+                      <div className="w-9 h-9 rounded-lg bg-red-600/15 flex items-center justify-center">
+                        <Tag className="w-4 h-4 text-red-500" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <p className="text-sm font-semibold text-white">Mã giảm giá sắp hết hạn</p>
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-bold">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-600/20 text-purple-300 font-bold">
                             {alerts.expiringCouponsCount}
                           </span>
                         </div>
@@ -206,7 +206,7 @@ export default function AdminAlerts() {
                       {alerts.expiringCoupons.slice(0, 3).map(c => (
                         <div key={c.id} className="flex items-center gap-2 text-xs">
                           <Tag className="w-3 h-3 text-slate-500" />
-                          <span className="text-slate-300 font-mono">{c.code}</span>
+                          <span className="text-neutral-300 font-mono">{c.code}</span>
                           <span className="text-purple-300 font-bold">-{c.discount_percent}%</span>
                           <span className="ml-auto text-amber-300 text-[10px]">còn {c.days_left || 0} ngày</span>
                         </div>
@@ -223,19 +223,19 @@ export default function AdminAlerts() {
                   <Link
                     to="/admin/orders"
                     onClick={() => setOpen(false)}
-                    className="flex items-start gap-3 p-4 hover:bg-slate-800/40 transition-colors"
+                    className="flex items-start gap-3 p-4 hover:bg-neutral-900/40 transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-cyan-500/15 flex items-center justify-center flex-shrink-0">
-                      <ShoppingCart className="w-4 h-4 text-cyan-400" />
+                    <div className="w-9 h-9 rounded-lg bg-red-600/15 flex items-center justify-center flex-shrink-0">
+                      <ShoppingCart className="w-4 h-4 text-red-500" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <p className="text-sm font-semibold text-white">Đơn hàng cần xử lý</p>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-600/20 text-red-400 font-bold">
                           {alerts.pendingOrdersCount}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400 mt-0.5">Đơn đang chờ xác nhận hoặc đã xác nhận.</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">Đơn đang chờ xác nhận hoặc đã xác nhận.</p>
                     </div>
                     <ChevronRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2" />
                   </Link>
@@ -245,7 +245,7 @@ export default function AdminAlerts() {
           </div>
 
           {/* Footer */}
-          <div className="px-4 py-2 border-t border-slate-800 text-center text-[10px] text-slate-500">
+          <div className="px-4 py-2 border-t border-neutral-800 text-center text-[10px] text-slate-500">
             Cập nhật mỗi 30 giây
           </div>
         </div>

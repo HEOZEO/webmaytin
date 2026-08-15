@@ -23,6 +23,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminOrders from './pages/admin/AdminOrders';
+import AdminReviews from './pages/admin/AdminReviews';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminCoupons from './pages/admin/AdminCoupons';
 import AdminInventory from './pages/admin/AdminInventory';
@@ -44,7 +45,7 @@ export default function App() {
           <WishlistProvider>
             <CompareProvider>
               <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
+                <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-red-600 selection:text-white font-bold tracking-widest uppercase">
                   <Routes>
                     <Route path="/" element={<><Navbar /><main className="flex-grow"><Home /></main><Footer /></>} />
                     <Route path="/products" element={<><Navbar /><main className="flex-grow"><Products /></main><Footer /></>} />
@@ -66,6 +67,7 @@ export default function App() {
                       <Route index element={<Dashboard />} />
                       <Route path="products" element={<AdminProducts />} />
                       <Route path="orders" element={<AdminOrders />} />
+                      <Route path="reviews" element={<AdminReviews />} />
                       <Route path="users" element={<AdminUsers />} />
                       <Route path="coupons" element={<AdminCoupons />} />
                       <Route path="inventory" element={<AdminInventory />} />

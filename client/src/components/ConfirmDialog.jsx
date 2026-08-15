@@ -35,7 +35,7 @@ export default function ConfirmDialog({
   const palette = {
     danger: { btn: 'bg-red-600 hover:bg-red-700', icon: 'text-red-500', iconBg: 'bg-red-500/10' },
     warning: { btn: 'bg-amber-600 hover:bg-amber-700', icon: 'text-amber-500', iconBg: 'bg-amber-500/10' },
-    info: { btn: 'bg-cyan-600 hover:bg-cyan-700', icon: 'text-cyan-500', iconBg: 'bg-cyan-500/10' }
+    info: { btn: 'bg-cyan-600 hover:bg-cyan-700', icon: 'text-red-600', iconBg: 'bg-red-600/10' }
   }[variant] || { btn: 'bg-red-600 hover:bg-red-700', icon: 'text-red-500', iconBg: 'bg-red-500/10' };
 
   return (
@@ -47,7 +47,7 @@ export default function ConfirmDialog({
       onClick={onCancel}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-2xl animate-[fadeIn_0.15s_ease-out]"
+        className="w-full max-w-md rounded-none clip-path-rog border border-slate-700 bg-black p-6 shadow-2xl animate-[fadeIn_0.15s_ease-out]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start gap-4">
@@ -59,9 +59,9 @@ export default function ConfirmDialog({
           <div className="flex-1">
             <h3 id="confirm-dialog-title" className="text-lg font-bold text-white">{title}</h3>
             {typeof message === 'string' ? (
-              <p className="mt-2 text-sm text-slate-300">{message}</p>
+              <p className="mt-2 text-sm text-neutral-300">{message}</p>
             ) : (
-              <div className="mt-2 text-sm text-slate-300">{message}</div>
+              <div className="mt-2 text-sm text-neutral-300">{message}</div>
             )}
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function ConfirmDialog({
           <button
             type="button"
             onClick={onCancel}
-            className="rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition"
+            className="rounded-lg border border-slate-700 bg-neutral-900 px-4 py-2 text-sm font-medium text-neutral-300 hover:bg-slate-700 hover:text-white transition"
           >
             {cancelText}
           </button>

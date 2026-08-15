@@ -99,8 +99,8 @@ const STRENGTH_COLORS = [
   'bg-rose-500',
   'bg-amber-500',
   'bg-yellow-500',
-  'bg-emerald-500',
-  'bg-emerald-400'
+  'bg-red-600',
+  'bg-red-500'
 ];
 
 const PASSWORD_RULES = [
@@ -471,23 +471,25 @@ export default function Login() {
   );
 
   return (
-    <div className="relative min-h-[calc(100vh-5rem)] overflow-hidden">
-      {/* Animated background */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-cyan-500/20 blur-3xl animate-float-slow" />
-        <div className="absolute top-1/3 -right-32 w-[520px] h-[520px] rounded-full bg-purple-500/20 blur-3xl animate-float-slower" />
-        <div className="absolute bottom-0 left-1/3 w-[420px] h-[420px] rounded-full bg-sky-500/15 blur-3xl animate-float-slowest" />
-      </div>
+    <div className="relative min-h-screen overflow-hidden bg-[#0a0a0a] text-white">
+      {/* Họa tiết ROG Anime Matrix (Dark Theme) */}
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }}></div>
+      
+      {/* Diagonal Light Slash (Zephyrus Dark) */}
+      <div className="absolute -top-[50%] left-[5%] w-[45%] h-[200%] bg-gradient-to-r from-red-600/10 via-red-600/5 to-transparent transform skew-x-[28deg] pointer-events-none z-0 border-r-[3px] border-red-500/40 shadow-[15px_0_40px_rgba(255,0,41,0.2)] blur-[1px]"></div>
+      
+      {/* Tech Grid Slash */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.02) 5px, rgba(255,255,255,0.02) 6px)' }}></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* ====== LEFT: Brand panel ====== */}
           <div className="hidden lg:flex flex-col gap-8 animate-fadeInUp">
             <div className="flex items-center gap-3">
               <Logo size={52} />
               <div>
-                <p className="text-[11px] font-bold tracking-[0.3em] text-cyan-400 uppercase">Laptop Store</p>
-                <p className="text-xs text-slate-400">High Tech Hub · Since 2020</p>
+                <p className="text-[11px] font-bold tracking-[0.3em] text-red-500 uppercase">Laptop Store</p>
+                <p className="text-xs text-neutral-400">High Tech Hub · Since 2020</p>
               </div>
             </div>
 
@@ -495,11 +497,11 @@ export default function Login() {
               <h1 className="text-4xl xl:text-5xl font-black text-white leading-tight">
                 Mua laptop chính hãng
                 <br />
-                <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-red-500 via-sky-400 to-red-500 bg-clip-text text-transparent">
                   Nhanh chóng & an toàn
                 </span>
               </h1>
-              <p className="text-sm text-slate-400 max-w-md leading-relaxed">
+              <p className="text-sm text-neutral-400 max-w-md leading-relaxed">
                 Đăng nhập để theo dõi đơn hàng, lưu danh sách yêu thích và nhận ưu đãi
                 dành riêng cho thành viên Laptop Store.
               </p>
@@ -511,13 +513,13 @@ export default function Login() {
                 return (
                   <div
                     key={f.title}
-                    className="glass-card rounded-2xl p-4 space-y-2 hover:border-cyan-500/40 transition-colors"
+                    className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 space-y-2 hover:border-red-600/40 transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-none clip-path-rog bg-red-600/10 text-red-500 flex items-center justify-center">
                       <Icon className="w-4 h-4" />
                     </div>
                     <h3 className="text-sm font-bold text-white">{f.title}</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">{f.desc}</p>
+                    <p className="text-xs text-neutral-400 leading-relaxed">{f.desc}</p>
                   </div>
                 );
               })}
@@ -526,17 +528,17 @@ export default function Login() {
 
           {/* ====== RIGHT: Auth card ====== */}
           <div className="relative">
-            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500/30 via-sky-500/30 to-purple-500/30 blur-2xl opacity-50" />
-            <div className="relative glass-card rounded-3xl p-6 sm:p-8 glow-blue border-cyan-500/20 animate-fadeInUp">
+            <div className="absolute -inset-1 rounded-none clip-path-rog bg-gradient-to-r from-red-600/30 via-sky-500/30 to-red-600/30 blur-2xl opacity-50" />
+            <div className="relative bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 sm:p-8 glow-rog border-red-600/20 animate-fadeInUp">
               {/* Tab switcher */}
-              <div className="flex p-1 rounded-2xl bg-slate-900/70 border border-slate-800 mb-6">
+              <div className="flex p-1 rounded-none clip-path-rog bg-black/70 border border-neutral-800 mb-6">
                 <button
                   type="button"
                   onClick={() => toggleMode('login')}
-                  className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all text-center ${
+                  className={`flex-1 py-2.5 text-xs font-bold rounded-none clip-path-rog transition-all text-center ${
                     mode === 'login'
-                      ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-slate-950 shadow-lg shadow-cyan-500/20'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-gradient-to-r from-red-600 to-sky-500 text-white font-bold tracking-widest uppercase shadow-lg shadow-red-600/20'
+                      : 'text-neutral-400 hover:text-slate-200'
                   }`}
                 >
                   Đăng nhập
@@ -544,10 +546,10 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => toggleMode('register')}
-                  className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all text-center ${
+                  className={`flex-1 py-2.5 text-xs font-bold rounded-none clip-path-rog transition-all text-center ${
                     mode === 'register'
-                      ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-slate-950 shadow-lg shadow-cyan-500/20'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-gradient-to-r from-red-600 to-sky-500 text-white font-bold tracking-widest uppercase shadow-lg shadow-red-600/20'
+                      : 'text-neutral-400 hover:text-slate-200'
                   }`}
                 >
                   Đăng ký
@@ -561,14 +563,14 @@ export default function Login() {
                     <button
                       type="button"
                       onClick={() => toggleMode('login')}
-                      className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white"
+                      className="p-1.5 rounded-lg hover:bg-neutral-900 text-neutral-400 hover:text-white"
                       aria-label="Quay lại đăng nhập"
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
                   )}
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 flex items-center justify-center">
-                    {mode === 'login' ? <Lock className="w-5 h-5 text-cyan-400" /> : mode === 'register' ? <User className="w-5 h-5 text-cyan-400" /> : <KeyRound className="w-5 h-5 text-cyan-400" />}
+                  <div className="w-10 h-10 rounded-none clip-path-rog bg-gradient-to-br from-red-600/20 to-red-600/20 border border-red-600/30 flex items-center justify-center">
+                    {mode === 'login' ? <Lock className="w-5 h-5 text-red-500" /> : mode === 'register' ? <User className="w-5 h-5 text-red-500" /> : <KeyRound className="w-5 h-5 text-red-500" />}
                   </div>
                   <div>
                     <h2 className="text-lg font-bold text-white">
@@ -576,7 +578,7 @@ export default function Login() {
                       {mode === 'register' && 'Tạo tài khoản mới'}
                       {mode === 'forgot' && 'Khôi phục mật khẩu'}
                     </h2>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-neutral-400">
                       {mode === 'login' && 'Đăng nhập để tiếp tục mua sắm'}
                       {mode === 'register' && 'Chỉ mất 30 giây để bắt đầu'}
                       {mode === 'forgot' && 'Nhập email để nhận liên kết đặt lại mật khẩu'}
@@ -620,7 +622,7 @@ export default function Login() {
                       <button
                         type="button"
                         onClick={() => setShowLoginPassword((v) => !v)}
-                        className="text-slate-500 hover:text-cyan-400 transition-colors p-1"
+                        className="text-slate-500 hover:text-red-500 transition-colors p-1"
                         tabIndex={-1}
                       >
                         {showLoginPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -629,13 +631,13 @@ export default function Login() {
                   />
 
                   <div className="flex items-center justify-between text-xs">
-                    <label className={`flex items-center gap-2 cursor-pointer ${accountLockedByAdmin ? 'text-slate-600 cursor-not-allowed' : 'text-slate-300 hover:text-white'}`}>
+                    <label className={`flex items-center gap-2 cursor-pointer ${accountLockedByAdmin ? 'text-slate-600 cursor-not-allowed' : 'text-neutral-300 hover:text-white'}`}>
                       <input
                         type="checkbox"
                         checked={remember}
                         onChange={(e) => setRemember(e.target.checked)}
                         disabled={accountLockedByAdmin}
-                        className="w-4 h-4 rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-cyan-500/30 disabled:opacity-50"
+                        className="w-4 h-4 rounded border-slate-700 bg-black text-red-600 focus:ring-red-600/30 disabled:opacity-50"
                       />
                       Ghi nhớ đăng nhập
                     </label>
@@ -643,7 +645,7 @@ export default function Login() {
                       <button
                         type="button"
                         onClick={() => toggleMode('forgot')}
-                        className="text-cyan-400 hover:text-cyan-300 font-semibold hover:underline"
+                        className="text-red-500 hover:text-red-400 font-semibold hover:underline"
                       >
                         Quên mật khẩu?
                       </button>
@@ -653,7 +655,7 @@ export default function Login() {
                   <button
                     type="submit"
                     disabled={submitting || !!loginLockedUntil || accountLockedByAdmin}
-                    className="group relative w-full py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-cyan-500 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50"
+                    className="group relative w-full py-3.5 rounded-none clip-path-rog font-bold text-sm text-white font-bold tracking-widest uppercase bg-gradient-to-r from-red-500 via-red-600 to-sky-500 hover:from-red-400 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-600/30 hover:shadow-red-600/50"
                   >
                     {submitting ? (
                       <span className="inline-flex items-center gap-2">
@@ -669,12 +671,12 @@ export default function Login() {
                   </button>
 
                   {!accountLockedByAdmin && (
-                    <p className="text-center text-xs text-slate-400 pt-2">
+                    <p className="text-center text-xs text-neutral-400 pt-2">
                       Chưa có tài khoản?{' '}
                       <button
                         type="button"
                         onClick={() => toggleMode('register')}
-                        className="text-cyan-400 font-semibold hover:underline"
+                        className="text-red-500 font-semibold hover:underline"
                       >
                         Đăng ký ngay
                       </button>
@@ -688,17 +690,17 @@ export default function Login() {
                 <>
                   {/* Step indicator */}
                   <div className="flex items-center gap-2 mb-5">
-                    <div className={`flex items-center gap-1.5 ${regStep === 'form' ? 'text-cyan-400' : 'text-emerald-400'}`}>
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${regStep === 'form' ? 'bg-cyan-500 text-slate-950' : 'bg-emerald-500 text-slate-950'}`}>
+                    <div className={`flex items-center gap-1.5 ${regStep === 'form' ? 'text-red-500' : 'text-red-500'}`}>
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${regStep === 'form' ? 'bg-red-600 text-white font-bold tracking-widest uppercase' : 'bg-red-600 text-white font-bold tracking-widest uppercase'}`}>
                         {regStep === 'form' ? '1' : <Check className="w-3 h-3" />}
                       </div>
                       <span className="text-xs font-semibold">
                         {regStep === 'form' ? 'Thông tin' : 'Đã xác thực'}
                       </span>
                     </div>
-                    <div className="flex-1 h-px bg-slate-800" />
-                    <div className={`flex items-center gap-1.5 ${regStep === 'otp' ? 'text-cyan-400' : 'text-slate-600'}`}>
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${regStep === 'otp' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-800 text-slate-500'}`}>
+                    <div className="flex-1 h-px bg-neutral-900" />
+                    <div className={`flex items-center gap-1.5 ${regStep === 'otp' ? 'text-red-500' : 'text-slate-600'}`}>
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${regStep === 'otp' ? 'bg-red-600 text-white font-bold tracking-widest uppercase' : 'bg-neutral-900 text-slate-500'}`}>
                         2
                       </div>
                       <span className="text-xs font-semibold">Xác thực</span>
@@ -770,7 +772,7 @@ export default function Login() {
                             <button
                               type="button"
                               onClick={() => setShowRegPassword((v) => !v)}
-                              className="text-slate-500 hover:text-cyan-400 transition-colors p-1"
+                              className="text-slate-500 hover:text-red-500 transition-colors p-1"
                               tabIndex={-1}
                             >
                               {showRegPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -786,7 +788,7 @@ export default function Login() {
                                 {STRENGTH_LABELS[regStrength]}
                               </span>
                             </div>
-                            <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                            <div className="h-1.5 rounded-full bg-neutral-900 overflow-hidden">
                               <div
                                 className={`h-full transition-all duration-300 ${STRENGTH_COLORS[regStrength]}`}
                                 style={{ width: `${(regStrength / 5) * 100}%` }}
@@ -801,7 +803,7 @@ export default function Login() {
                             return (
                               <div
                                 key={rule.id}
-                                className={`flex items-center gap-1.5 ${passed ? 'text-emerald-400' : 'text-slate-500'}`}
+                                className={`flex items-center gap-1.5 ${passed ? 'text-red-500' : 'text-slate-500'}`}
                               >
                                 {passed ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />}
                                 <span>{rule.label}</span>
@@ -828,7 +830,7 @@ export default function Login() {
                           <button
                             type="button"
                             onClick={() => setShowRegConfirm((v) => !v)}
-                            className="text-slate-500 hover:text-cyan-400 transition-colors p-1"
+                            className="text-slate-500 hover:text-red-500 transition-colors p-1"
                             tabIndex={-1}
                           >
                             {showRegConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -838,7 +840,7 @@ export default function Login() {
 
                       {/* Terms acceptance */}
                       <div
-                        className="flex items-start gap-2.5 pt-1 cursor-pointer group rounded-xl"
+                        className="flex items-start gap-2.5 pt-1 cursor-pointer group rounded-none clip-path-rog"
                         onClick={() => {
                           setReg({ ...reg, accept: !reg.accept });
                           setAcceptTouched(true);
@@ -852,29 +854,29 @@ export default function Login() {
                             readOnly
                             className={`w-4 h-4 rounded border transition-all appearance-none cursor-pointer ${
                               reg.accept
-                                ? 'bg-cyan-500 border-cyan-500'
+                                ? 'bg-red-600 border-red-600'
                                 : acceptTouched && !reg.accept
                                 ? 'border-rose-500 bg-rose-500/20'
-                                : 'border-slate-700 bg-slate-900'
+                                : 'border-slate-700 bg-black'
                             }`}
                             style={{ accentColor: '#06b6d4' }}
                           />
                           {reg.accept && (
-                            <Check className="absolute inset-0 w-4 h-4 text-slate-950 m-auto" style={{ width: 10, height: 10 }} />
+                            <Check className="absolute inset-0 w-4 h-4 text-white font-bold tracking-widest uppercase m-auto" style={{ width: 10, height: 10 }} />
                           )}
                         </div>
-                        <label htmlFor="accept-terms" className="text-[11px] leading-relaxed cursor-pointer group-hover:text-slate-300">
-                          <span className={acceptTouched && !reg.accept ? 'text-rose-400' : 'text-slate-400'}>
+                        <label htmlFor="accept-terms" className="text-[11px] leading-relaxed cursor-pointer group-hover:text-neutral-300">
+                          <span className={acceptTouched && !reg.accept ? 'text-rose-400' : 'text-neutral-400'}>
                             Tôi đồng ý với{' '}
                           </span>
-                          <Link to="/page/policy" className="text-cyan-400 hover:underline">
+                          <Link to="/page/policy" className="text-red-500 hover:underline">
                             Điều khoản dịch vụ
                           </Link>
-                          <span className={acceptTouched && !reg.accept ? 'text-rose-400' : 'text-slate-400'}> và </span>
-                          <Link to="/page/policy" className="text-cyan-400 hover:underline">
+                          <span className={acceptTouched && !reg.accept ? 'text-rose-400' : 'text-neutral-400'}> và </span>
+                          <Link to="/page/policy" className="text-red-500 hover:underline">
                             Chính sách bảo mật
                           </Link>
-                          <span className={acceptTouched && !reg.accept ? 'text-rose-400' : 'text-slate-400'}> của Laptop Store.</span>
+                          <span className={acceptTouched && !reg.accept ? 'text-rose-400' : 'text-neutral-400'}> của Laptop Store.</span>
                         </label>
                       </div>
                       {acceptTouched && !reg.accept && (
@@ -887,7 +889,7 @@ export default function Login() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="group relative w-full py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-cyan-500 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 mt-2"
+                        className="group relative w-full py-3.5 rounded-none clip-path-rog font-bold text-sm text-white font-bold tracking-widest uppercase bg-gradient-to-r from-red-500 via-red-600 to-sky-500 hover:from-red-400 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-600/30 hover:shadow-red-600/50 mt-2"
                       >
                         {submitting ? (
                           <span className="inline-flex items-center gap-2">
@@ -906,13 +908,13 @@ export default function Login() {
                     /* ====== STEP 2: Enter OTP ====== */
                     <form onSubmit={handleVerifyOTP} noValidate className="space-y-4">
                       <div className="text-center py-2">
-                        <div className="mx-auto w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-3">
-                          <Mail className="w-6 h-6 text-cyan-400" />
+                        <div className="mx-auto w-12 h-12 rounded-none clip-path-rog bg-red-600/10 border border-red-600/30 flex items-center justify-center mb-3">
+                          <Mail className="w-6 h-6 text-red-500" />
                         </div>
                         <h3 className="text-sm font-bold text-white mb-1">Nhập mã xác thực</h3>
-                        <p className="text-xs text-slate-400">
+                        <p className="text-xs text-neutral-400">
                           Mã đã được gửi đến{' '}
-                          <span className="text-cyan-300 font-semibold">{reg.email}</span>
+                          <span className="text-red-400 font-semibold">{reg.email}</span>
                         </p>
                         {otpResendCountdown > 0 && (
                           <p className="text-[11px] text-slate-500 mt-1">
@@ -934,7 +936,7 @@ export default function Login() {
                             onChange={(e) => handleOTPInputChange(i, e.target.value)}
                             onKeyDown={(e) => handleOTPKeyDown(i, e)}
                             disabled={submitting}
-                            className="w-11 h-12 text-center text-lg font-bold rounded-xl border bg-slate-900 text-white transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 disabled:opacity-50"
+                            className="w-11 h-12 text-center text-lg font-bold rounded-none clip-path-rog border bg-black text-white transition-all focus:outline-none focus:ring-2 focus:ring-red-600/50 focus:border-red-600 disabled:opacity-50"
                             style={{
                               borderColor: regError && otpValue.length < 6 ? '#f43f5e' : '#334155',
                               backgroundColor: '#0f172a'
@@ -946,7 +948,7 @@ export default function Login() {
                       <button
                         type="submit"
                         disabled={submitting || otpValue.trim().length !== 6}
-                        className="group relative w-full py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-cyan-500 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50"
+                        className="group relative w-full py-3.5 rounded-none clip-path-rog font-bold text-sm text-white font-bold tracking-widest uppercase bg-gradient-to-r from-red-500 via-red-600 to-sky-500 hover:from-red-400 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-600/30 hover:shadow-red-600/50"
                       >
                         {submitting ? (
                           <span className="inline-flex items-center gap-2">
@@ -969,7 +971,7 @@ export default function Login() {
                             setOtpValue('');
                             setRegError('');
                           }}
-                          className="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"
+                          className="text-neutral-400 hover:text-red-500 transition-colors flex items-center gap-1"
                         >
                           <ArrowLeft className="w-3 h-3" />
                           Quay lại
@@ -978,7 +980,7 @@ export default function Login() {
                           type="button"
                           onClick={handleResendOTP}
                           disabled={otpResendCountdown > 0 || submitting}
-                          className="text-cyan-400 hover:text-cyan-300 font-semibold disabled:text-slate-600 disabled:cursor-not-allowed transition-colors"
+                          className="text-red-500 hover:text-red-400 font-semibold disabled:text-slate-600 disabled:cursor-not-allowed transition-colors"
                         >
                           Gửi lại mã
                         </button>
@@ -986,12 +988,12 @@ export default function Login() {
                     </form>
                   )}
 
-                  <p className="text-center text-xs text-slate-400 pt-1">
+                  <p className="text-center text-xs text-neutral-400 pt-1">
                     Đã có tài khoản?{' '}
                     <button
                       type="button"
                       onClick={() => toggleMode('login')}
-                      className="text-cyan-400 font-semibold hover:underline"
+                      className="text-red-500 font-semibold hover:underline"
                     >
                       Đăng nhập ngay
                     </button>
@@ -1004,18 +1006,18 @@ export default function Login() {
                 <form onSubmit={handleForgot} noValidate className="space-y-4">
                   {forgotSent ? (
                     <div className="text-center py-6 space-y-3">
-                      <div className="mx-auto w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                        <CheckCircle2 className="w-7 h-7 text-emerald-400" />
+                      <div className="mx-auto w-14 h-14 rounded-none clip-path-rog bg-red-600/10 border border-red-600/30 flex items-center justify-center">
+                        <CheckCircle2 className="w-7 h-7 text-red-500" />
                       </div>
                       <h3 className="text-base font-bold text-white">Đã gửi email khôi phục!</h3>
-                      <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                        Vui lòng kiểm tra hộp thư <strong className="text-cyan-300">{forgotEmail}</strong>.
+                      <p className="text-xs text-neutral-400 max-w-sm mx-auto">
+                        Vui lòng kiểm tra hộp thư <strong className="text-red-400">{forgotEmail}</strong>.
                         Liên kết đặt lại có hiệu lực trong 1 giờ.
                       </p>
                       <button
                         type="button"
                         onClick={() => toggleMode('login')}
-                        className="mt-4 px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 text-xs font-bold hover:bg-cyan-400"
+                        className="mt-4 px-4 py-2 rounded-none clip-path-rog bg-red-600 text-white font-bold tracking-widest uppercase text-xs font-bold hover:bg-red-500"
                       >
                         Quay lại đăng nhập
                       </button>
@@ -1037,7 +1039,7 @@ export default function Login() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="w-full py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-cyan-500 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/30"
+                        className="w-full py-3.5 rounded-none clip-path-rog font-bold text-sm text-white font-bold tracking-widest uppercase bg-gradient-to-r from-red-500 via-red-600 to-sky-500 hover:from-red-400 hover:to-sky-400 disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-red-600/30"
                       >
                         {submitting ? (
                           <span className="inline-flex items-center gap-2">
@@ -1051,12 +1053,12 @@ export default function Login() {
                           </span>
                         )}
                       </button>
-                      <p className="text-center text-xs text-slate-400">
+                      <p className="text-center text-xs text-neutral-400">
                         Nhớ mật khẩu rồi?{' '}
                         <button
                           type="button"
                           onClick={() => toggleMode('login')}
-                          className="text-cyan-400 font-semibold hover:underline"
+                          className="text-red-500 font-semibold hover:underline"
                         >
                           Đăng nhập
                         </button>
@@ -1070,15 +1072,15 @@ export default function Login() {
             {/* Trust badges */}
             <div className="mt-5 flex items-center justify-center gap-5 text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
               <span className="inline-flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-emerald-400" />
+                <Shield className="w-3.5 h-3.5 text-red-500" />
                 SSL 256-bit
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                <Lock className="w-3.5 h-3.5 text-red-500" />
                 Bcrypt Hash
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-purple-400" />
+                <Award className="w-3.5 h-3.5 text-red-500" />
                 JWT Auth
               </span>
             </div>
@@ -1112,25 +1114,25 @@ function Field({
   return (
     <div className="space-y-1.5">
       {label && (
-        <label htmlFor={id} className="block text-xs font-semibold text-slate-300">
+        <label htmlFor={id} className="block text-xs font-semibold text-neutral-300">
           {label}
         </label>
       )}
       <div
-        className={`relative rounded-xl bg-slate-900/80 border transition-all ${
+        className={`relative rounded-none clip-path-rog bg-black/80 border transition-all ${
           error
             ? 'border-rose-500/60 ring-1 ring-rose-500/20'
             : showSuccess
-            ? 'border-emerald-500/40 ring-1 ring-emerald-500/10'
+            ? 'border-red-600/40 ring-1 ring-red-600/10'
             : focused
-            ? 'border-cyan-500/60 ring-2 ring-cyan-500/15'
-            : 'border-slate-800 hover:border-slate-700'
+            ? 'border-red-600/60 ring-2 ring-red-600/15'
+            : 'border-neutral-800 hover:border-slate-700'
         }`}
       >
         {Icon && (
           <Icon
             className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${
-              error ? 'text-rose-400' : showSuccess ? 'text-emerald-400' : focused ? 'text-cyan-400' : 'text-slate-500'
+              error ? 'text-rose-400' : showSuccess ? 'text-red-500' : focused ? 'text-red-500' : 'text-slate-500'
             }`}
           />
         )}
@@ -1152,7 +1154,7 @@ function Field({
         />
         <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
           {trailing}
-          {showSuccess && <Check className="w-4 h-4 text-emerald-400" />}
+          {showSuccess && <Check className="w-4 h-4 text-red-500" />}
           {error && <AlertCircle className="w-4 h-4 text-rose-400" />}
         </div>
       </div>
@@ -1170,10 +1172,10 @@ function AlertBox({ type = 'error', message, attempts }) {
   const isError = type === 'error';
   return (
     <div
-      className={`p-3 rounded-xl text-xs font-medium border ${
+      className={`p-3 rounded-none clip-path-rog text-xs font-medium border ${
         isError
           ? 'bg-rose-500/10 border-rose-500/30 text-rose-300'
-          : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+          : 'bg-red-600/10 border-red-600/30 text-emerald-300'
       }`}
     >
       <div className="flex items-start gap-2">
@@ -1194,13 +1196,13 @@ function AlertBox({ type = 'error', message, attempts }) {
 // Cảnh báo khi tài khoản bị admin/staff khoá (is_active=false)
 function AccountLockedByAdminAlert() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-rose-500/40 bg-gradient-to-br from-rose-500/15 via-rose-500/5 to-transparent p-4 space-y-3 animate-fadeInUp">
+    <div className="relative overflow-hidden rounded-none clip-path-rog border border-rose-500/40 bg-gradient-to-br from-rose-500/15 via-rose-500/5 to-transparent p-4 space-y-3 animate-fadeInUp">
       {/* Decorative blur */}
       <div className="absolute -top-12 -right-12 w-40 h-40 bg-rose-500/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative flex items-start gap-3">
-        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-rose-500/30">
+        <div className="w-11 h-11 rounded-none clip-path-rog bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-rose-500/30">
           <Ban className="w-5 h-5 text-white" />
         </div>
         <div className="flex-1 min-w-0">
@@ -1218,7 +1220,7 @@ function AccountLockedByAdminAlert() {
       <div className="relative grid grid-cols-2 gap-2 pt-1">
         <Link
           to="/contact"
-          className="group flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-400 via-cyan-500 to-sky-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all hover:scale-[1.02]"
+          className="group flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none clip-path-rog bg-gradient-to-r from-red-500 via-red-600 to-sky-500 text-white font-bold tracking-widest uppercase font-bold text-xs shadow-lg shadow-red-600/30 hover:shadow-red-600/50 transition-all hover:scale-[1.02]"
         >
           <MessageCircle className="w-4 h-4 group-hover:rotate-12 transition-transform" />
           Liên hệ hỗ trợ
@@ -1226,7 +1228,7 @@ function AccountLockedByAdminAlert() {
         </Link>
         <a
           href="tel:19006789"
-          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-200 font-bold text-xs hover:border-emerald-500/50 hover:text-emerald-300 transition-all"
+          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-none clip-path-rog bg-black/80 border border-slate-700 text-slate-200 font-bold text-xs hover:border-red-600/50 hover:text-emerald-300 transition-all"
         >
           <PhoneCall className="w-4 h-4" />
           Gọi 1900 6789

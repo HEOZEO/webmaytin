@@ -194,12 +194,12 @@ export default function Products() {
 
   const FilterPanel = () => (
     <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <h3 className="font-bold text-white text-sm flex items-center gap-2">
-          <SlidersHorizontal className="w-4 h-4 text-cyan-400" /> Bộ Lọc Tìm Kiếm
+      <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+        <h3 className="font-bold text-black text-sm flex items-center gap-2">
+          <SlidersHorizontal className="w-4 h-4 text-red-600" /> Bộ Lọc Tìm Kiếm
         </h3>
         {activeFilterCount > 0 && (
-          <button onClick={clearFilters} className="text-xs text-rose-400 hover:underline flex items-center gap-1">
+          <button onClick={clearFilters} className="text-xs text-rose-500 hover:underline flex items-center gap-1">
             <X className="w-3 h-3" /> Xóa ({activeFilterCount})
           </button>
         )}
@@ -207,11 +207,11 @@ export default function Products() {
 
       {/* Brand Filter */}
       <div className="space-y-2">
-        <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Thương Hiệu</label>
+        <label className="text-xs font-semibold text-neutral-700 uppercase tracking-wider">Thương Hiệu</label>
         <select
           value={selectedBrand}
           onChange={(e) => { setSelectedBrand(e.target.value); setCurrentPage(1); }}
-          className="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none"
+          className="w-full p-2.5 bg-white border border-neutral-200 rounded-none clip-path-rog text-sm text-black focus:outline-none focus:border-red-600 focus:shadow-[0_0_10px_rgba(255,0,41,0.1)]"
         >
           <option value="">Tất cả thương hiệu</option>
           {brands.map(b => (
@@ -222,11 +222,11 @@ export default function Products() {
 
       {/* Price Range Filter */}
       <div className="space-y-2">
-        <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Khoảng Giá</label>
+        <label className="text-xs font-semibold text-neutral-700 uppercase tracking-wider">Khoảng Giá</label>
         <select
           value={selectedPriceRange}
           onChange={(e) => { setSelectedPriceRange(e.target.value); setCurrentPage(1); }}
-          className="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none"
+          className="w-full p-2.5 bg-white border border-neutral-200 rounded-none clip-path-rog text-sm text-black focus:outline-none focus:border-red-600 focus:shadow-[0_0_10px_rgba(255,0,41,0.1)]"
         >
           {PRICE_RANGES.map(r => (
             <option key={r.value} value={r.value}>{r.label}</option>
@@ -250,25 +250,25 @@ export default function Products() {
       <FilterChipGroup label="Kích Thước Màn Hình" icon={Monitor} field="screen_size" selected={selectedScreen} setSelected={setSelectedScreen} setCurrentPage={setCurrentPage} />
 
       {/* In Stock Toggle */}
-      <div className="space-y-2 pt-2 border-t border-slate-800">
+      <div className="space-y-2 pt-2 border-t border-neutral-800">
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
             checked={inStockOnly}
             onChange={(e) => { setInStockOnly(e.target.checked); setCurrentPage(1); }}
-            className="w-4 h-4 accent-cyan-500"
+            className="w-4 h-4 accent-red-600"
           />
-          <span className="text-xs font-semibold text-slate-300">Chỉ hiển thị còn hàng</span>
+          <span className="text-xs font-semibold text-neutral-300">Chỉ hiển thị còn hàng</span>
         </label>
       </div>
 
       {/* Sort Selector */}
-      <div className="space-y-2 pt-2 border-t border-slate-800">
-        <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Sắp Xếp</label>
+      <div className="space-y-2 pt-2 border-t border-neutral-800">
+        <label className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">Sắp Xếp</label>
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none"
+          className="w-full p-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-sm text-slate-200 focus:outline-none"
         >
           <option value="featured">Nổi bật nhất</option>
           <option value="best-seller">Bán chạy nhất</option>
@@ -280,7 +280,7 @@ export default function Products() {
       </div>
 
       {compareCount > 0 && (
-        <Link to="/compare" className="flex items-center justify-between gap-2 w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold rounded-xl text-xs">
+        <Link to="/compare" className="flex items-center justify-between gap-2 w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs">
           <span className="flex items-center gap-2"><Eye className="w-4 h-4" /> So sánh ({compareCount})</span>
           <span className="opacity-75">→</span>
         </Link>
@@ -289,14 +289,35 @@ export default function Products() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div>
-          <h1 className="text-3xl font-bold text-white">
-            {showWishlistOnly ? 'Danh Sách Yêu Thích' : 'Bộ Sưu Tập Laptop & PC'}
+    <div className="w-full bg-[#f4f5f6] min-h-screen pb-16 relative overflow-hidden">
+      {/* Họa tiết ROG Slash Pattern & Tech Glow */}
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(0,0,0,0.03) 4px, rgba(0,0,0,0.03) 5px)' }}></div>
+      <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      <div className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      
+      <div className="relative z-10">
+      {/* Hero Banner */}
+      <div className="relative w-full h-[250px] md:h-[350px] overflow-hidden bg-black mb-8">
+        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=1920&q=80" alt="All Models Banner" className="w-full h-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-3">
+          <h1 className="text-3xl md:text-5xl font-black text-white font-rog uppercase tracking-widest drop-shadow-[0_0_15px_rgba(255,0,41,0.5)]">
+            LAPTOP GAMING ASUS ROG
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Hiển thị <strong className="text-cyan-400">{sortedProducts.length}</strong> sản phẩm phù hợp</p>
+          <p className="text-red-500 font-bold uppercase tracking-widest text-sm">
+            {showWishlistOnly ? 'DANH SÁCH YÊU THÍCH' : 'TẤT CẢ SẢN PHẨM'}
+          </p>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        {/* Toolbar */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-200 pb-4">
+          <div>
+            <p className="text-neutral-600 text-sm font-bold uppercase tracking-wider">
+              Hiển thị <strong className="text-red-600">{sortedProducts.length}</strong> sản phẩm phù hợp
+            </p>
+          </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative min-w-[260px] flex-1">
@@ -306,33 +327,33 @@ export default function Products() {
               placeholder="Tìm tên laptop, CPU, RAM..."
               value={searchTerm}
               onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-neutral-200 rounded-none clip-path-rog text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-red-600 focus:shadow-[0_0_10px_rgba(255,0,41,0.2)]"
             />
           </div>
 
           <button
             onClick={() => setShowMobileFilter(true)}
-            className="lg:hidden relative p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 hover:text-cyan-400"
+            className="lg:hidden relative p-2.5 bg-black border border-neutral-800 rounded-none clip-path-rog text-neutral-300 hover:text-red-500"
           >
             <FilterIcon className="w-4 h-4" />
             {activeFilterCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-cyan-500 text-slate-950 text-[10px] font-bold rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white font-bold tracking-widest uppercase text-[10px] font-bold rounded-full flex items-center justify-center">
                 {activeFilterCount}
               </span>
             )}
           </button>
 
-          <div className="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-1">
+          <div className="flex items-center bg-white border border-neutral-200 rounded-none clip-path-rog p-1">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-cyan-500 text-slate-950' : 'text-slate-400 hover:text-white'}`}
+              className={`p-2 rounded-none transition-all ${viewMode === 'grid' ? 'bg-red-600 text-white shadow-[0_0_10px_rgba(255,0,41,0.4)]' : 'text-neutral-400 hover:text-red-600 hover:bg-neutral-100'}`}
               title="Lưới"
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-cyan-500 text-slate-950' : 'text-slate-400 hover:text-white'}`}
+              className={`p-2 rounded-none transition-all ${viewMode === 'list' ? 'bg-red-600 text-white shadow-[0_0_10px_rgba(255,0,41,0.4)]' : 'text-neutral-400 hover:text-red-600 hover:bg-neutral-100'}`}
               title="Danh sách"
             >
               <List className="w-4 h-4" />
@@ -343,7 +364,7 @@ export default function Products() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <aside className="hidden lg:block lg:col-span-3">
-          <div className="glass-card p-5 rounded-2xl border border-slate-800 sticky top-24">
+          <div className="bg-white border border-neutral-200 clip-path-rog p-5 rounded-none sticky top-24 shadow-sm">
             <FilterPanel />
           </div>
         </aside>
@@ -352,13 +373,13 @@ export default function Products() {
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-                <div key={i} className="glass-card rounded-2xl h-84 animate-pulse" />
+                <div key={i} className="bg-white border border-neutral-200 clip-path-rog rounded-none clip-path-rog h-84 animate-pulse" />
               ))}
             </div>
           ) : currentProducts.length === 0 ? (
-            <div className="glass-card p-12 text-center rounded-2xl space-y-3">
-              <p className="text-slate-400 text-base">Không tìm thấy sản phẩm nào phù hợp với bộ lọc hiện tại.</p>
-              <button onClick={clearFilters} className="px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl text-xs">
+            <div className="bg-white border border-neutral-200 clip-path-rog p-12 text-center rounded-none clip-path-rog space-y-3">
+              <p className="text-neutral-600 text-base">Không tìm thấy sản phẩm nào phù hợp với bộ lọc hiện tại.</p>
+              <button onClick={clearFilters} className="px-4 py-2 bg-red-600 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs hover:bg-red-500">
                 Đặt Lại Bộ Lọc
               </button>
             </div>
@@ -377,11 +398,11 @@ export default function Products() {
           )}
 
           {totalPages > 1 && (
-            <div className="flex items-center justify-center space-x-2 pt-6 border-t border-slate-800">
+            <div className="flex items-center justify-center space-x-2 pt-6 border-t border-neutral-200">
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(p => p - 1)}
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white disabled:opacity-40"
+                className="p-2 rounded-lg bg-white border border-neutral-200 text-neutral-500 hover:text-red-600 hover:border-red-200 disabled:opacity-40 transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -389,8 +410,8 @@ export default function Products() {
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-9 h-9 rounded-lg font-semibold text-xs transition-all ${
-                    currentPage === i + 1 ? 'bg-cyan-500 text-slate-950 font-bold' : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                  className={`w-9 h-9 rounded-lg font-bold text-xs transition-all ${
+                    currentPage === i + 1 ? 'bg-red-600 text-white shadow-[0_0_10px_rgba(255,0,41,0.3)]' : 'bg-white text-neutral-500 hover:text-red-600 border border-neutral-200 hover:border-red-200'
                   }`}
                 >
                   {i + 1}
@@ -399,7 +420,7 @@ export default function Products() {
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage(p => p + 1)}
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white disabled:opacity-40"
+                className="p-2 rounded-lg bg-white border border-neutral-200 text-neutral-500 hover:text-red-600 hover:border-red-200 disabled:opacity-40 transition-colors"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -411,20 +432,20 @@ export default function Products() {
       {showMobileFilter && (
         <div className="fixed inset-0 z-[60] lg:hidden">
           <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setShowMobileFilter(false)} />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto glass-card rounded-t-3xl p-6 space-y-6 border-t-2 border-cyan-500/40 animate-[slideUp_0.3s_ease-out]">
-            <div className="flex items-center justify-between sticky top-0 bg-slate-900/90 pb-3 -mt-2 pt-2 backdrop-blur z-10">
-              <h3 className="font-bold text-white text-base flex items-center gap-2">
-                <FilterIcon className="w-5 h-5 text-cyan-400" /> Bộ Lọc {activeFilterCount > 0 && <span className="text-cyan-400">({activeFilterCount})</span>}
+          <div className="absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto bg-white border border-neutral-200 clip-path-rog rounded-t-3xl p-6 space-y-6 border-t-2 border-red-600/40 animate-[slideUp_0.3s_ease-out]">
+            <div className="flex items-center justify-between sticky top-0 bg-white/90 pb-3 -mt-2 pt-2 backdrop-blur z-10">
+              <h3 className="font-bold text-black text-base flex items-center gap-2">
+                <FilterIcon className="w-5 h-5 text-red-600" /> Bộ Lọc {activeFilterCount > 0 && <span className="text-red-600">({activeFilterCount})</span>}
               </h3>
-              <button onClick={() => setShowMobileFilter(false)} className="p-2 text-slate-400 hover:text-white">
+              <button onClick={() => setShowMobileFilter(false)} className="p-2 text-neutral-400 hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <FilterPanel />
-            <div className="sticky bottom-0 bg-slate-900/90 backdrop-blur -mx-6 px-6 pt-3 pb-1 border-t border-slate-800">
+            <div className="sticky bottom-0 bg-white/90 backdrop-blur -mx-6 px-6 pt-3 pb-1 border-t border-neutral-200">
               <button
                 onClick={() => setShowMobileFilter(false)}
-                className="w-full py-3 bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 font-bold rounded-xl text-sm"
+                className="w-full py-3 bg-red-600 text-white font-bold tracking-widest uppercase rounded-none clip-path-rog text-sm hover:bg-red-500 hover:shadow-[0_0_15px_rgba(255,0,41,0.5)] transition-all"
               >
                 Áp dụng ({sortedProducts.length} sản phẩm)
               </button>
@@ -432,6 +453,8 @@ export default function Products() {
           </div>
         </div>
       )}
+      </div>
+      </div>
     </div>
   );
 }
@@ -444,18 +467,18 @@ function FilterChipGroup({ label, icon: Icon, field, selected, setSelected, setC
   };
   return (
     <div className="space-y-2">
-      <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-1">
-        {Icon && <Icon className="w-3 h-3 text-cyan-400" />} {label}
+      <label className="text-xs font-semibold text-neutral-700 uppercase tracking-wider flex items-center gap-1">
+        {Icon && <Icon className="w-3 h-3 text-red-600" />} {label}
       </label>
       <div className="flex flex-wrap gap-1.5">
         {options.map(opt => (
           <button
             key={opt}
             onClick={() => toggle(opt)}
-            className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all ${
+            className={`px-3 py-1.5 rounded-none clip-path-rog text-xs font-bold uppercase tracking-wide border transition-all ${
               selected.includes(opt)
-                ? 'border-cyan-400 bg-cyan-950/60 text-cyan-300'
-                : 'border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white hover:border-slate-700'
+                ? 'border-red-600 bg-red-50 text-red-600 shadow-[0_0_10px_rgba(255,0,41,0.1)]'
+                : 'border-neutral-200 bg-[#f4f5f6] text-neutral-600 hover:text-black hover:border-red-600/50'
             }`}
           >
             {opt}
@@ -479,9 +502,10 @@ function ProductCard({ product, formatPrice, addToCart, toggleWishlist, isInWish
     }
   };
   return (
-    <div className="glass-card rounded-2xl p-4 flex flex-col justify-between group hover:border-cyan-500/40 transition-all">
+    <div className="bg-white p-4 flex flex-col justify-between group transition-all relative overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1">
+      <div className="absolute top-0 left-0 w-full h-1 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 z-10"></div>
       <div>
-        <div className="relative aspect-video rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 flex items-center justify-center">
+        <div className="relative aspect-video overflow-hidden mb-3 bg-[#f4f5f6] flex items-center justify-center">
           <Link to={`/products/${product.id}`} className="block w-full h-full">
             <img
               src={resolveImage(product.image_url)}
@@ -493,8 +517,8 @@ function ProductCard({ product, formatPrice, addToCart, toggleWishlist, isInWish
           </Link>
           <button
             onClick={() => toggleWishlist(product)}
-            className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-md transition-colors ${
-              isInWishlist(product.id) ? 'bg-rose-500 text-white' : 'bg-slate-900/60 text-slate-300 hover:text-white'
+            className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-md shadow-sm transition-colors ${
+              isInWishlist(product.id) ? 'bg-rose-500 text-white' : 'bg-white/90 text-neutral-500 hover:text-red-600'
             }`}
           >
             <Heart className="w-4 h-4" />
@@ -502,8 +526,8 @@ function ProductCard({ product, formatPrice, addToCart, toggleWishlist, isInWish
           <button
             onClick={handleAddToCompare}
             title="So sánh"
-            className={`absolute top-12 right-2 p-2 rounded-full backdrop-blur-md transition-colors ${
-              isInCompare(product.id) ? 'bg-amber-500 text-slate-950' : 'bg-slate-900/60 text-slate-300 hover:text-amber-400'
+            className={`absolute top-12 right-2 p-2 rounded-full backdrop-blur-md shadow-sm transition-colors ${
+              isInCompare(product.id) ? 'bg-amber-500 text-white font-bold tracking-widest uppercase' : 'bg-white/90 text-neutral-500 hover:text-amber-500'
             }`}
           >
             <Eye className="w-4 h-4" />
@@ -516,28 +540,39 @@ function ProductCard({ product, formatPrice, addToCart, toggleWishlist, isInWish
         </div>
 
         <Link to={`/products/${product.id}`} className="block">
-          <h3 className="font-bold text-white text-sm line-clamp-2 group-hover:text-cyan-300 transition-colors min-h-[2.5rem]">
+          <h3 className="font-bold text-black text-sm line-clamp-2 group-hover:text-red-600 transition-colors uppercase tracking-wide min-h-[2.5rem]">
             {product.name}
           </h3>
         </Link>
 
-        <div className="grid grid-cols-2 gap-1 mt-3 text-[11px] text-slate-400">
-          <div className="bg-slate-900 p-1 rounded text-center truncate">{product.cpu || '—'}</div>
-          <div className="bg-slate-900 p-1 rounded text-center truncate">{product.ram || '—'}</div>
+        <div className="flex flex-col gap-1.5 mt-3">
+          <div className="flex items-center gap-2 bg-[#f4f5f6] px-2.5 py-1.5 shadow-sm border-l-2 border-blue-600">
+            <Cpu className="w-3.5 h-3.5 shrink-0 text-blue-600" />
+            <span className="text-[10px] text-neutral-700 font-bold uppercase tracking-wider leading-tight">
+              {product.cpu || 'Intel Core'}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 bg-[#f4f5f6] px-2.5 py-1.5 shadow-sm border-l-2 border-red-600">
+            <HardDrive className="w-3.5 h-3.5 shrink-0 text-red-600" />
+            <span className="text-[10px] text-neutral-700 font-bold uppercase tracking-wider leading-tight">
+              {product.ram || '16GB RAM'}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
-        <div className="min-w-0">
-          <div className="text-[10px] text-slate-500">Giá bán:</div>
-          <div className="text-base font-bold text-cyan-400 truncate">{formatPrice(product.price)}</div>
+      <div className="mt-5 pt-3 border-t border-neutral-200 flex items-center justify-between gap-2">
+        <div className="flex-1">
+          <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-wider">Giá bán:</div>
+          <div className="text-base sm:text-lg font-black text-red-600 leading-tight whitespace-nowrap">{formatPrice(product.price)}</div>
         </div>
         <button
           onClick={handleAddToCart}
           disabled={product.stock === 0}
-          className="px-3 py-2 bg-cyan-500 hover:bg-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-bold rounded-xl text-[11px] flex items-center gap-1 transition-colors whitespace-nowrap"
+          title="Thêm vào giỏ hàng"
+          className="p-3 bg-red-600 hover:bg-red-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-none clip-path-rog shrink-0 transition-all hover:shadow-[0_0_15px_rgba(255,0,41,0.5)]"
         >
-          <ShoppingCart className="w-3.5 h-3.5" /> Thêm
+          <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
     </div>
@@ -550,8 +585,10 @@ function ProductListItem({ product, formatPrice, addToCart, toggleWishlist, isIn
     showToast.success(`Đã thêm "${product.name}" vào giỏ hàng`);
   };
   return (
-    <div className="glass-card p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 group hover:border-cyan-500/40 transition-all">
-      <Link to={`/products/${product.id}`} className="w-full sm:w-48 h-32 flex-shrink-0 bg-gradient-to-br from-slate-800 to-slate-950 rounded-xl overflow-hidden flex items-center justify-center p-2">
+    <div className="bg-white p-5 flex flex-col sm:flex-row items-center gap-6 group transition-all relative overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1">
+      <div className="absolute top-0 left-0 w-1 h-full sm:w-full sm:h-1 bg-red-600 scale-y-0 sm:scale-x-0 group-hover:scale-y-100 sm:group-hover:scale-x-100 transition-transform origin-top sm:origin-left duration-500 z-10"></div>
+      
+      <Link to={`/products/${product.id}`} className="w-full sm:w-48 h-32 flex-shrink-0 bg-[#f4f5f6] overflow-hidden flex items-center justify-center p-2">
         <img
           src={resolveImage(product.image_url)}
           alt={product.name}
@@ -561,34 +598,42 @@ function ProductListItem({ product, formatPrice, addToCart, toggleWishlist, isIn
       </Link>
       <div className="flex-1 space-y-2 min-w-0">
         <Link to={`/products/${product.id}`}>
-          <h3 className="font-bold text-white text-lg group-hover:text-cyan-300 transition-colors line-clamp-1">
+          <h3 className="font-bold text-black text-lg group-hover:text-red-600 transition-colors line-clamp-1 uppercase tracking-wide">
             {product.name}
           </h3>
         </Link>
-        <p className="text-xs text-slate-400 line-clamp-2">{product.description}</p>
-        <div className="flex flex-wrap gap-2 text-xs">
-          {product.cpu && <span className="px-2.5 py-1 bg-slate-900 rounded-md text-slate-300">CPU: {product.cpu}</span>}
-          {product.ram && <span className="px-2.5 py-1 bg-slate-900 rounded-md text-slate-300">RAM: {product.ram}</span>}
-          {product.storage && <span className="px-2.5 py-1 bg-slate-900 rounded-md text-slate-300">SSD: {product.storage}</span>}
-          {product.gpu && <span className="px-2.5 py-1 bg-slate-900 rounded-md text-slate-300">GPU: {product.gpu}</span>}
+        <p className="text-xs text-neutral-400 line-clamp-2">{product.description}</p>
+        <div className="flex flex-wrap gap-2 text-xs mt-2">
+          {product.cpu && (
+            <div className="flex items-center gap-1.5 bg-[#f4f5f6] px-2 py-1 shadow-sm border-l-2 border-blue-600">
+              <Cpu className="w-3 h-3 text-blue-600" />
+              <span className="font-bold uppercase tracking-wider text-neutral-700">{product.cpu}</span>
+            </div>
+          )}
+          {product.ram && (
+            <div className="flex items-center gap-1.5 bg-[#f4f5f6] px-2 py-1 shadow-sm border-l-2 border-red-600">
+              <HardDrive className="w-3 h-3 text-red-600" />
+              <span className="font-bold uppercase tracking-wider text-neutral-700">{product.ram}</span>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex flex-col items-end gap-3 min-w-[140px]">
-        <div className="text-xl font-bold text-cyan-400">{formatPrice(product.price)}</div>
+        <div className="text-xl font-bold text-red-600">{formatPrice(product.price)}</div>
         <div className="flex gap-2">
           <button
             onClick={() => {
               toggleWishlist(product);
               showToast.success(isInWishlist(product.id) ? 'Đã xóa khỏi yêu thích' : 'Đã thêm vào yêu thích');
             }}
-            className={`p-2 rounded-xl border ${isInWishlist(product.id) ? 'border-rose-500 text-rose-400 bg-rose-500/10' : 'border-slate-700 text-slate-400 hover:text-rose-400'}`}
+            className={`p-2 rounded-none clip-path-rog border ${isInWishlist(product.id) ? 'border-rose-500 text-rose-500 bg-rose-50' : 'border-neutral-200 text-neutral-400 bg-[#f4f5f6] hover:text-rose-500'}`}
           >
             <Heart className="w-4 h-4" />
           </button>
           <button
             onClick={handleAddToCart}
             disabled={product.stock === 0}
-            className="py-2.5 px-4 bg-cyan-500 hover:bg-cyan-400 disabled:opacity-40 text-slate-950 font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-1.5"
+            className="py-2.5 px-4 bg-red-600 hover:bg-red-500 disabled:opacity-40 text-white font-bold tracking-widest uppercase font-bold rounded-none clip-path-rog text-xs transition-colors flex items-center justify-center gap-1.5"
           >
             <ShoppingCart className="w-4 h-4" /> Thêm Giỏ
           </button>

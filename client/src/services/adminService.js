@@ -187,4 +187,21 @@ export const adminOrderService = {
   }
 };
 
+export const adminReviewService = {
+  getAll: async (params = {}) => {
+    const response = await api.get('/admin/reviews', { params });
+    return response.data;
+  },
+
+  toggleVisibility: async (id) => {
+    const response = await api.put(`/admin/reviews/${id}/toggle-visibility`);
+    return response.data;
+  },
+
+  delete: async (id) => {
+    const response = await api.delete(`/admin/reviews/${id}`);
+    return response.data;
+  }
+};
+
 export default adminService;

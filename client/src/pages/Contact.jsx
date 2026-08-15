@@ -25,7 +25,7 @@ const STORE_LOCATIONS = [
 ];
 
 const SOCIALS = [
-  { name: 'Facebook', icon: Facebook, color: 'hover:bg-blue-600', link: 'https://facebook.com' },
+  { name: 'Facebook', icon: Facebook, color: 'hover:bg-red-700', link: 'https://facebook.com' },
   { name: 'YouTube', icon: Youtube, color: 'hover:bg-rose-600', link: 'https://youtube.com' },
   { name: 'Instagram', icon: Instagram, color: 'hover:bg-pink-600', link: 'https://instagram.com' },
   { name: 'Website', icon: Globe, color: 'hover:bg-cyan-600', link: '/' }
@@ -104,72 +104,73 @@ export default function Contact() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-10 sm:space-y-12">
-      {/* Hero */}
-      <section className="text-center space-y-4 animate-fadeInUp">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
-          <Sparkles className="w-3.5 h-3.5" />
-          Liên Hệ Với Chúng Tôi
-        </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-          Hỗ Trợ <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">24/7</span>
-        </h1>
-        <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
-          Đội ngũ tư vấn viên của LaptopStore luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của bạn.
-          Liên hệ ngay để được hỗ trợ nhanh nhất.
-        </p>
-      </section>
-
-      {/* Quick contact cards */}
-      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-        <a href="tel:19006789" className="glass-card p-5 sm:p-6 rounded-2xl space-y-3 border-l-4 border-cyan-500 hover:border-cyan-400 hover:scale-[1.02] transition-all">
-          <div className="inline-flex p-2.5 bg-cyan-500/10 rounded-lg text-cyan-400 border border-cyan-500/30">
-            <Phone className="w-5 h-5" />
+    <div className="min-h-screen bg-[#f4f5f6] relative">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+        {/* Hero */}
+        <section className="text-center space-y-4 animate-fadeInUp">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold uppercase tracking-wider shadow-sm">
+            <Sparkles className="w-3.5 h-3.5" />
+            Liên Hệ Với Chúng Tôi
           </div>
-          <h3 className="text-sm sm:text-base font-bold text-white">Hotline Bán Hàng</h3>
-          <p className="text-xl sm:text-2xl font-black text-cyan-300">1900 6789</p>
-          <p className="text-xs text-slate-400">8:00 - 22:00 (Tất cả các ngày, kể cả Lễ Tết)</p>
-        </a>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-black uppercase tracking-tight">
+            Hỗ Trợ <span className="text-red-600">24/7</span>
+          </h1>
+          <p className="text-neutral-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Đội ngũ tư vấn viên của LaptopStore luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của bạn.
+            Liên hệ ngay để được hỗ trợ nhanh nhất.
+          </p>
+        </section>
 
-        <a href="mailto:support@laptopstore.com" className="glass-card p-5 sm:p-6 rounded-2xl space-y-3 border-l-4 border-emerald-500 hover:border-emerald-400 hover:scale-[1.02] transition-all">
-          <div className="inline-flex p-2.5 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/30">
-            <Mail className="w-5 h-5" />
-          </div>
-          <h3 className="text-sm sm:text-base font-bold text-white">Email Hỗ Trợ</h3>
-          <p className="text-base sm:text-lg font-bold text-emerald-300 truncate">support@laptopstore.com</p>
-          <p className="text-xs text-slate-400">Phản hồi trong vòng 2 giờ làm việc</p>
-        </a>
+        {/* Quick contact cards */}
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <a href="tel:19006789" className="group bg-white border border-neutral-200 p-6 sm:p-8 rounded-xl shadow-sm space-y-4 border-l-4 border-l-red-600 hover:border-red-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="inline-flex p-3 bg-red-50 rounded-lg text-red-600 border border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors">
+              <Phone className="w-6 h-6" />
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-black uppercase tracking-wide">Hotline Bán Hàng</h3>
+            <p className="text-2xl sm:text-3xl font-black text-red-600">1900 6789</p>
+            <p className="text-xs text-neutral-500 font-medium">8:00 - 22:00 (Tất cả các ngày)</p>
+          </a>
 
-        <div className="glass-card p-5 sm:p-6 rounded-2xl space-y-3 border-l-4 border-purple-500">
-          <div className="inline-flex p-2.5 bg-purple-500/10 rounded-lg text-purple-400 border border-purple-500/30">
-            <MessageSquare className="w-5 h-5" />
+          <a href="mailto:support@laptopstore.com" className="group bg-white border border-neutral-200 p-6 sm:p-8 rounded-xl shadow-sm space-y-4 border-l-4 border-l-red-600 hover:border-red-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="inline-flex p-3 bg-red-50 rounded-lg text-red-600 border border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors">
+              <Mail className="w-6 h-6" />
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-black uppercase tracking-wide">Email Hỗ Trợ</h3>
+            <p className="text-lg sm:text-xl font-bold text-neutral-800 truncate">support@laptopstore.com</p>
+            <p className="text-xs text-neutral-500 font-medium">Phản hồi trong vòng 2 giờ làm việc</p>
+          </a>
+
+          <div className="group bg-white border border-neutral-200 p-6 sm:p-8 rounded-xl shadow-sm space-y-4 border-l-4 border-l-red-600 hover:border-red-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="inline-flex p-3 bg-red-50 rounded-lg text-red-600 border border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors">
+              <MessageSquare className="w-6 h-6" />
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-black uppercase tracking-wide">Live Chat</h3>
+            <p className="text-xl sm:text-2xl font-black text-red-600">8:00 - 22:00</p>
+            <p className="text-xs text-neutral-500 font-medium">Hỗ trợ qua Messenger & Zalo OA</p>
           </div>
-          <h3 className="text-sm sm:text-base font-bold text-white">Live Chat Trực Tuyến</h3>
-          <p className="text-base sm:text-lg font-bold text-purple-300">8:00 - 22:00</p>
-          <p className="text-xs text-slate-400">Hỗ trợ qua Messenger & Zalo OA</p>
-        </div>
-      </section>
+        </section>
 
       {/* Form + stores */}
-      <section className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-2 space-y-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-cyan-400" /> Hệ Thống Cửa Hàng
+      <section className="grid grid-cols-1 lg:grid-cols-5 gap-6 relative z-10">
+        <div className="lg:col-span-2 space-y-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-black uppercase tracking-wide border-b border-neutral-200 pb-3 flex items-center gap-2">
+            <Building2 className="w-6 h-6 text-red-600" /> Hệ Thống Cửa Hàng
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {STORE_LOCATIONS.map((loc, idx) => (
-              <div key={idx} className="glass-card p-4 sm:p-5 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 p-2 bg-cyan-500/10 rounded-lg text-cyan-400 border border-cyan-500/30">
+              <div key={idx} className="group bg-white border border-neutral-200 p-4 sm:p-5 rounded-lg hover:border-red-300 hover:shadow-sm transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 p-2.5 bg-red-50 rounded-lg text-red-600 border border-red-100 group-hover:bg-red-600 group-hover:text-white transition-colors">
                     <MapPin className="w-5 h-5" />
                   </div>
-                  <div className="flex-1 min-w-0 space-y-1.5">
-                    <h3 className="text-sm font-bold text-white">Cửa Hàng {loc.city}</h3>
-                    <p className="text-xs text-slate-300 leading-relaxed">{loc.address}</p>
-                    <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="text-xs text-cyan-300 font-bold flex items-center gap-1 hover:text-cyan-200">
+                  <div className="flex-1 min-w-0 space-y-1.5 pt-0.5">
+                    <h3 className="text-sm font-bold text-black">Cửa Hàng {loc.city}</h3>
+                    <p className="text-xs text-neutral-600 leading-relaxed">{loc.address}</p>
+                    <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="text-xs text-red-600 font-bold flex items-center gap-1 hover:text-red-500">
                       <Phone className="w-3 h-3" /> {loc.phone}
                     </a>
-                    <p className="text-[10px] text-slate-500 flex items-center gap-1">
+                    <p className="text-[10px] text-neutral-500 flex items-center gap-1">
                       <Clock className="w-3 h-3" /> {loc.hours}
                     </p>
                   </div>
@@ -179,9 +180,9 @@ export default function Contact() {
           </div>
 
           {/* Socials */}
-          <div className="pt-4 border-t border-slate-800">
-            <h3 className="text-sm font-bold text-white mb-3">Theo dõi chúng tôi</h3>
-            <div className="flex gap-2">
+          <div className="pt-6 border-t border-neutral-200">
+            <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-4">Theo dõi chúng tôi</h3>
+            <div className="flex gap-3">
               {SOCIALS.map(s => {
                 const Icon = s.icon;
                 return (
@@ -191,7 +192,7 @@ export default function Contact() {
                     title={s.name}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 transition-all ${s.color} hover:text-white hover:border-transparent`}
+                    className={`p-3 bg-white border border-neutral-200 rounded-lg text-neutral-600 transition-all duration-300 ${s.color} hover:text-white hover:border-transparent shadow-sm`}
                   >
                     <Icon className="w-5 h-5" />
                   </a>
@@ -201,16 +202,16 @@ export default function Contact() {
           </div>
 
           {/* FAQ nhanh */}
-          <div className="pt-4 border-t border-slate-800">
-            <h3 className="text-sm font-bold text-white mb-3">Câu hỏi thường gặp</h3>
-            <div className="space-y-2">
+          <div className="pt-6 border-t border-neutral-200">
+            <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-4">Câu hỏi thường gặp</h3>
+            <div className="space-y-3">
               {FAQ_QUICK.map((f, i) => (
-                <details key={i} className="glass-card rounded-xl border border-slate-800 px-3 py-2">
-                  <summary className="text-xs font-semibold text-cyan-300 cursor-pointer list-none flex items-center justify-between">
+                <details key={i} className="group bg-white border border-neutral-200 rounded-lg px-4 py-3 hover:border-red-300 transition-colors shadow-sm">
+                  <summary className="text-xs font-bold text-red-600 cursor-pointer list-none flex items-center justify-between">
                     {f.q}
-                    <span className="text-slate-500">+</span>
+                    <span className="text-red-500 group-open:rotate-45 transition-transform duration-300">+</span>
                   </summary>
-                  <p className="text-xs text-slate-400 mt-2">{f.a}</p>
+                  <p className="text-xs font-medium text-neutral-600 mt-3 leading-relaxed border-t border-neutral-100 pt-2">{f.a}</p>
                 </details>
               ))}
             </div>
@@ -218,65 +219,65 @@ export default function Contact() {
         </div>
 
         <div className="lg:col-span-3">
-          <div className="glass-card p-5 sm:p-6 lg:p-8 rounded-2xl border border-slate-800 space-y-5">
-            <div className="space-y-1">
-              <h2 className="text-xl sm:text-2xl font-bold text-white">Gửi Tin Nhắn Cho Chúng Tôi</h2>
-              <p className="text-xs text-slate-400">Điền form bên dưới, chúng tôi sẽ phản hồi trong vòng 24h qua email</p>
+          <div className="bg-white border border-neutral-200 p-6 sm:p-8 lg:p-10 rounded-xl space-y-6 shadow-sm">
+            <div className="space-y-1.5">
+              <h2 className="text-2xl sm:text-3xl font-bold text-black uppercase tracking-tight">Gửi Tin Nhắn</h2>
+              <p className="text-sm font-medium text-neutral-600">Điền form bên dưới, chúng tôi sẽ phản hồi trong vòng 24h qua email</p>
             </div>
 
             {sent && (
-              <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-3 animate-fadeInUp">
-                <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center gap-3 animate-fadeInUp">
+                <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                 <div>
-                  <p className="text-sm text-emerald-300 font-bold">Tin nhắn đã được gửi thành công!</p>
-                  <p className="text-[11px] text-emerald-400/80 mt-0.5">Mã tin nhắn #{Date.now().toString().slice(-6)} · Bạn có thể theo dõi phản hồi trong email</p>
+                  <p className="text-sm text-emerald-700 font-bold">Tin nhắn đã được gửi thành công!</p>
+                  <p className="text-[11px] text-emerald-600 mt-0.5">Mã tin nhắn #{Date.now().toString().slice(-6)} · Theo dõi phản hồi trong email</p>
                 </div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1 block">Họ và Tên *</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5 block">Họ và Tên *</label>
                   <input
                     type="text" name="name" value={form.name} onChange={handleChange}
                     placeholder="Nguyễn Văn A"
-                    className={`w-full px-4 py-2.5 bg-slate-900 border rounded-xl text-sm text-slate-100 focus:outline-none transition ${
-                      errors.name ? 'border-rose-500' : 'border-slate-800 focus:border-cyan-500'
+                    className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-black font-medium focus:outline-none transition-all duration-300 ${
+                      errors.name ? 'border-rose-500' : 'border-neutral-300 focus:border-red-600'
                     }`}
                   />
-                  {errors.name && <p className="text-[10px] text-rose-400 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.name}</p>}
+                  {errors.name && <p className="text-[10px] text-rose-500 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.name}</p>}
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1 block">Email *</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5 block">Email *</label>
                   <input
                     type="email" name="email" value={form.email} onChange={handleChange}
                     placeholder="email@example.com"
-                    className={`w-full px-4 py-2.5 bg-slate-900 border rounded-xl text-sm text-slate-100 focus:outline-none transition ${
-                      errors.email ? 'border-rose-500' : 'border-slate-800 focus:border-cyan-500'
+                    className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-black font-medium focus:outline-none transition-all duration-300 ${
+                      errors.email ? 'border-rose-500' : 'border-neutral-300 focus:border-red-600'
                     }`}
                   />
-                  {errors.email && <p className="text-[10px] text-rose-400 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.email}</p>}
+                  {errors.email && <p className="text-[10px] text-rose-500 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.email}</p>}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1 block">Số Điện Thoại</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5 block">Số Điện Thoại</label>
                   <input
                     type="tel" name="phone" value={form.phone} onChange={handleChange}
                     placeholder="0912 345 678"
-                    className={`w-full px-4 py-2.5 bg-slate-900 border rounded-xl text-sm text-slate-100 focus:outline-none transition ${
-                      errors.phone ? 'border-rose-500' : 'border-slate-800 focus:border-cyan-500'
+                    className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-black font-medium focus:outline-none transition-all duration-300 ${
+                      errors.phone ? 'border-rose-500' : 'border-neutral-300 focus:border-red-600'
                     }`}
                   />
-                  {errors.phone && <p className="text-[10px] text-rose-400 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.phone}</p>}
+                  {errors.phone && <p className="text-[10px] text-rose-500 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.phone}</p>}
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 mb-1 block">Chủ Đề</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5 block">Chủ Đề</label>
                   <select
                     name="subject" value={form.subject} onChange={handleChange}
-                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-lg text-sm text-black font-medium focus:outline-none focus:border-red-600 transition-all duration-300"
                   >
                     <option value="">Chọn chủ đề</option>
                     <option value="Tư vấn mua hàng">Tư vấn mua hàng</option>
@@ -290,22 +291,22 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-300 mb-1 block">
-                  Tin Nhắn * <span className="text-slate-500 font-normal">({form.message.length} ký tự)</span>
+                <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 mb-1.5 block">
+                  Tin Nhắn * <span className="text-neutral-400 font-medium tracking-normal">({form.message.length} ký tự)</span>
                 </label>
                 <textarea
                   rows="5" name="message" value={form.message} onChange={handleChange}
                   placeholder="Nhập nội dung tin nhắn của bạn (ít nhất 10 ký tự)..."
-                  className={`w-full px-4 py-2.5 bg-slate-900 border rounded-xl text-sm text-slate-100 focus:outline-none transition resize-none ${
-                    errors.message ? 'border-rose-500' : 'border-slate-800 focus:border-cyan-500'
+                  className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-black font-medium focus:outline-none transition-all duration-300 resize-none ${
+                    errors.message ? 'border-rose-500' : 'border-neutral-300 focus:border-red-600'
                   }`}
                 />
-                {errors.message && <p className="text-[10px] text-rose-400 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.message}</p>}
+                {errors.message && <p className="text-[10px] text-rose-500 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.message}</p>}
               </div>
 
               <button
                 type="submit" disabled={sending}
-                className="w-full py-3.5 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 text-slate-950 font-bold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-4 bg-red-600 text-white font-bold tracking-widest uppercase rounded-lg hover:bg-red-500 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {sending ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Đang gửi...</>
@@ -318,28 +319,28 @@ export default function Contact() {
 
           {/* Lịch sử liên hệ của tôi */}
           {myMessages.length > 0 && (
-            <div className="glass-card rounded-2xl border border-slate-800 mt-6 overflow-hidden">
-              <div className="px-5 py-3 border-b border-slate-800 flex items-center justify-between">
-                <h3 className="text-sm font-bold text-white">Tin nhắn gần đây của bạn</h3>
-                <span className="text-[10px] text-slate-500">{myMessages.length} tin nhắn</span>
+            <div className="bg-white border border-neutral-200 rounded-xl mt-8 overflow-hidden shadow-sm">
+              <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-black">Tin nhắn gần đây</h3>
+                <span className="text-[10px] font-bold text-red-600 px-2 py-0.5 border border-red-200 bg-red-50 rounded-md">{myMessages.length} tin nhắn</span>
               </div>
-              <div className="divide-y divide-slate-800">
+              <div className="divide-y divide-neutral-100">
                 {myMessages.map(m => (
-                  <div key={m.id} className="p-4">
+                  <div key={m.id} className="p-4 hover:bg-neutral-50 transition-colors">
                     <div className="flex items-center justify-between mb-1.5 gap-2">
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="text-xs font-bold text-white truncate">{m.subject || 'Tin nhắn'}</span>
+                        <span className="text-xs font-bold text-black truncate">{m.subject || 'Tin nhắn'}</span>
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${
-                          m.status === 'replied' ? 'bg-emerald-500/20 text-emerald-300' :
-                          m.status === 'read' ? 'bg-blue-500/20 text-blue-300' :
-                          'bg-amber-500/20 text-amber-300'
+                          m.status === 'replied' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' :
+                          m.status === 'read' ? 'bg-blue-50 text-blue-600 border border-blue-200' :
+                          'bg-amber-50 text-amber-600 border border-amber-200'
                         }`}>
                           {m.status === 'replied' ? '✓ Đã phản hồi' : m.status === 'read' ? 'Đã xem' : '⏳ Đang chờ'}
                         </span>
                       </div>
-                      <span className="text-[10px] text-slate-500 flex-shrink-0">{new Date(m.created_at).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>
+                      <span className="text-[10px] text-neutral-500 flex-shrink-0">{new Date(m.created_at).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
-                    <p className="text-xs text-slate-400 line-clamp-2">{m.message}</p>
+                    <p className="text-xs text-neutral-600 line-clamp-2">{m.message}</p>
                   </div>
                 ))}
               </div>
@@ -347,6 +348,7 @@ export default function Contact() {
           )}
         </div>
       </section>
+    </div>
     </div>
   );
 }

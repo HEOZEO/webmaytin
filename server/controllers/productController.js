@@ -186,7 +186,7 @@ exports.getProducts = async (req, res) => {
       FROM products p
       LEFT JOIN brands b ON p.brand_id = b.id
       LEFT JOIN categories c ON p.category_id = c.id
-      LEFT JOIN reviews r ON p.id = r.product_id
+      LEFT JOIN reviews r ON p.id = r.product_id AND r.is_hidden = false
       WHERE ${whereClause}
       GROUP BY p.id, b.name, c.name
       ORDER BY ${orderBy}
@@ -234,7 +234,7 @@ exports.getProduct = async (req, res) => {
        FROM products p
        LEFT JOIN brands b ON p.brand_id = b.id
        LEFT JOIN categories c ON p.category_id = c.id
-       LEFT JOIN reviews r ON p.id = r.product_id
+       LEFT JOIN reviews r ON p.id = r.product_id AND r.is_hidden = false
        WHERE p.id = $1 AND (p.deleted_at IS NULL) AND (p.is_active = true OR p.is_active IS NULL)
        GROUP BY p.id, b.name, c.name`,
       [id]
@@ -380,7 +380,7 @@ exports.compareProducts = async (req, res) => {
        FROM products p
        LEFT JOIN brands b ON p.brand_id = b.id
        LEFT JOIN categories c ON p.category_id = c.id
-       LEFT JOIN reviews r ON p.id = r.product_id
+       LEFT JOIN reviews r ON p.id = r.product_id AND r.is_hidden = false
        WHERE (p.deleted_at IS NULL) AND (p.is_active = true OR p.is_active IS NULL)
          AND p.id = ANY($1::int[])
        GROUP BY p.id, b.name, c.name`,
