@@ -145,6 +145,7 @@ exports.hasPermission = (permKey) => {
 exports.DEFAULT_STAFF_PERMISSIONS = {
   dashboard: true,
   products: { view: true, create: true, update: true, delete: false, bulk_stock: true },
+  categories: { view: true, create: true, update: true },
   orders: { view: true, create: true, update_status: true, cancel: true, delete: false, export: false },
   inventory: { view: true, update: true },
   users: { view: true, lock_customer: true },

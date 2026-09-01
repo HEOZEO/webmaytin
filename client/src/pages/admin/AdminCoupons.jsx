@@ -246,7 +246,7 @@ export default function AdminCoupons() {
       </div>
 
       {/* Filters */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 flex flex-col sm:flex-row gap-3">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="w-4 h-4 absolute ml-3 mt-[14px] text-slate-500 pointer-events-none" />
           <input
@@ -270,7 +270,7 @@ export default function AdminCoupons() {
       </div>
 
       {/* Table */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog overflow-hidden">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-neutral-300">
             <thead className="bg-black/50 text-xs uppercase text-neutral-400">

@@ -3,7 +3,7 @@ import {
   Package, Users, ShoppingCart, TrendingUp, Tag,
   LayoutDashboard, Boxes, Image as ImageIcon,
   LogOut, Home, Eye, Menu, X, ChevronLeft,
-  MessageCircle, Settings, CreditCard, Star
+  MessageCircle, Settings, CreditCard, Star, FolderTree
 } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import showToast from '../../utils/toast';
@@ -14,6 +14,7 @@ import AdminAlerts from '../../components/AdminAlerts';
 const ROUTE_TITLES = {
   '/admin': 'Tổng quan hệ thống',
   '/admin/products': 'Quản lý sản phẩm',
+  '/admin/categories': 'Quản lý danh mục',
   '/admin/orders': 'Quản lý đơn hàng',
   '/admin/inventory': 'Quản lý tồn kho',
   '/admin/users': 'Quản lý khách hàng',
@@ -28,6 +29,7 @@ const ROUTE_TITLES = {
 const FULL_SIDEBAR = [
   { to: '/admin', label: 'Tổng Quan', icon: LayoutDashboard, exact: true, adminOnly: false, permission: null },
   { to: '/admin/products', label: 'Sản Phẩm', icon: Package, adminOnly: false, permission: 'products.view' },
+  { to: '/admin/categories', label: 'Danh Mục', icon: FolderTree, adminOnly: false, permission: 'categories.view' },
   { to: '/admin/orders', label: 'Đơn Hàng', icon: ShoppingCart, adminOnly: false, permission: 'orders.view' },
   { to: '/admin/inventory', label: 'Tồn Kho', icon: Boxes, adminOnly: false, permission: 'inventory.view' },
   { to: '/admin/users', label: 'Khách Hàng', icon: Users, adminOnly: false, permission: 'users.view' },

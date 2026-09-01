@@ -204,4 +204,26 @@ export const adminReviewService = {
   }
 };
 
+export const adminCategoryService = {
+  getAll: async () => {
+    const response = await api.get('/categories/admin');
+    return response.data;
+  },
+
+  create: async (data) => {
+    const response = await api.post('/categories', data);
+    return response.data;
+  },
+
+  update: async (id, data) => {
+    const response = await api.put(`/categories/${id}`, data);
+    return response.data;
+  },
+
+  toggleVisibility: async (id) => {
+    const response = await api.put(`/categories/${id}/toggle-visibility`);
+    return response.data;
+  }
+};
+
 export default adminService;

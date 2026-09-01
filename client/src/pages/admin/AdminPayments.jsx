@@ -213,7 +213,7 @@ export default function AdminPayments() {
                   return (
                     <div
                       key={req.id}
-                      className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog overflow-hidden hover:border-red-600/40 transition-all"
+                      className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog overflow-hidden hover:border-red-600/40 transition-all"
                     >
                       <div className="flex flex-col sm:flex-row">
                         {/* Bill thumbnail - click to open full preview */}
@@ -364,7 +364,7 @@ export default function AdminPayments() {
       {/* ===== SETTINGS TAB ===== */}
       {activeTab === 'settings' && (
         <div className="max-w-3xl">
-          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-8 space-y-6">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-8 space-y-6">
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
                 <QrCode className="w-5 h-5 text-red-500" />
@@ -482,7 +482,7 @@ export default function AdminPayments() {
 
           {/* Preview */}
           {settings.account_number && (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 space-y-4 mt-6">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6 space-y-4 mt-6">
               <h3 className="text-sm font-bold text-neutral-400 flex items-center gap-2">
                 <Info className="w-4 h-4" />
                 Xem trước thông tin hiển thị cho khách
@@ -537,7 +537,7 @@ export default function AdminPayments() {
           : null;
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setDetailRequest(null)}>
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
               <div className="sticky top-0 bg-black/95 backdrop-blur-sm border-b border-neutral-800 p-5 flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-bold text-white flex items-center gap-2">
@@ -686,7 +686,7 @@ export default function AdminPayments() {
       {/* Reject Modal */}
       {rejectModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setRejectModal(null)}>
-          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 w-full max-w-md space-y-4" onClick={e => e.stopPropagation()}>
+          <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6 w-full max-w-md space-y-4" onClick={e => e.stopPropagation()}>
             <h3 className="text-base font-bold text-white flex items-center gap-2">
               <XCircle className="w-5 h-5 text-rose-400" />
               Từ Chối Thanh Toán

@@ -120,7 +120,7 @@ export default function AdminContactMessages() {
       </header>
 
       {/* Filters */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-3 border border-neutral-800 space-y-3">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-3 border border-neutral-800 space-y-3">
         <div className="flex gap-2">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -158,9 +158,9 @@ export default function AdminContactMessages() {
         {/* List */}
         <div className="lg:col-span-2 space-y-2">
           {loading ? (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-red-500" /></div>
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-red-500" /></div>
           ) : filtered.length === 0 ? (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-12 text-center">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-12 text-center">
               <Inbox className="w-10 h-10 mx-auto text-slate-600 mb-2" />
               <p className="text-neutral-400 text-sm">Không có tin nhắn</p>
             </div>
@@ -177,7 +177,7 @@ export default function AdminContactMessages() {
                       setReplyText('');
                       if (m.status === 'pending') handleMarkRead(m);
                     }}
-                    className={`bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 cursor-pointer transition-all border ${
+                    className={`bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 cursor-pointer transition-all border ${
                       selected?.id === m.id ? 'border-red-600/60 bg-red-600/5' : 'border-neutral-800 hover:border-slate-700'
                     }`}
                   >
@@ -211,7 +211,7 @@ export default function AdminContactMessages() {
         {/* Detail & Reply Box */}
         <div className="lg:col-span-3">
           {selected ? (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog border border-neutral-800 p-5 sm:p-6 space-y-4 sticky top-24">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog border border-neutral-800 p-5 sm:p-6 space-y-4 sticky top-24">
               <div className="flex items-start justify-between gap-3 border-b border-neutral-800 pb-3">
                 <div className="flex-1 min-w-0">
                   <h3 className="text-lg font-black text-white truncate">{selected.subject || 'Tin nhắn liên hệ'}</h3>
@@ -332,7 +332,7 @@ export default function AdminContactMessages() {
               )}
             </div>
           ) : (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog border border-neutral-800 p-12 text-center">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog border border-neutral-800 p-12 text-center">
               <Inbox className="w-12 h-12 mx-auto text-slate-600 mb-3" />
               <p className="text-neutral-400 font-semibold">Chọn một tin nhắn để xem chi tiết</p>
               <p className="text-slate-500 text-xs mt-1">Tin nhắn từ khách hàng sẽ hiển thị ở đây</p>

@@ -4,7 +4,7 @@ import {
   UserPlus, Trash2, X, Mail, User, Phone, Calendar, Activity, Users as UsersIcon,
   Crown, ShieldAlert, KeyRound, Save, RotateCcw,
   Filter, RefreshCw, CheckCircle2, XCircle, BadgeCheck, Settings,
-  Package, Boxes, ShoppingCart, TrendingUp
+  Package, Boxes, ShoppingCart, TrendingUp, FolderTree
 } from 'lucide-react';
 import showToast from '../../utils/toast';
 import { adminUserService } from '../../services/adminService';
@@ -1102,6 +1102,18 @@ const PERMISSION_GROUPS = [
       { key: 'products.update', label: 'Sửa thông tin sản phẩm' },
       { key: 'products.bulk_stock', label: 'Cập nhật tồn kho hàng loạt' },
       { key: 'products.delete', label: 'Xoá sản phẩm', sensitive: true }
+    ]
+  },
+  {
+    key: 'categories',
+    title: 'Danh mục',
+    icon: FolderTree,
+    color: 'teal',
+    description: 'Quản lý danh mục sản phẩm',
+    items: [
+      { key: 'categories.view', label: 'Xem danh sách danh mục' },
+      { key: 'categories.create', label: 'Thêm danh mục mới' },
+      { key: 'categories.update', label: 'Sửa / Ẩn danh mục' }
     ]
   },
   {

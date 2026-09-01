@@ -410,7 +410,7 @@ exports.createOrder = async (req, res) => {
     // ----- 11. Best-effort: send confirmation email AFTER commit -----
     try {
       const user = await pool.query('SELECT email, full_name FROM users WHERE id = $1', [user_id]);
-      if (user.rows.length > 0) {
+      if (user && user.rows && user.rows.length > 0) {
         const emailHtml = orderConfirmation(
           {
             id: order.id,

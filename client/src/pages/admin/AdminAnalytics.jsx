@@ -548,7 +548,7 @@ export default function AdminAnalytics() {
       </div>
 
       {/* ===== Date range bar (dùng cho TOÀN BỘ trang) ===== */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 border border-neutral-800">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 border border-neutral-800">
         <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
           <div className="flex items-center gap-2 text-neutral-300">
             <Calendar className="w-4 h-4 text-red-500" />
@@ -608,7 +608,7 @@ export default function AdminAnalytics() {
 
       {/* ===== KPI summary ===== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
             <div className="p-2 rounded-none clip-path-rog bg-red-600/20 border border-red-600/30">
               <DollarSign className="w-4 h-4 text-red-500" />
@@ -625,7 +625,7 @@ export default function AdminAnalytics() {
           </p>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
             <div className="p-2 rounded-none clip-path-rog bg-red-600/20 border border-red-600/30">
               <ShoppingCart className="w-4 h-4 text-red-500" />
@@ -640,7 +640,7 @@ export default function AdminAnalytics() {
           <p className="text-[11px] text-red-500 mt-1">Đơn đã xử lý</p>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-5 border border-red-600/30 bg-gradient-to-br from-red-600/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
             <div className="p-2 rounded-none clip-path-rog bg-red-600/20 border border-red-600/30">
               <TrendingUp className="w-4 h-4 text-red-500" />
@@ -655,7 +655,7 @@ export default function AdminAnalytics() {
           <p className="text-[11px] text-red-500 mt-1">Mỗi đơn hàng</p>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-5 border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-5 border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent">
           <div className="flex items-center gap-2 mb-3">
             <div className="p-2 rounded-none clip-path-rog bg-amber-500/20 border border-amber-500/30">
               <Package className="w-4 h-4 text-amber-400" />
@@ -672,7 +672,7 @@ export default function AdminAnalytics() {
       </div>
 
       {/* ===== Revenue Chart (with date picker + groupBy on header) ===== */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-red-600/20">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6 border border-red-600/20">
         <div className="flex flex-col gap-3 mb-6">
           <div className="flex items-start sm:items-center justify-between gap-3 flex-col sm:flex-row">
             <div>
@@ -744,7 +744,7 @@ export default function AdminAnalytics() {
         ) : filledRevenue.length > 0 ? (
           <div style={{ width: '100%', height: 360 }} className="relative">
             {chartLoading && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/40 backdrop-blur-[1px] rounded-none clip-path-rog">
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/40 backdrop-blur-[1px] rounded-none clip-path-rog ">
                 <Loader2 className="w-6 h-6 animate-spin text-red-500" />
               </div>
             )}
@@ -830,7 +830,7 @@ export default function AdminAnalytics() {
       {/* ===== Charts row ===== */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Order Status Pie */}
-        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-slate-700">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6 border border-slate-700">
           <h2 className="text-base font-bold text-white flex items-center gap-2 mb-1">
             <ShoppingCart className="w-5 h-5 text-red-500" />
             Phân Bố Trạng Thái Đơn Hàng
@@ -898,7 +898,7 @@ export default function AdminAnalytics() {
         </div>
 
         {/* Category Sales */}
-        <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-slate-700">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6 border border-slate-700">
           <h2 className="text-base font-bold text-white flex items-center gap-2 mb-1">
             <TrendingUp className="w-5 h-5 text-red-500" />
             Doanh Số Theo Danh Mục
@@ -933,7 +933,7 @@ export default function AdminAnalytics() {
       </div>
 
       {/* ===== Top Products Table ===== */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6 border border-slate-700">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6 border border-slate-700">
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">

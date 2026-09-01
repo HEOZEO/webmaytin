@@ -6,6 +6,7 @@ exports.getCategories = async (req, res) => {
       `SELECT c.*, COUNT(p.id) as product_count
        FROM categories c
        LEFT JOIN products p ON c.id = p.category_id
+       WHERE c.is_hidden = false OR c.is_hidden IS NULL
        GROUP BY c.id
        ORDER BY c.name`
     );
@@ -17,6 +18,26 @@ exports.getCategories = async (req, res) => {
   } catch (error) {
     console.error('Get categories error:', error);
     res.status(500).json({ success: false, message: 'Lỗi lấy danh mục' });
+  }
+};
+
+exports.getAdminCategories = async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT c.*, COUNT(p.id) as product_count
+       FROM categories c
+       LEFT JOIN products p ON c.id = p.category_id
+       GROUP BY c.id
+       ORDER BY c.name`
+    );
+
+    res.json({
+      success: true,
+      data: result.rows
+    });
+  } catch (error) {
+    console.error('Get admin categories error:', error);
+    res.status(500).json({ success: false, message: 'Lỗi lấy danh mục admin' });
   }
 };
 
@@ -75,41 +96,36 @@ exports.updateCategory = async (req, res) => {
   }
 };
 
-exports.deleteCategory = async (req, res) => {
+exports.toggleCategoryVisibility = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Check if category has products
-    const productCheck = await pool.query(
-      'SELECT COUNT(*) as count FROM products WHERE category_id = $1',
-      [id]
-    );
-
-    if (parseInt(productCheck.rows[0].count) > 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Không thể xóa danh mục đang có sản phẩm' 
-      });
-    }
-
-    const result = await pool.query('DELETE FROM categories WHERE id = $1 RETURNING name', [id]);
-
-    if (result.rows.length === 0) {
+    // Lấy trạng thái hiện tại
+    const current = await pool.query('SELECT name, is_hidden FROM categories WHERE id = $1', [id]);
+    if (current.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Không tìm thấy danh mục' });
     }
+
+    const newHiddenStatus = !current.rows[0].is_hidden;
+
+    const result = await pool.query(
+      'UPDATE categories SET is_hidden = $1 WHERE id = $2 RETURNING *',
+      [newHiddenStatus, id]
+    );
 
     // Log activity
     await pool.query(
       'INSERT INTO activity_logs (user_id, action, description) VALUES ($1, $2, $3)',
-      [req.user.id, 'CATEGORY_DELETE', `Xóa danh mục: ${result.rows[0].name}`]
+      [req.user.id, 'CATEGORY_TOGGLE_VISIBILITY', `${newHiddenStatus ? 'Ẩn' : 'Hiện'} danh mục: ${result.rows[0].name}`]
     );
 
     res.json({
       success: true,
-      message: 'Xóa danh mục thành công'
+      message: newHiddenStatus ? 'Đã ẩn danh mục' : 'Đã hiện danh mục',
+      is_hidden: newHiddenStatus
     });
   } catch (error) {
-    console.error('Delete category error:', error);
-    res.status(500).json({ success: false, message: 'Lỗi xóa danh mục' });
+    console.error('Toggle category visibility error:', error);
+    res.status(500).json({ success: false, message: 'Lỗi cập nhật trạng thái danh mục' });
   }
 };

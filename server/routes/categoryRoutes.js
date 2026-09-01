@@ -2,15 +2,17 @@ const express = require('express');
 const router = express.Router();
 const {
   getCategories,
+  getAdminCategories,
   createCategory,
   updateCategory,
-  deleteCategory
+  toggleCategoryVisibility
 } = require('../controllers/categoryController');
-const { protect, authorize } = require('../middleware/auth');
+const { protect, hasPermission } = require('../middleware/auth');
 
 router.get('/', getCategories);
-router.post('/', protect, authorize('admin'), createCategory);
-router.put('/:id', protect, authorize('admin'), updateCategory);
-router.delete('/:id', protect, authorize('admin'), deleteCategory);
+router.get('/admin', protect, hasPermission('categories.view'), getAdminCategories);
+router.post('/', protect, hasPermission('categories.create'), createCategory);
+router.put('/:id', protect, hasPermission('categories.update'), updateCategory);
+router.put('/:id/toggle-visibility', protect, hasPermission('categories.update'), toggleCategoryVisibility);
 
 module.exports = router;

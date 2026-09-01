@@ -188,7 +188,7 @@ export default function AdminSettings() {
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar Categories */}
         <div className="lg:w-64 flex-shrink-0">
-          <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-3 sticky top-4">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-3 sticky top-4">
             <h3 className="text-xs font-bold text-neutral-400 uppercase mb-3 px-2">Danh mục</h3>
             <nav className="space-y-1">
               {SETTING_CATEGORIES.map(cat => {
@@ -223,12 +223,12 @@ export default function AdminSettings() {
         {/* Settings Content */}
         <div className="flex-1">
           {loading ? (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-12 flex flex-col items-center justify-center gap-4">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-12 flex flex-col items-center justify-center gap-4">
               <Loader2 className="w-10 h-10 animate-spin text-red-500" />
               <span className="text-neutral-400">Đang tải cài đặt...</span>
             </div>
           ) : (
-            <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-6">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-6">
               <div className="flex items-center gap-3 mb-6">
                 {currentCategory && <currentCategory.icon className="w-6 h-6 text-red-500" />}
                 <h2 className="text-lg font-bold text-white">
@@ -327,7 +327,7 @@ export default function AdminSettings() {
       </div>
 
       {/* Info Card */}
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 bg-gradient-to-r from-red-600/10 to-red-600/10 border border-red-600/20">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 bg-gradient-to-r from-red-600/10 to-red-600/10 border border-red-600/20">
         <div className="flex items-start gap-3">
           <div className="p-2 bg-red-600/20 rounded-lg flex-shrink-0">
             <Shield className="w-5 h-5 text-red-500" />

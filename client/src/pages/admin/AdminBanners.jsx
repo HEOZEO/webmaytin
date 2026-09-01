@@ -133,7 +133,7 @@ export default function AdminBanners() {
         </button>
       </div>
 
-      <div className="bg-neutral-900 border border-neutral-800 clip-path-rog rounded-none clip-path-rog p-4 overflow-x-auto">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-none clip-path-rog p-4 overflow-x-auto">
         <table className="w-full text-left text-sm text-neutral-300">
           <thead className="text-xs uppercase text-neutral-400 border-b border-neutral-800">
             <tr>

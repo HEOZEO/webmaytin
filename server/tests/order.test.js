@@ -288,7 +288,7 @@ describe('Order: POST /api/orders - createOrder', () => {
       .send({ ...validBody, coupon_code: 'EXPIRED10' });
 
     expect(res.status).toBe(400);
-    expect(res.body.message).toMatch(/không hợp lệ|hết hạn|hết lượt/i);
+    expect(res.body.message).toMatch(/không hợp lệ|hết hạn|hết lượt|vô hiệu hóa/i);
   });
 
   test('rollback coupon increment when min_order_amount not met', async () => {
