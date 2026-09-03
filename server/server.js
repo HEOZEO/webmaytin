@@ -84,7 +84,7 @@ const app = express();
 // Rate limiting - Giảm giới hạn xuống còn development mode
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: process.env.NODE_ENV === 'production' ? 100 : 1000, // 1000 requests cho dev, 100 cho production
+  max: process.env.NODE_ENV === 'production' ? 1000 : 1000, // 1000 requests cho dev, 1000 cho production (tăng lên để test)
   message: {
     success: false,
     message: 'Quá nhiều requests, vui lòng thử lại sau 15 phút'
@@ -98,7 +98,7 @@ const limiter = rateLimit({
 // Strict rate limit cho các endpoint nhạy cảm (login, order create, contact)
 const strictLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 20,
+  max: process.env.NODE_ENV === 'production' ? 100 : 50, // Nới lỏng lên 100 để test thoải mái
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: 'Quá nhiều thao tác, vui lòng thử lại sau 15 phút' }
